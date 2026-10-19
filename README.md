@@ -1,2438 +1,2440 @@
-# Skill Home
+# Skill Home 技能库
 
-A personal library of **212 agent skills**, one skill per `.zip`. This page is the catalog: for every skill it says **what it does**, **how to use it**, and **what it's best suited for**, grouped by area so you can find the right one quickly.
+**中文** | [English](README.en.md)
 
-- `00_212项压缩包清单.csv` — the original manifest (skill name, zip, type, file count, entry file, SHA-256).
-- `00_使用说明.txt` — the original packaging note.
-- Inside every zip, `00_入口说明.txt` names the entry file(s) for that skill.
+这是一个包含 **212 个 agent 技能**的个人技能库，每个技能一个 `.zip`。本页是技能目录：每个技能都写明了**它能做什么**、**怎么用**以及**最适合什么场景**，并按领域分组，方便你快速找到合适的技能。
 
-## Contents
+- `00_212项压缩包清单.csv` —— 原始清单（技能名称、压缩包、类型、文件数、入口文件、SHA-256）。
+- `00_使用说明.txt` —— 原始打包说明。
+- 每个压缩包里的 `00_入口说明.txt` 写明了该技能的入口文件。
 
-- [Quick finder: "I want to…"](#quick-finder)
-- [How to install a skill](#how-to-install)
-- [Packaging notes and caveats](#packaging-notes)
-- [Catalog by category](#catalog)
-  - [AI video, film & storyboards](#cat-video) (24)
-  - [Screenwriting & storytelling](#cat-story) (14)
-  - [AI image & photography](#cat-image) (23)
-  - [Visual style analysis & reverse prompting](#cat-aesthetics) (7)
-  - [3D & product rendering](#cat-image3d) (2)
-  - [Ads, product demos & slides](#cat-marketing) (4)
-  - [Social media & creator operations](#cat-social) (4)
-  - [Writing, author voice & de-AI polish](#cat-writing) (4)
-  - [Research, search & intelligence](#cat-research) (12)
-  - [Ideas, product management & strategy](#cat-product) (13)
-  - [Frontend, UI & design systems](#cat-frontend) (15)
-  - [Architecture, backend & data](#cat-backend) (10)
-  - [Language & project starters](#cat-languages) (7)
-  - [Testing, debugging & code quality](#cat-testing) (7)
-  - [DevOps, release & reliability](#cat-devops) (5)
-  - [Security](#cat-security) (4)
-  - [Git & open-source contribution](#cat-git) (5)
-  - [Coding agents: Claude Code, Codex & multi-agent work](#cat-agents) (20)
-  - [Building & managing skills](#cat-skills) (10)
-  - [Local models, GPUs & API gateways](#cat-ai-infra) (3)
-  - [Network & proxy troubleshooting](#cat-network) (6)
-  - [Computer & editor maintenance](#cat-system) (4)
-  - [Productivity, knowledge & reports](#cat-productivity) (4)
-  - [Learning & tutoring](#cat-learning) (2)
-  - [Home, travel & lifestyle](#cat-lifestyle) (3)
+## 目录
+
+- [快速查找：“我想要……”](#quick-finder)
+- [如何安装技能](#how-to-install)
+- [打包说明与注意事项](#packaging-notes)
+- [按类别浏览](#catalog)
+  - [AI 视频、影视与分镜](#cat-video) (24)
+  - [编剧与讲故事](#cat-story) (14)
+  - [AI 图像与摄影](#cat-image) (23)
+  - [视觉风格分析与反推提示词](#cat-aesthetics) (7)
+  - [3D 与产品渲染](#cat-image3d) (2)
+  - [广告、产品演示与幻灯片](#cat-marketing) (4)
+  - [社交媒体与创作者运营](#cat-social) (4)
+  - [写作、作者文风与去 AI 味](#cat-writing) (4)
+  - [调研、搜索与情报](#cat-research) (12)
+  - [想法、产品管理与策略](#cat-product) (13)
+  - [前端、UI 与设计系统](#cat-frontend) (15)
+  - [架构、后端与数据](#cat-backend) (10)
+  - [编程语言与项目模板](#cat-languages) (7)
+  - [测试、调试与代码质量](#cat-testing) (7)
+  - [DevOps、发布与可靠性](#cat-devops) (5)
+  - [安全](#cat-security) (4)
+  - [Git 与开源贡献](#cat-git) (5)
+  - [编程 agent：Claude Code、Codex 与多 agent 协作](#cat-agents) (20)
+  - [构建与管理技能](#cat-skills) (10)
+  - [本地模型、GPU 与 API 网关](#cat-ai-infra) (3)
+  - [网络与代理排障](#cat-network) (6)
+  - [电脑与编辑器维护](#cat-system) (4)
+  - [效率、知识库与报告](#cat-productivity) (4)
+  - [学习与辅导](#cat-learning) (2)
+  - [家居、旅行与生活](#cat-lifestyle) (3)
 
 <a id="quick-finder"></a>
-## Quick finder: "I want to…"
+## 快速查找：“我想要……”
 
-| I want to… | Start with |
+| 我想要…… | 可以先用 |
 |---|---|
-| Write a Seedance prompt for a shot or scene | [`seedance-clean`](#s-seedance-clean), [`Mx-Shell_Prompts`](#s-mx-shell-prompts), [`cinematic-fight-director`](#s-cinematic-fight-director) |
-| Turn a script into storyboards and video prompts | [`storyboard-forge-20-25`](#s-storyboard-forge-20-25), [`script-scene-visual-storyboard`](#s-script-scene-visual-storyboard), [`mr-li-seedance-25`](#s-mr-li-seedance-25), [`分镜设计大师阶段1：导演设计器`](#s-zh-a4f0e6a7) |
-| Remake a reference video with my own characters | [`scenerelay-reverse`](#s-scenerelay-reverse), [`motionprint-reverse`](#s-motionprint-reverse) |
-| Produce a whole AI short or motion comic from an idea | [`motion-drama-foundry`](#s-motion-drama-foundry), [`short-drama-producer`](#s-short-drama-producer), [`解说漫制片教练`](#s-zh-8927f55c) |
-| Check continuity between shots | [`jingqiao-continuity-supervisor`](#s-jingqiao-continuity-supervisor), [`AI视频空间调度导演`](#s-zh-b603f88d) |
-| Edit real video files (cuts, captions, clips) | [`video-studio`](#s-video-studio), [`talking-head-fx-packager`](#s-talking-head-fx-packager), [`agentic-video-director`](#s-agentic-video-director) |
-| Write a film or short-drama script | [`screenplay-factory`](#s-screenplay-factory), [`hollywood-omni-screenplay-master`](#s-hollywood-omni-screenplay-master), [`mass-appeal-super-screenwriter`](#s-mass-appeal-super-screenwriter), [`微短剧剧本创作`](#s-zh-b6e6af54) |
-| Continue a novel or story in the original voice | [`author-style-continuation`](#s-author-style-continuation), [`story-forge-engine`](#s-story-forge-engine), [`story-dynamics-workbench`](#s-story-dynamics-workbench) |
-| Keep a character, outfit or product consistent across images | [`asset-continuity-imagegen`](#s-asset-continuity-imagegen), [`public-character-continuity`](#s-public-character-continuity), [`threadlock-wardrobe-skill-v1.0.0`](#s-threadlock-wardrobe-skill-v1-0-0) |
-| Retouch, repair or upscale an image | [`portrait-retouch`](#s-portrait-retouch), [`realistic-social-selfie-retouch`](#s-realistic-social-selfie-retouch), [`pic-fix-oneshot`](#s-pic-fix-oneshot), [`fidelity-4k-upscale-skill-v1.0`](#s-fidelity-4k-upscale-skill-v1-0) |
-| Turn a reference image into a prompt or borrow its style | [`strong-image-reverse-prompt`](#s-strong-image-reverse-prompt), [`reference-rendering-reader`](#s-reference-rendering-reader), [`photographic-atmosphere-reconstruction`](#s-photographic-atmosphere-reconstruction), [`reverse-anything`](#s-reverse-anything) |
-| Write Xiaohongshu or other social content | [`xiaohongshu`](#s-xiaohongshu), [`xiaohongshu-netfeel-guardian`](#s-xiaohongshu-netfeel-guardian), [`creator-ops-os`](#s-creator-ops-os), [`topic-insight-writing`](#s-topic-insight-writing) |
-| Make an ad, poster or product video | [`narrative-ad-engine`](#s-narrative-ad-engine), [`brand-short-drama`](#s-brand-short-drama), [`beetle-poster-director`](#s-beetle-poster-director), [`build-product-demo`](#s-build-product-demo) |
-| Research a market, industry or question | [`industry-intelligence-engine`](#s-industry-intelligence-engine), [`universal-research-architect`](#s-universal-research-architect), [`consulting-analysis`](#s-consulting-analysis), [`multi-ai-research`](#s-multi-ai-research) |
-| Go from a raw idea to a PRD | [`idea-team`](#s-idea-team), [`idea-to-product`](#s-idea-to-product), [`product-discovery`](#s-product-discovery), [`prd-master`](#s-prd-master) |
-| Build or redesign a web UI | [`frontend-design`](#s-frontend-design), [`frontend-art-director`](#s-frontend-art-director), [`ui-ux-pro-max`](#s-ui-ux-pro-max), [`figma-to-code`](#s-figma-to-code) |
-| Start a new codebase | [`repo-scaffold`](#s-repo-scaffold), [`python-project`](#s-python-project), [`typescript-project`](#s-typescript-project), [`golang-web`](#s-golang-web), [`rust-project`](#s-rust-project) |
-| Debug or audit code | [`systematic-debugging`](#s-systematic-debugging), [`codebase-audit`](#s-codebase-audit), [`project-health-auditor`](#s-project-health-auditor) |
-| Set up or clean up AGENTS.md / CLAUDE.md | [`agentsmd-scaffold`](#s-agentsmd-scaffold), [`repo-agent-context-audit`](#s-repo-agent-context-audit), [`agentsmd-optimize`](#s-agentsmd-optimize) |
-| Use Codex from inside Claude Code | [`codex`](#s-codex), [`codex-agent`](#s-codex-agent) |
-| Create, fix or organise skills | [`skill-creator`](#s-skill-creator), [`skill-reforge-foundry`](#s-skill-reforge-foundry), [`self-evolution`](#s-self-evolution), [`skill-archive-manager`](#s-skill-archive-manager) |
-| Fix proxy or network problems | [`clash-doctor`](#s-clash-doctor), [`network-reconnect-repair`](#s-network-reconnect-repair), [`optimize-network`](#s-optimize-network), [`ip-check`](#s-ip-check) |
-| Free disk space or speed up my computer | [`storage-gc-guardian`](#s-storage-gc-guardian), [`disk-cleaner`](#s-disk-cleaner), [`system-doctor`](#s-system-doctor), [`vscode-doctor`](#s-vscode-doctor) |
+| 为一个镜头或场景写 Seedance 提示词 | [`seedance-clean`](#s-seedance-clean), [`Mx-Shell_Prompts`](#s-mx-shell-prompts), [`cinematic-fight-director`](#s-cinematic-fight-director) |
+| 把剧本变成分镜和视频提示词 | [`storyboard-forge-20-25`](#s-storyboard-forge-20-25), [`script-scene-visual-storyboard`](#s-script-scene-visual-storyboard), [`mr-li-seedance-25`](#s-mr-li-seedance-25), [`分镜设计大师阶段1：导演设计器`](#s-zh-a4f0e6a7) |
+| 用自己的角色翻拍参考视频 | [`scenerelay-reverse`](#s-scenerelay-reverse), [`motionprint-reverse`](#s-motionprint-reverse) |
+| 从一个想法做出完整的 AI 短片或漫剧 | [`motion-drama-foundry`](#s-motion-drama-foundry), [`short-drama-producer`](#s-short-drama-producer), [`解说漫制片教练`](#s-zh-8927f55c) |
+| 检查镜头之间的连续性 | [`jingqiao-continuity-supervisor`](#s-jingqiao-continuity-supervisor), [`AI视频空间调度导演`](#s-zh-b603f88d) |
+| 剪辑真实视频文件（剪切、字幕、切片） | [`video-studio`](#s-video-studio), [`talking-head-fx-packager`](#s-talking-head-fx-packager), [`agentic-video-director`](#s-agentic-video-director) |
+| 写电影或短剧剧本 | [`screenplay-factory`](#s-screenplay-factory), [`hollywood-omni-screenplay-master`](#s-hollywood-omni-screenplay-master), [`mass-appeal-super-screenwriter`](#s-mass-appeal-super-screenwriter), [`微短剧剧本创作`](#s-zh-b6e6af54) |
+| 按原作风格续写小说或故事 | [`author-style-continuation`](#s-author-style-continuation), [`story-forge-engine`](#s-story-forge-engine), [`story-dynamics-workbench`](#s-story-dynamics-workbench) |
+| 让角色、服装或产品在多张图里保持一致 | [`asset-continuity-imagegen`](#s-asset-continuity-imagegen), [`public-character-continuity`](#s-public-character-continuity), [`threadlock-wardrobe-skill-v1.0.0`](#s-threadlock-wardrobe-skill-v1-0-0) |
+| 修图、修复或放大图片 | [`portrait-retouch`](#s-portrait-retouch), [`realistic-social-selfie-retouch`](#s-realistic-social-selfie-retouch), [`pic-fix-oneshot`](#s-pic-fix-oneshot), [`fidelity-4k-upscale-skill-v1.0`](#s-fidelity-4k-upscale-skill-v1-0) |
+| 把参考图变成提示词或借用它的风格 | [`strong-image-reverse-prompt`](#s-strong-image-reverse-prompt), [`reference-rendering-reader`](#s-reference-rendering-reader), [`photographic-atmosphere-reconstruction`](#s-photographic-atmosphere-reconstruction), [`reverse-anything`](#s-reverse-anything) |
+| 写小红书或其他社交内容 | [`xiaohongshu`](#s-xiaohongshu), [`xiaohongshu-netfeel-guardian`](#s-xiaohongshu-netfeel-guardian), [`creator-ops-os`](#s-creator-ops-os), [`topic-insight-writing`](#s-topic-insight-writing) |
+| 做广告、海报或产品视频 | [`narrative-ad-engine`](#s-narrative-ad-engine), [`brand-short-drama`](#s-brand-short-drama), [`beetle-poster-director`](#s-beetle-poster-director), [`build-product-demo`](#s-build-product-demo) |
+| 调研市场、行业或某个问题 | [`industry-intelligence-engine`](#s-industry-intelligence-engine), [`universal-research-architect`](#s-universal-research-architect), [`consulting-analysis`](#s-consulting-analysis), [`multi-ai-research`](#s-multi-ai-research) |
+| 从一个原始想法走到 PRD | [`idea-team`](#s-idea-team), [`idea-to-product`](#s-idea-to-product), [`product-discovery`](#s-product-discovery), [`prd-master`](#s-prd-master) |
+| 构建或重新设计网页 UI | [`frontend-design`](#s-frontend-design), [`frontend-art-director`](#s-frontend-art-director), [`ui-ux-pro-max`](#s-ui-ux-pro-max), [`figma-to-code`](#s-figma-to-code) |
+| 新建一个代码库 | [`repo-scaffold`](#s-repo-scaffold), [`python-project`](#s-python-project), [`typescript-project`](#s-typescript-project), [`golang-web`](#s-golang-web), [`rust-project`](#s-rust-project) |
+| 调试或审计代码 | [`systematic-debugging`](#s-systematic-debugging), [`codebase-audit`](#s-codebase-audit), [`project-health-auditor`](#s-project-health-auditor) |
+| 搭建或整理 AGENTS.md / CLAUDE.md | [`agentsmd-scaffold`](#s-agentsmd-scaffold), [`repo-agent-context-audit`](#s-repo-agent-context-audit), [`agentsmd-optimize`](#s-agentsmd-optimize) |
+| 在 Claude Code 里使用 Codex | [`codex`](#s-codex), [`codex-agent`](#s-codex-agent) |
+| 创建、修复或整理技能 | [`skill-creator`](#s-skill-creator), [`skill-reforge-foundry`](#s-skill-reforge-foundry), [`self-evolution`](#s-self-evolution), [`skill-archive-manager`](#s-skill-archive-manager) |
+| 解决代理或网络问题 | [`clash-doctor`](#s-clash-doctor), [`network-reconnect-repair`](#s-network-reconnect-repair), [`optimize-network`](#s-optimize-network), [`ip-check`](#s-ip-check) |
+| 释放磁盘空间或让电脑变快 | [`storage-gc-guardian`](#s-storage-gc-guardian), [`disk-cleaner`](#s-disk-cleaner), [`system-doctor`](#s-system-doctor), [`vscode-doctor`](#s-vscode-doctor) |
 
 <a id="how-to-install"></a>
-## How to install a skill
+## 如何安装技能
 
-There are two kinds of package in this repo.
+本仓库里有两种包。
 
-**Standard skills (202 zips)** contain a `SKILL.md` and work with Claude Code, Codex and other runtimes that support Agent Skills.
+**标准技能（202 个压缩包）**包含 `SKILL.md`，可用于 Claude Code、Codex 以及其他支持 Agent Skills 的运行环境。
 
-1. Unzip the file and open `00_入口说明.txt` (or check the entry column in the CSV) to find the entry `SKILL.md`.
-2. Copy the folder that contains that `SKILL.md` — together with its `references/`, `scripts/`, `assets/` and so on — into your agent's skills folder. For Claude Code that is `~/.claude/skills/<skill-name>/` for personal skills or `.claude/skills/<skill-name>/` inside a project ([Claude Code skills docs](https://code.claude.com/docs/en/skills)). For Codex or other runtimes, use the skills folder that runtime expects (several skills here assume `~/.agents/skills/`).
-3. If the entry is a single file such as `skills/brainstorming.SKILL.md`, make a folder named after the skill and save the file inside it as `SKILL.md`.
-4. Install anything listed under "How to use" for that skill (Python requirements, CLIs, MCP servers, API keys).
+1. 解压文件，打开 `00_入口说明.txt`（或查看 CSV 中的入口文件一列），找到入口 `SKILL.md`。
+2. 把包含该 `SKILL.md` 的文件夹——连同它的 `references/`、`scripts/`、`assets/` 等——复制到你的 agent 技能目录。Claude Code 的个人技能目录是 `~/.claude/skills/<技能名>/`，项目技能目录是项目里的 `.claude/skills/<技能名>/`（[Claude Code 技能文档](https://code.claude.com/docs/en/skills)）。Codex 或其他运行环境请使用它们要求的技能目录（这里有好几个技能默认使用 `~/.agents/skills/`）。
+3. 如果入口是单个文件，比如 `skills/brainstorming.SKILL.md`，就新建一个以技能名命名的文件夹，把文件放进去并改名为 `SKILL.md`。
+4. 安装该技能“怎么用”里列出的依赖（Python 依赖、命令行工具、MCP 服务器、API key）。
 
-Most skills activate on their own when you describe a matching task. A few only run when you name them explicitly; their entries say so.
+大多数技能在你描述相应任务时会自动启用。少数技能只有点名时才会运行，条目里已注明。
 
-**Prompt-type skills (10 zips)** have no `SKILL.md`. Paste the entry file into any chat AI as the system prompt, custom instructions or first message, then send your material. They are marked *prompt-type* below.
+**提示词型技能（10 个压缩包）**没有 `SKILL.md`。把入口文件作为系统提示词、自定义指令或第一条消息粘贴到任意聊天 AI，然后发送你的材料即可。下文中标为*提示词型*。
 
 <a id="packaging-notes"></a>
-## Packaging notes and caveats
+## 打包说明与注意事项
 
-**Spellbook skills.** 106 of the zips come from the [Spellbook](https://github.com/majiayu000/spellbook) library (formerly Claude Arsenal). Each of those zips contains the *entire* `spellbook-main/` repository (~650 files); the skill itself is only the folder or `*.SKILL.md` file at its entry path. Spellbook also ships its own `install.sh` if you'd rather install the whole library at once. Several Spellbook skills hand work to siblings (for example `idea-team` → `idea-research`, `idea-devils-advocate`, `idea-analogist`), so install those together.
+**Spellbook 技能。** 其中 106 个压缩包来自 [Spellbook](https://github.com/majiayu000/spellbook) 技能库（前身为 Claude Arsenal）。这些压缩包每一个都包含*完整的* `spellbook-main/` 仓库（约 650 个文件）；技能本身只是入口路径处的那个文件夹或 `*.SKILL.md` 文件。如果想一次性安装整个库，Spellbook 也自带 `install.sh`。有几个 Spellbook 技能会把工作交给同系列的技能（例如 `idea-team` → `idea-research`、`idea-devils-advocate`、`idea-analogist`），这些最好一起安装。
 
-**Zips that contain more than one copy or version**
+**包含多个副本或版本的压缩包**
 
-| Skill | What's inside | Which to use |
+| 技能 | 包含内容 | 建议使用 |
 |---|---|---|
-| `huazhao-portrait-director` | v5.0.0 and v6.0.0 | v6.0.0 (newer) |
-| `reverse-anything` | v1.0 (`reverse-anything/`) and v2.0 (`reverse-anything__不同内容_0d88a8ba/`) | v2.0 (broader, evidence-driven) |
-| `skill-reforge-foundry` | v5.1.0 (English) and a newer Chinese-first edition | Either; the Chinese edition focuses on turning conversations into skills |
-| `h3-video-editing-prompt` | `SKILL.md` (English) and `SKILL.cn.md` (Chinese) | Same skill in two languages |
-| `xuanshu-agent` | Full xuanshu-skill repo with two entry files | `skills/xuanshu-agent/SKILL.md` is the full guide |
-| `feishu-rent-billing` | Current skill plus a backup copy | Root `feishu-rent-billing/SKILL.md` |
-| `app-ui-design`, `figma-to-react`, `frontend-design`, `ui-design-system`, `idea-analogist`, `idea-devils-advocate`, `idea-research`, `idea-team`, `idea-to-product`, `rust-best-practices` | A core copy and a Spellbook plugin copy | Install only one, to avoid duplicate triggers |
+| `huazhao-portrait-director` | v5.0.0 和 v6.0.0 | v6.0.0（更新） |
+| `reverse-anything` | v1.0（`reverse-anything/`）和 v2.0（`reverse-anything__不同内容_0d88a8ba/`） | v2.0（覆盖更广，证据驱动） |
+| `skill-reforge-foundry` | v5.1.0（英文）和更新的中文版 | 都可以；中文版侧重把对话萃取成技能 |
+| `h3-video-editing-prompt` | `SKILL.md`（英文）和 `SKILL.cn.md`（中文） | 同一技能的两种语言 |
+| `xuanshu-agent` | 完整的 xuanshu-skill 仓库，含两个入口文件 | `skills/xuanshu-agent/SKILL.md` 是完整指南 |
+| `feishu-rent-billing` | 当前技能和一份备份 | 根目录的 `feishu-rent-billing/SKILL.md` |
+| `app-ui-design`、`figma-to-react`、`frontend-design`、`ui-design-system`、`idea-analogist`、`idea-devils-advocate`、`idea-research`、`idea-team`、`idea-to-product`、`rust-best-practices` | 一份核心版和一份 Spellbook 插件版 | 只装一份，避免重复触发 |
 
-**Overlaps.** `figma-to-code` and `figma-to-react` are the same generator under two names. The `anysearch`, `consulting-analysis`, `research-guide` and `research-hub` zips all contain the same `大调查` research bundle.
+**重叠。** `figma-to-code` 和 `figma-to-react` 是同一个生成器的两个名字。`anysearch`、`consulting-analysis`、`research-guide` 和 `research-hub` 这几个压缩包里都是同一个 `大调查` 调研包。
 
-**Adjust before use**
+**使用前需要调整**
 
-- `gpu-use` — the default SSH server in `SKILL.md` is the original author's; replace it with yours.
-- `weekly` — hard-wired to one project's front-end and back-end repos ("om-generator"); edit the repo names and paths.
-- `meta-timing` — declares dependencies (`agent-harness-loop`, `scr-judgment`) that are not in this repo.
-- `react-hooks-best-practices` — expects a `typescript-best-practices` skill that is not in this repo.
-- `research-hub` — routes to video-download, book-ingest and knowledge-* skills that are not in this repo.
-- `skill-archive-manager` — part of an `archive-center-suite` and relies on that suite's tooling.
-- `分镜设计大师阶段2` / `分镜设计大师阶段3` — the file *inside* each zip carries the other stage's file name. The zip names are right: the Stage 2 zip holds the Stage 2 assembler, the Stage 3 zip holds the Stage 3 converter.
+- `gpu-use` —— `SKILL.md` 里默认的 SSH 服务器是原作者的，请换成你自己的。
+- `weekly` —— 写死了某个项目的前端和后端仓库（“om-generator”），请修改仓库名和路径。
+- `meta-timing` —— 声明依赖的技能（`agent-harness-loop`、`scr-judgment`）不在本仓库中。
+- `react-hooks-best-practices` —— 需要搭配的 `typescript-best-practices` 技能不在本仓库中。
+- `research-hub` —— 它路由到的 video-download、book-ingest 和 knowledge-* 技能不在本仓库中。
+- `skill-archive-manager` —— 属于 `archive-center-suite` 套件，依赖该套件的工具。
+- `分镜设计大师阶段2` / `分镜设计大师阶段3` —— 两个压缩包*里面*的文件名互换了。压缩包名是对的：阶段 2 的压缩包里是阶段 2 装配器，阶段 3 的压缩包里是阶段 3 转换器。
 
 <a id="catalog"></a>
-# Catalog by category
+# 按类别浏览
 
-Each section starts with a one-line overview table; full entries follow it.
+每个类别先有一张一句话概览表，后面是完整条目。
 
 <a id="cat-video"></a>
-## AI video, film & storyboards
+## AI 视频、影视与分镜
 
-Directing and prompting AI video (Seedance, MiniMax H3, Jimeng and others), storyboards, continuity, editing and full production pipelines.
+AI 视频（Seedance、MiniMax H3、即梦等）的导演与提示词、分镜、连续性、剪辑和全流程生产。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`agentic-video-director`](#s-agentic-video-director) | End-to-end video builds where the deliverable is a rendered file, not just a prompt. |
-| [`atmospheric-character-short-director`](#s-atmospheric-character-short-director) | Short vertical character mood films. |
-| [`cinematic-fight-director`](#s-cinematic-fight-director) | Readable, physically convincing fight choreography in AI video. |
-| [`fengyun-jue-rebuilder`](#s-fengyun-jue-rebuilder) | Fan restagings of this specific animated film in a new visual style. |
-| [`h3-video-editing-prompt`](#s-h3-video-editing-prompt) | Precise masked-region and object-replacement edits with MiniMax H3. |
-| [`interactive-film-ui-fusion`](#s-interactive-film-ui-fusion) | Adding clean, cinematic interactivity on top of interactive video. |
-| [`jingqiao-continuity-supervisor`](#s-jingqiao-continuity-supervisor) | Catching continuity errors before you spend credits generating video. |
-| [`live-mv-weaver`](#s-live-mv-weaver) | Live-performance MVs with an audience storyline. |
-| [`motion-drama-foundry`](#s-motion-drama-foundry) | Taking a motion comic or AI short from idea to generation-ready package. |
-| [`motionprint-reverse`](#s-motionprint-reverse) | Recreating how a reference video moves, not just how it looks. |
-| [`mr-li-seedance-25`](#s-mr-li-seedance-25) | Faithful, segment-by-segment Seedance production from a finished script. |
-| [`Mx-Shell_Prompts`](#s-mx-shell-prompts) | Writing Seedance 2.0 prompts from rough narrative text. |
-| [`scenerelay-reverse`](#s-scenerelay-reverse) | Remaking a reference video with your own cast and world in Seedance 2.5. |
-| [`script-scene-visual-storyboard`](#s-script-scene-visual-storyboard) | Turning a written scene into a believable sequence of frames. |
-| [`seedance-clean`](#s-seedance-clean) | Clean, single Seedance 2.0 shot and scene prompts. |
-| [`short-drama-producer`](#s-short-drama-producer) | A complete Jimeng-ready production pack for a short drama. |
-| [`storyboard-forge-20-25`](#s-storyboard-forge-20-25) | Planning a generatable, editable AI video sequence. |
-| [`talking-head-fx-packager`](#s-talking-head-fx-packager) | Tasteful effects and subtitle packaging for spoken-content videos. |
-| [`video-studio`](#s-video-studio) | Editing talking-head videos and livestream clips locally by chat. |
-| [`AI视频空间调度导演`](#s-zh-b603f88d) | Keeping room layout, character positions and camera paths consistent across AI video shots — aimed at non-technical creators. |
-| [`分镜设计大师阶段1：导演设计器`](#s-zh-a4f0e6a7) | Locking the director's design before any storyboard image is made. |
-| [`分镜设计大师阶段2：分镜图Skill装配器`](#s-zh-18d9bfd6) | Turning a locked director design into consistent storyboard images. |
-| [`分镜设计大师阶段3：视频提示词转换器`](#s-zh-5a8eb463) | Faithful shot-by-shot video prompts from approved storyboards. |
-| [`解说漫制片教练`](#s-zh-8927f55c) | Beginners producing narrated recap comics (解说漫) step by step. |
+| [`agentic-video-director`](#s-agentic-video-director) | 交付物必须是渲染好的视频文件（而不只是提示词）的端到端制作。 |
+| [`atmospheric-character-short-director`](#s-atmospheric-character-short-director) | 竖屏人物氛围短片。 |
+| [`cinematic-fight-director`](#s-cinematic-fight-director) | 看得清、物理上可信的 AI 视频打斗编排。 |
+| [`fengyun-jue-rebuilder`](#s-fengyun-jue-rebuilder) | 用新的视觉风格重新演绎这部动画电影的同人创作。 |
+| [`h3-video-editing-prompt`](#s-h3-video-editing-prompt) | 用 MiniMax H3 做精确的遮罩区域和物体替换编辑。 |
+| [`interactive-film-ui-fusion`](#s-interactive-film-ui-fusion) | 在互动视频上加一层干净、有电影感的交互。 |
+| [`jingqiao-continuity-supervisor`](#s-jingqiao-continuity-supervisor) | 在花额度生成视频之前抓出连续性错误。 |
+| [`live-mv-weaver`](#s-live-mv-weaver) | 带观众故事线的现场演出 MV。 |
+| [`motion-drama-foundry`](#s-motion-drama-foundry) | 把漫剧或 AI 短片从想法推进到可直接生成的制作包。 |
+| [`motionprint-reverse`](#s-motionprint-reverse) | 还原参考视频“怎么动”，而不只是“长什么样”。 |
+| [`mr-li-seedance-25`](#s-mr-li-seedance-25) | 从定稿剧本出发，逐段忠实地用 Seedance 制作。 |
+| [`Mx-Shell_Prompts`](#s-mx-shell-prompts) | 从粗糙的叙事文字写出 Seedance 2.0 提示词。 |
+| [`scenerelay-reverse`](#s-scenerelay-reverse) | 在 Seedance 2.5 里用你自己的角色和世界翻拍参考视频。 |
+| [`script-scene-visual-storyboard`](#s-script-scene-visual-storyboard) | 把文字场景变成一组可信的画面序列。 |
+| [`seedance-clean`](#s-seedance-clean) | 干净的单条 Seedance 2.0 镜头和场景提示词。 |
+| [`short-drama-producer`](#s-short-drama-producer) | 一套可直接用于即梦的完整短剧制作包。 |
+| [`storyboard-forge-20-25`](#s-storyboard-forge-20-25) | 规划一段可生成、可剪辑的 AI 视频序列。 |
+| [`talking-head-fx-packager`](#s-talking-head-fx-packager) | 为口播类视频做有品位的特效和字幕包装。 |
+| [`video-studio`](#s-video-studio) | 通过聊天在本地剪辑口播视频和直播切片。 |
+| [`AI视频空间调度导演`](#s-zh-b603f88d) | 让多镜头 AI 视频里的房间布局、人物站位和镜头路线保持一致——面向不懂技术的创作者。 |
+| [`分镜设计大师阶段1：导演设计器`](#s-zh-a4f0e6a7) | 在生成任何分镜图之前先把导演设计锁定。 |
+| [`分镜设计大师阶段2：分镜图Skill装配器`](#s-zh-18d9bfd6) | 把锁定的导演设计变成风格一致的分镜图。 |
+| [`分镜设计大师阶段3：视频提示词转换器`](#s-zh-5a8eb463) | 从已定稿的分镜得到忠实的逐镜视频提示词。 |
+| [`解说漫制片教练`](#s-zh-8927f55c) | 零基础学生一步一步制作解说漫。 |
 
 <a id="s-agentic-video-director"></a>
 ### agentic-video-director
 
-[agentic-video-director.zip](agentic-video-director.zip) · entry: `agentic-video-director-v1.0.0/SKILL.md`
+[agentic-video-director.zip](agentic-video-director.zip) · 入口：`agentic-video-director-v1.0.0/SKILL.md`
 
-- **What it does:** Lets a coding agent produce real video files: turns intent into a timed shot contract, picks the lightest production path, renders, inspects the actual pixels and audio, repairs defects and delivers the file. Has model notes for Claude Opus 5.5 and GPT-6, MV timing, quality gates, scripts and templates.
-- **How to use:** In Claude Code or Codex, ask it to create, edit, repair or finish a video, MV, promo, launch film, explainer or motion-graphics piece; supply your assets, music and target length.
-- **Best suited for:** End-to-end video builds where the deliverable is a rendered file, not just a prompt.
+- **能做什么：** 让编程 agent 真正产出视频文件：把意图转成带时间的镜头合同，选择最轻的制作路线，渲染后检查实际画面和音频，修复问题并交付文件。包含针对 Claude Opus 5.5 和 GPT-6 的说明、MV 卡点、质量闸门、脚本和模板。
+- **怎么用：** 在 Claude Code 或 Codex 里，让它制作、剪辑、修复或完成视频、MV、宣传片、发布片、讲解视频或动态图形；提供素材、音乐和目标时长。
+- **最适合：** 交付物必须是渲染好的视频文件（而不只是提示词）的端到端制作。
 
 <a id="s-atmospheric-character-short-director"></a>
 ### atmospheric-character-short-director
 
-[atmospheric-character-short-director.zip](atmospheric-character-short-director.zip) · entry: `视频分镜skill导演.md`
+[atmospheric-character-short-director.zip](atmospheric-character-short-director.zip) · 入口：`视频分镜skill导演.md`
 
-- **What it does:** Directs 5–15 second, character-centred atmospheric AI videos — character showcases, beauty/fashion mood films, ancient-style portraits, restrained romance, vertical social promos. Turns an idea or reference image into a shot design and a ready-to-use video prompt, choosing between a single take, a short multi-shot or separately generated shots.
-- **How to use:** The entry is `视频分镜skill导演.md`. Describe the character, mood and platform (optionally attach a reference image). Not for long plots, multi-character dialogue or fight scenes.
-- **Best suited for:** Short vertical character mood films.
+- **能做什么：** 执导 5–15 秒、以人物为中心的 AI 氛围短片——角色展示、美妆/服装氛围片、古风人像、克制的浪漫、竖屏社交宣传。把一个想法或参考图变成镜头设计和可直接使用的视频提示词，并在单镜头连续表演、一次生成的短多镜头、分别生成再剪辑之间做选择。
+- **怎么用：** 入口文件是 `视频分镜skill导演.md`。描述人物、氛围和发布平台（可附参考图）。不适合长剧情、多人对话或打斗场面。
+- **最适合：** 竖屏人物氛围短片。
 
 <a id="s-cinematic-fight-director"></a>
 ### cinematic-fight-director
 
-[cinematic-fight-director.zip](cinematic-fight-director.zip) · entry: `cinematic-fight-director-public-v4.0.0/SKILL.md`
+[cinematic-fight-director.zip](cinematic-fight-director.zip) · 入口：`cinematic-fight-director-public-v4.0.0/SKILL.md`
 
-- **What it does:** Director-first prompt compiler for AI fight scenes, optimised for Seedance 2.5 and adaptable to other models. Builds "action packets" with six locks (identity, space, physics, tempo, camera, style), motion-density settings, momentum continuity, impact hierarchy and multi-enemy / airborne rules, so action reads as fast, physical and continuous.
-- **How to use:** Give a fight idea, script beat, character image, storyboard or motion reference; get a production-ready video prompt (choose measured / kinetic / hyper-dense density).
-- **Best suited for:** Readable, physically convincing fight choreography in AI video.
+- **能做什么：** 以导演思维为先的 AI 打斗戏提示词编译器，针对 Seedance 2.5 优化，也可适配其他模型。用“动作包”和六把锁（身份、空间、物理、节奏、镜头、风格）、动作密度设置、动量连续、冲击层级以及多敌人/腾空规则，让动作快速、有物理感且连贯。
+- **怎么用：** 提供打斗构想、剧本片段、角色图、分镜或动作参考，得到可直接用于制作的视频提示词（可选克制 / 动感 / 超高密度）。
+- **最适合：** 看得清、物理上可信的 AI 视频打斗编排。
 
 <a id="s-fengyun-jue-rebuilder"></a>
 ### fengyun-jue-rebuilder
 
-[fengyun-jue-rebuilder.zip](fengyun-jue-rebuilder.zip) · entry: `fengyun-jue-rebuilder/SKILL.md`
+[fengyun-jue-rebuilder.zip](fengyun-jue-rebuilder.zip) · 入口：`fengyun-jue-rebuilder/SKILL.md`
 
-- **What it does:** Recreates or restages *Feng Yun Jue / Storm Rider: Clash of the Evils* characters, scenes, fights, trailers and music-driven sequences. Uses three separate engines — narrative, combat and style — that meet only at the shot package, with character identity as a fixed invariant. Modes: CHARACTER_ASSET, SHOT_REPLICA, NARRATIVE_REBUILD, COMBAT_REBUILD, MUSIC_REBUILD, TRAILER_REBUILD.
-- **How to use:** Pick a mode, give the source scene or character and a separately defined target visual style; approval gates come before final generation.
-- **Best suited for:** Fan restagings of this specific animated film in a new visual style.
+- **能做什么：** 重建或重新演绎《风云决》的角色、场景、打斗、预告片和音乐驱动片段。使用三个相互独立的引擎——叙事、打斗和风格——只在镜头包处汇合，人物身份作为固定不变量。模式：CHARACTER_ASSET、SHOT_REPLICA、NARRATIVE_REBUILD、COMBAT_REBUILD、MUSIC_REBUILD、TRAILER_REBUILD。
+- **怎么用：** 选择模式，提供原片场景或角色，以及单独定义的目标视觉风格；最终生成前有审批关卡。
+- **最适合：** 用新的视觉风格重新演绎这部动画电影的同人创作。
 
 <a id="s-h3-video-editing-prompt"></a>
 ### h3-video-editing-prompt
 
-[h3-video-editing-prompt.zip](h3-video-editing-prompt.zip) · entry: `h3-video-editing-prompt/SKILL.md` · `h3-video-editing-prompt/SKILL.cn.md`
+[h3-video-editing-prompt.zip](h3-video-editing-prompt.zip) · 入口：`h3-video-editing-prompt/SKILL.md` · `h3-video-editing-prompt/SKILL.cn.md`
 
-- **What it does:** Writes MiniMax H3 video-editing prompts in the full-reference Ref2VA six-field format: face and identity replacement, costumes, held or scene objects, background, on-screen text, materials, lighting, object removal or addition, and video continuation. Key rule: describe what the final video shows, never the operation ("swap", "remove"). Includes visible-behaviour and motion-transfer checklists and scene recipes; English and Chinese versions; works as a ComfyUI node prompt.
-- **How to use:** Provide the source video description and reference material and say what should change ("replace the apple with this watermelon", "put this face into the video", "relight to dusk"). Outputs English prompt text by default.
-- **Best suited for:** Precise masked-region and object-replacement edits with MiniMax H3.
+- **能做什么：** 用全参考 Ref2VA 六段格式编写 MiniMax H3 视频编辑提示词：换脸与身份替换、服装、手持或场景物体、背景、画内文字、材质、光照、物体移除或新增以及视频续写。核心规则：描述最终视频里看到什么，而不是操作本身（不写“swap”“remove”）。包含可见行为与动作迁移清单和场景配方；有英文和中文两个版本；也可作为 ComfyUI 节点的提示词使用。
+- **怎么用：** 提供源视频描述和参考素材，说明要改什么（“把苹果换成这个西瓜”“把这张脸放进视频”“改成黄昏光”）。默认只输出英文提示词正文。
+- **最适合：** 用 MiniMax H3 做精确的遮罩区域和物体替换编辑。
 
 <a id="s-interactive-film-ui-fusion"></a>
 ### interactive-film-ui-fusion
 
-[interactive-film-ui-fusion.zip](interactive-film-ui-fusion.zip) · entry: `interactive-film-ui-fusion-v1.1.0/SKILL.md`
+[interactive-film-ui-fusion.zip](interactive-film-ui-fusion.zip) · 入口：`interactive-film-ui-fusion-v1.1.0/SKILL.md`
 
-- **What it does:** Designs the visible interaction layer of interactive films, FMV, branching AI video, playable shorts, H5 experiences and cinematic games: HUD/UI assets, hotspots, QTE presentation, interaction feedback, video-attached overlays, motion states, spatial anchors, storyboard/previs review and runtime UI handoff. Story and branch state stay with the upstream production system.
-- **How to use:** Provide the branch graph or node list and video context; it produces a canonical event timeline, UI components and renderer-ready handoff. Load only the references the task needs.
-- **Best suited for:** Adding clean, cinematic interactivity on top of interactive video.
+- **能做什么：** 为互动电影、FMV、分支 AI 视频、可玩短片、H5 体验和电影化游戏设计可见的交互层：HUD/UI 素材、热点、QTE 呈现、交互反馈、贴合视频的叠加层、动效状态、空间锚点、分镜/预演评审和运行时 UI 交接。剧情和分支状态仍由上游制作系统负责。
+- **怎么用：** 提供分支图或节点列表以及视频背景；它会产出标准事件时间线、UI 组件和可交给渲染端的交接文档。只加载当前任务需要的参考文件。
+- **最适合：** 在互动视频上加一层干净、有电影感的交互。
 
 <a id="s-jingqiao-continuity-supervisor"></a>
 ### jingqiao-continuity-supervisor
 
-[jingqiao-continuity-supervisor.zip](jingqiao-continuity-supervisor.zip) · entry: `jingqiao-continuity-supervisor/SKILL.md`
+[jingqiao-continuity-supervisor.zip](jingqiao-continuity-supervisor.zip) · 入口：`jingqiao-continuity-supervisor/SKILL.md`
 
-- **What it does:** "Jingqiao (Shot Bridge) 2.0" — a continuity supervisor for AI-video storyboard prompts and generated clips. Models each shot as entry state → event → exit state and checks identity, persistent state (props, wardrobe, injuries), motion handoff, space-time and cause across the whole sequence, distinguishing legitimate ellipsis and intentional hard cuts from real breaks. Fixes with the smallest change; supports Seedance 2.0 multi-shot and continuation.
-- **How to use:** Paste two or dozens of shot prompts (or clips) and ask "check continuity" or "fix the jumps". It returns flagged cuts and repaired prompts, or a full corrected version on request.
-- **Best suited for:** Catching continuity errors before you spend credits generating video.
+- **能做什么：** “镜桥 2.0”——AI 视频分镜提示词和生成片段的连续性监督。把每个镜头看作“进入状态 → 事件 → 离开状态”，在整个序列中检查身份、持续状态（道具、服装、伤痕）、动作衔接、时空和因果，区分合法省略、故意硬切和真正的穿帮。用最小改动修复；支持 Seedance 2.0 多镜头和续写。
+- **怎么用：** 粘贴两条到几十条镜头提示词（或片段），说“检查连续性”或“修好跳接”。它会返回标出的问题切口和修正后的提示词，要求时给出完整修正版。
+- **最适合：** 在花额度生成视频之前抓出连续性错误。
 
 <a id="s-live-mv-weaver"></a>
 ### live-mv-weaver
 
-[live-mv-weaver.zip](live-mv-weaver.zip) · entry: `live-mv-weaver/SKILL.md`
+[live-mv-weaver.zip](live-mv-weaver.zip) · 入口：`live-mv-weaver/SKILL.md`
 
-- **What it does:** Builds or reconstructs music videos where one continuous live song is the master timeline, intercut with recurring audience reactions, in-world dialogue, band details, callbacks and same-location micro-drama. REPLICA mode copies a reference MV's structure; REPLICA_PLUS keeps the grammar but improves performances, continuity, audio and cuts.
-- **How to use:** Supply the song (with start/end times) and, ideally, a reference MV; it produces the locked song timeline, shot plan and generation package.
-- **Best suited for:** Live-performance MVs with an audience storyline.
+- **能做什么：** 制作或重建这样的音乐 MV：一首完整的现场演唱作为主时间线，穿插反复出现的观众反应、场内对白、乐队细节、前后呼应和同一地点的小剧情。REPLICA 模式复刻参考 MV 的结构；REPLICA_PLUS 保留语法，同时提升表演、连续性、音频和剪辑。
+- **怎么用：** 提供歌曲（含起止时间），最好附上参考 MV；它会产出锁定的歌曲时间线、镜头计划和生成包。
+- **最适合：** 带观众故事线的现场演出 MV。
 
 <a id="s-motion-drama-foundry"></a>
 ### motion-drama-foundry
 
-[motion-drama-foundry.zip](motion-drama-foundry.zip) · entry: `motion-drama-foundry/SKILL.md`
+[motion-drama-foundry.zip](motion-drama-foundry.zip) · 入口：`motion-drama-foundry/SKILL.md`
 
-- **What it does:** All-in-one motion-comic / AI-video production: from a one-line story, script or existing assets through story development, script, character/scene/prop asset definitions, storyboard, cross-shot continuity, video-generation prompts and sound/edit handoff. Keeps one Project Ledger as the source of truth.
-- **How to use:** Modes are detected automatically: FULL RUN ("do it all from this story"), TAKEOVER (continue from what you have), STAGE ONLY (just one step), REPAIR (fix a broken image, video or prompt). See `使用说明书.pdf` for the manual.
-- **Best suited for:** Taking a motion comic or AI short from idea to generation-ready package.
+- **能做什么：** 一体化漫剧 / AI 视频生产：从一句话故事、剧本或现有素材出发，完成故事开发、剧本、人物/场景/道具资产定义、分镜、跨镜连续性、视频生成提示词以及声音/剪辑交接。全程只认一份“项目账本”作为事实来源。
+- **怎么用：** 模式自动判定：FULL RUN（“从这个故事一路做完”）、TAKEOVER（从你已有的内容继续）、STAGE ONLY（只做某一步）、REPAIR（修复跑偏的图、视频或提示词）。说明书见 `使用说明书.pdf`。
+- **最适合：** 把漫剧或 AI 短片从想法推进到可直接生成的制作包。
 
 <a id="s-motionprint-reverse"></a>
 ### motionprint-reverse
 
-[motionprint-reverse.zip](motionprint-reverse.zip) · entry: `MOTIONPRINT-REVERSE-1.1/SKILL.md`
+[motionprint-reverse.zip](motionprint-reverse.zip) · 入口：`MOTIONPRINT-REVERSE-1.1/SKILL.md`
 
-- **What it does:** Reverse-engineers any AI video into a high-fidelity video prompt by recovering motion, camera movement, rhythm, space and environmental response (seven "motion fingerprints") rather than listing visual tags. Modes: quick, full, multi-shot, compare-and-patch (fix the top three deviations) and enhanced rewrite.
-- **How to use:** Upload a video, clip or keyframe sequence; default output is a full fingerprint card plus Core, Directed and platform prompts. Upload your generated result too for a compare-and-patch loop.
-- **Best suited for:** Recreating how a reference video moves, not just how it looks.
+- **能做什么：** 把任意 AI 视频反推成高执行度的视频提示词，重点还原运动、运镜、节奏、空间和环境响应（七枚“动态指纹”），而不是堆砌画面标签。模式：快速、完整、多镜头、对比修补（只修最大的三处偏差）和增强重构。
+- **怎么用：** 上传视频、片段或关键帧序列；默认输出完整的动态指纹卡以及 Core、Directed 和平台版提示词。把你生成的结果也上传，就能进入对比修补循环。
+- **最适合：** 还原参考视频“怎么动”，而不只是“长什么样”。
 
 <a id="s-mr-li-seedance-25"></a>
 ### mr-li-seedance-25
 
-[mr-li-seedance-25.zip](mr-li-seedance-25.zip) · entry: `mr-li-seedance-25/SKILL.md`
+[mr-li-seedance-25.zip](mr-li-seedance-25.zip) · 入口：`mr-li-seedance-25/SKILL.md`
 
-- **What it does:** "Mr. Li's Seedance rules" — splits an authoritative Chinese script into submit-ready Seedance segment prompts sized to real performance capacity, one natural generation segment at a time. Handles drama vs action scene writing, visual tone, asset binding and creation, result rework and delivery review, without silently rewriting dialogue or plot.
-- **How to use:** On first use it explains its seven stages (lock script, scope, tone, assets, segment prompts, rework, wrap-up); then control it with phrases like "confirm and continue", "skip assets", "do 1-1", "next segment", "only change blocking". If a host takes one file, use `references/universal-runtime.md`.
-- **Best suited for:** Faithful, segment-by-segment Seedance production from a finished script.
+- **能做什么：** “李先生 Seedance 通用创作规则”——按真实表演容量，把一份权威中文剧本拆成可直接提交的 Seedance 分段提示词，一次只写一个自然生成段。区分文戏和动作戏的写法，处理视觉基调、素材绑定与资产制作、结果返工和交付审阅，不擅自改写对白或剧情。
+- **怎么用：** 第一次使用时会说明七个阶段（锁定剧本、制作范围、创作基调、资产、分段提示词、返工、收束）；之后用“确认继续”“跳过资产”“做 1-1”“继续下一段”“只改站位”等话控制流程。如果宿主只能加载一个文件，用 `references/universal-runtime.md`。
+- **最适合：** 从定稿剧本出发，逐段忠实地用 Seedance 制作。
 
 <a id="s-mx-shell-prompts"></a>
 ### Mx-Shell_Prompts
 
-[Mx-Shell_Prompts.zip](Mx-Shell_Prompts.zip) · *prompt-type* · entry: `内层包/Mx-Shell_Prompts_v1.5/Mx-Shell_Prompts_v1.5.md`
+[Mx-Shell_Prompts.zip](Mx-Shell_Prompts.zip) · *提示词型* · 入口：`内层包/Mx-Shell_Prompts_v1.5/Mx-Shell_Prompts_v1.5.md`
 
-- **What it does:** Converts a story outline, script excerpt, storyboard draft, novel passage or voice-over copy into structured, film-grade Seedance 2.0 video prompts with second-by-second timelines and physics-first (non-literary) descriptions. Supports one-take mode and multi-camera mode.
-- **How to use:** Load `Mx-Shell_Prompts_v1.5.md` as a prompt. It asks for the mode, character/prop/scene descriptions (short if you have reference images, detailed if not), mood and quality settings, sound rules, dialogue/voice-over and the action, then outputs the finished prompt.
-- **Best suited for:** Writing Seedance 2.0 prompts from rough narrative text.
+- **能做什么：** 把故事大纲、剧本片段、分镜草稿、小说段落或口播文案转成结构化、影视级的 Seedance 2.0 视频提示词，时间轴精确到秒，采用“物理优先”（非文学化）的描述。支持一镜到底和多机位分镜两种模式。
+- **怎么用：** 把 `Mx-Shell_Prompts_v1.5.md` 作为提示词加载。它会依次询问模式、角色/道具/场景描述（有参考图时简短，没有时详细）、氛围与画质、声音规则、对白/画外音和画面内容，然后输出完整提示词。
+- **最适合：** 从粗糙的叙事文字写出 Seedance 2.0 提示词。
 
 <a id="s-scenerelay-reverse"></a>
 ### scenerelay-reverse
 
-[scenerelay-reverse.zip](scenerelay-reverse.zip) · entry: `scenerelay-reverse/SKILL.md`
+[scenerelay-reverse.zip](scenerelay-reverse.zip) · 入口：`scenerelay-reverse/SKILL.md`
 
-- **What it does:** "SceneRelay Reverse 3.1" — adapts a reference video into a Seedance 2.5-ready production: shot-by-shot reverse analysis, dramatic-function breakdown, "replacement ripple" recalculation when swapping characters, scenes or props, a new causally closed shot script, an actual reference-image pack (with each image's role and upload order) and one copy-ready Seedance block per segment. Fixes the earliest deviation when generations drift. Supports multi-round projects.
-- **How to use:** Upload the reference video and (now or later) your replacement characters/scenes/props; say "analyse then give me the reference images and Seedance prompts".
-- **Best suited for:** Remaking a reference video with your own cast and world in Seedance 2.5.
+- **能做什么：** “SceneRelay Reverse 3.1”——把参考视频改编成可直接进入 Seedance 2.5 的制作：逐镜反推、拆解戏剧功能，替换人物、场景或道具时自动计算“替换涟漪”，写出因果闭合的新版镜头剧本，交付真实的参考图包（每张图的职责和上传顺序），并为每个生成段给出一段可直接复制的 Seedance 正文。生成跑偏时修复最早的偏差。支持多轮项目接续。
+- **怎么用：** 上传参考视频和（现在或稍后）你的替换人物/场景/道具；说“分析完直接给我参考图和 Seedance 提示词”。
+- **最适合：** 在 Seedance 2.5 里用你自己的角色和世界翻拍参考视频。
 
 <a id="s-script-scene-visual-storyboard"></a>
 ### script-scene-visual-storyboard
 
-[script-scene-visual-storyboard.zip](script-scene-visual-storyboard.zip) · entry: `script-scene-visual-storyboard-v1.0.0/SKILL.md`
+[script-scene-visual-storyboard.zip](script-scene-visual-storyboard.zip) · 入口：`script-scene-visual-storyboard-v1.0.0/SKILL.md`
 
-- **What it does:** Converts screenplays, scenes, story passages or dialogue into spatially coherent, emotionally purposeful storyboards: scene truth → visible evidence → space model → pressure curve → frame design, with anchor/support/punctuation shots, continuity rules and model-agnostic storyboard image prompts. Modes: direct storyboard, shot design, visual board, previs/continuity.
-- **How to use:** Paste the scene or script and ask for storyboards, a shot list, blocking or storyboard-image prompts.
-- **Best suited for:** Turning a written scene into a believable sequence of frames.
+- **能做什么：** 把剧本、场景、故事段落或对白转成空间连贯、有情绪目的的分镜：场景真相 → 可见证据 → 空间模型 → 压力曲线 → 画面设计，配合锚点/支撑/标点镜头、连续性规则和与模型无关的分镜图提示词。模式：直接分镜、镜头设计、视觉分镜板、预演/连续性。
+- **怎么用：** 粘贴场景或剧本，要求分镜、镜头列表、走位或分镜图提示词。
+- **最适合：** 把文字场景变成一组可信的画面序列。
 
 <a id="s-seedance-clean"></a>
 ### seedance-clean
 
-[seedance-clean.zip](seedance-clean.zip) · entry: `higg导演/SKILL.md`
+[seedance-clean.zip](seedance-clean.zip) · 入口：`higg导演/SKILL.md`
 
-- **What it does:** Seedance 2.0 prompt-writing system built on "write the visible": translates mood into observable action, light and camera; covers asset tagging, context isolation, distributed style, cuts and timing, directing, optics (shot sizes, lens/FOV anchors), special protocols and a pre-prompt checklist. Always outputs one standalone prompt in a code block.
-- **How to use:** Say "write a Seedance prompt for…", "build a shot where…", or ask about Seedance technique. The package folder is `higg导演/`; it also contains a packaged `seedance-clean_v2.skill` file.
-- **Best suited for:** Clean, single Seedance 2.0 shot and scene prompts.
+- **能做什么：** 以“只写看得见的东西”为核心的 Seedance 2.0 提示词写作系统：把情绪翻译成可观察的动作、光线和镜头；涵盖素材标注、上下文隔离、分布式风格、剪辑与时长、导演调度、光学（景别、焦段/视场角锚点）、特殊规程和写前检查清单。始终输出一条放在代码块里的独立提示词。
+- **怎么用：** 说“写一条 Seedance 提示词……”“做一个……的镜头”，或询问 Seedance 写法。包的文件夹是 `higg导演/`；里面还有一个打包好的 `seedance-clean_v2.skill` 文件。
+- **最适合：** 干净的单条 Seedance 2.0 镜头和场景提示词。
 
 <a id="s-short-drama-producer"></a>
 ### short-drama-producer
 
-[short-drama-producer.zip](short-drama-producer.zip) · entry: `short-drama-producer/SKILL.md`
+[short-drama-producer.zip](short-drama-producer.zip) · 入口：`short-drama-producer/SKILL.md`
 
-- **What it does:** End-to-end short-drama production for AI video: script, storyboard table, character / prop / scene asset cards and Jimeng (即梦) video prompts, with an AI self-check and delivery checklist. Handles single 3–5 minute episodes and multi-episode series.
-- **How to use:** Start from a theme (mode A), an outline (mode B) or a finished script (mode C). For A/B it first asks genre, cast, emotional tone, episode count and any brand constraints.
-- **Best suited for:** A complete Jimeng-ready production pack for a short drama.
+- **能做什么：** 面向 AI 视频的短剧全流程生产：剧本、分镜表、人物/道具/场景资产卡和即梦视频提示词，带 AI 自检和交付清单。支持单集（3–5 分钟）和多集系列。
+- **怎么用：** 可从主题（模式 A）、大纲（模式 B）或已有剧本（模式 C）开始。模式 A/B 会先询问题材、角色、情绪基调、集数和品牌限制。
+- **最适合：** 一套可直接用于即梦的完整短剧制作包。
 
 <a id="s-storyboard-forge-20-25"></a>
 ### storyboard-forge-20-25
 
-[storyboard-forge-20-25.zip](storyboard-forge-20-25.zip) · entry: `storyboard-forge-20-25-v2.0.0/SKILL.md`
+[storyboard-forge-20-25.zip](storyboard-forge-20-25.zip) · 入口：`storyboard-forge-20-25-v2.0.0/SKILL.md`
 
-- **What it does:** Director-grade storyboarding and shot planning for Seedance 2.0/2.5 and other AI video tools. Turns scripts, concepts, ads, action, dialogue, MV/performance, product films, trailers, horror, comedy, anime and documentary briefs into model-routed storyboards, shot contracts, continuity locks, reference plans, generation prompts, retake plans and edit handoffs.
-- **How to use:** Give the script or brief (with references if any); it infers before asking and outputs in the mode you need. Invocable directly.
-- **Best suited for:** Planning a generatable, editable AI video sequence.
+- **能做什么：** 面向 Seedance 2.0/2.5 和其他 AI 视频工具的导演级分镜与镜头规划。把剧本、概念、广告、动作戏、对话戏、MV/演出、产品片、预告片、恐怖、喜剧、动漫和纪录片简报转成按模型路由的分镜、镜头合同、连续性锁定、参考图方案、生成提示词、重拍计划和剪辑交接。
+- **怎么用：** 提供剧本或简报（如有参考图一并提供）；它会先推断再提问，并按你需要的模式输出。可直接调用。
+- **最适合：** 规划一段可生成、可剪辑的 AI 视频序列。
 
 <a id="s-talking-head-fx-packager"></a>
 ### talking-head-fx-packager
 
-[talking-head-fx-packager.zip](talking-head-fx-packager.zip) · entry: `talking-head-fx-packager-v1.0.0/SKILL.md`
+[talking-head-fx-packager.zip](talking-head-fx-packager.zip) · 入口：`talking-head-fx-packager-v1.0.0/SKILL.md`
 
-- **What it does:** Packaging director for talking-head, vlog, explainer, review and tutorial videos: turns a script, transcript, SRT/VTT or rough timeline into a restrained, editor-ready plan of captions, emphasis typography, callouts, punch-ins, overlays, B-roll prompts, UI cards, transitions and SFX — with a density budget and an anti-overpacking pass. Does not rewrite content.
-- **How to use:** Give the script or subtitles and say "package this talking-head video" / "加字幕和重点字卡，别太花". Works for 9:16, 1:1 and 16:9 and for CapCut/Jianying, Premiere, After Effects, DaVinci or Remotion.
-- **Best suited for:** Tasteful effects and subtitle packaging for spoken-content videos.
+- **能做什么：** 口播、vlog、知识讲解、测评和教程视频的包装导演：把讲稿、逐字稿、SRT/VTT 或粗剪时间线变成克制、可直接交给剪辑的方案——字幕、重点字卡、标注、推镜、叠加层、B-roll 提示词、UI 卡片、转场和音效——带密度预算和“防过度包装”检查。不改写内容。
+- **怎么用：** 提供讲稿或字幕，说“把这条口播包装一下”或“加字幕和重点字卡，别太花”。适用于 9:16、1:1 和 16:9，以及剪映、Premiere、After Effects、DaVinci 或 Remotion。
+- **最适合：** 为口播类视频做有品位的特效和字幕包装。
 
 <a id="s-video-studio"></a>
 ### video-studio
 
-[video-studio.zip](video-studio.zip) · entry: `video-studio/skills/video-studio/SKILL.md`
+[video-studio.zip](video-studio.zip) · 入口：`video-studio/skills/video-studio/SKILL.md`
 
-- **What it does:** Local, conversation-driven video editing and generation for Claude Code (ffmpeg + Python, HyperFrames HTML→MP4): talking-head fine cuts (remove fillers, retakes and dead air, punch-in zooms, burned-in Chinese captions), livestream slicing (find highlights in multi-hour streams, batch-cut 9:16 clips with titles, covers and copy) and code-generated data/product explainer animations with TTS. Also reframing 16:9→9:16, subtitles, BGM ducking, loudness and platform exports (Douyin, Channels, Xiaohongshu, Bilibili, YouTube).
-- **How to use:** One-time setup per machine (see the SKILL.md; install `requirements.txt`), then say "剪掉口误", "slice highlights from this stream", "add captions", "make a 9:16 version" or "make a data animation". Works from word-level transcripts and confirms before rendering.
-- **Best suited for:** Editing talking-head videos and livestream clips locally by chat.
+- **能做什么：** 在 Claude Code 里本地、对话式地剪辑和生成视频（ffmpeg + Python，HyperFrames 把 HTML 转成 MP4）：口播精剪（去口癖、重录和空白，推镜，烧录中文字幕）、直播切片（在几小时的直播里找高光，批量切 9:16 片段并配标题、封面和文案），以及用代码生成带 TTS 配音的数据/产品讲解动画。还支持 16:9 转 9:16、字幕、背景音乐闪避、响度和各平台导出（抖音、视频号、小红书、B 站、YouTube）。
+- **怎么用：** 每台电脑先做一次设置（见 SKILL.md；安装 `requirements.txt`），然后说“剪掉口误”“从这场直播里切高光”“加字幕”“做一个竖屏版”或“做一个数据动画”。基于逐字转写工作，渲染前会先确认。
+- **最适合：** 通过聊天在本地剪辑口播视频和直播切片。
 
 <a id="s-zh-b603f88d"></a>
 ### AI视频空间调度导演
 
-[AI视频空间调度导演.zip](AI%E8%A7%86%E9%A2%91%E7%A9%BA%E9%97%B4%E8%B0%83%E5%BA%A6%E5%AF%BC%E6%BC%94.zip) · *prompt-type* · entry: `AI视频空间调度导演-开源傻瓜版-v1.0/02-完整主提示词.md`
+[AI视频空间调度导演.zip](AI%E8%A7%86%E9%A2%91%E7%A9%BA%E9%97%B4%E8%B0%83%E5%BA%A6%E5%AF%BC%E6%BC%94.zip) · *提示词型* · 入口：`AI视频空间调度导演-开源傻瓜版-v1.0/02-完整主提示词.md`
 
-- **What it does:** "AI Video Spatial Blocking Director" — a plain-language prompt pack that turns a script into an AI-video plan: a 3×3 empty-set grid prompt, a top-down character and camera blocking diagram prompt, a recommended shot count (1–4) with reasons, a copy-ready video prompt per shot, and the three most likely failure points with fix-up phrases.
-- **How to use:** Not a SKILL.md skill. Paste `02-完整主提示词.md` (the master prompt) into any text LLM, then send your script using `03-客户填写模板.md`. `04-失败诊断器.md` helps when a generation goes wrong; `05` is a worked example.
-- **Best suited for:** Keeping room layout, character positions and camera paths consistent across AI video shots — aimed at non-technical creators.
+- **能做什么：** 一套通俗易懂的提示词包，把剧本整理成 AI 视频制作方案：3×3 九宫格空场景提示词、俯视人物与摄影机调度图提示词、建议镜头数（1–4 个）及理由、每个镜头可直接复制的视频提示词，以及最可能失败的三个地方和补救词。
+- **怎么用：** 不是 SKILL.md 技能。把 `02-完整主提示词.md` 粘贴到任意文本大模型，再用 `03-客户填写模板.md` 发送剧本。生成出问题时用 `04-失败诊断器.md`；`05` 是完整示例。
+- **最适合：** 让多镜头 AI 视频里的房间布局、人物站位和镜头路线保持一致——面向不懂技术的创作者。
 
 <a id="s-zh-a4f0e6a7"></a>
 ### 分镜设计大师阶段1：导演设计器
 
-[分镜设计大师阶段1：导演设计器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B51%EF%BC%9A%E5%AF%BC%E6%BC%94%E8%AE%BE%E8%AE%A1%E5%99%A8.zip) · *prompt-type* · entry: `内层包/分镜设计大师/分镜设计大师/01_阶段1_导演设计器_项目交接包A.txt`
+[分镜设计大师阶段1：导演设计器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B51%EF%BC%9A%E5%AF%BC%E6%BC%94%E8%AE%BE%E8%AE%A1%E5%99%A8.zip) · *提示词型* · 入口：`内层包/分镜设计大师/分镜设计大师/01_阶段1_导演设计器_项目交接包A.txt`
 
-- **What it does:** "Storyboard Design Master — Stage 1: Director Designer". First stage of a three-stage AI-video previs pipeline: from your plot, characters, scenes, reference images, shot count, canvas ratio and style needs, it does the full director design (core aesthetic, master visual prompt, character and space locks, canvas and layout lock, shot rhythm, key frame per shot) and outputs "Project Handoff Pack A" — the single source of truth for stages 2 and 3.
-- **How to use:** Prompt-type: paste `01_阶段1_导演设计器_项目交接包A.txt` into a text LLM, then send your story and requirements. Carry Pack A into Stage 2.
-- **Best suited for:** Locking the director's design before any storyboard image is made.
+- **能做什么：** 三阶段 AI 视频预演流水线的第一阶段：根据你的剧情、角色、场景、参考图、镜头数量、画布比例和风格要求，完成完整的导演设计（核心美学、统一影像母版、角色与空间锁定、画布与排版锁定、镜头节奏、每一镜的关键帧），并输出【项目交接包 A】——阶段 2 和阶段 3 唯一的上游源文件。
+- **怎么用：** 提示词型：把 `01_阶段1_导演设计器_项目交接包A.txt` 粘贴到文本大模型，再发送你的故事和要求。把交接包 A 带到阶段 2。
+- **最适合：** 在生成任何分镜图之前先把导演设计锁定。
 
 <a id="s-zh-18d9bfd6"></a>
 ### 分镜设计大师阶段2：分镜图Skill装配器
 
-[分镜设计大师阶段2：分镜图Skill装配器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B52%EF%BC%9A%E5%88%86%E9%95%9C%E5%9B%BESkill%E8%A3%85%E9%85%8D%E5%99%A8.zip) · *prompt-type* · entry: `内层包/分镜设计大师/分镜设计大师/03_阶段3_分镜图转Seedance视频提示词转换器.txt`
+[分镜设计大师阶段2：分镜图Skill装配器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B52%EF%BC%9A%E5%88%86%E9%95%9C%E5%9B%BESkill%E8%A3%85%E9%85%8D%E5%99%A8.zip) · *提示词型* · 入口：`内层包/分镜设计大师/分镜设计大师/03_阶段3_分镜图转Seedance视频提示词转换器.txt`
 
-- **What it does:** "Storyboard Design Master — Stage 2: Storyboard-Image Skill Assembler". Reads Project Handoff Pack A and, without re-designing anything, compresses it into a master prompt an image model can execute for the storyboard board (adaptive canvas, layout, info strips), runs an inheritance self-check before generation and image QA after, then outputs "Project Handoff Pack B".
-- **How to use:** Prompt-type: paste the prompt file into a text LLM together with Pack A. Heads-up: inside this zip the file is named `03_阶段3_分镜图转Seedance视频提示词转换器.txt`, but its content is the Stage 2 assembler — the inner file names of Stage 2 and Stage 3 are swapped; the zip names are correct.
-- **Best suited for:** Turning a locked director design into consistent storyboard images.
+- **能做什么：** 读取【项目交接包 A】，在不重新设计任何内容的前提下，把它压缩成图像模型可以执行的分镜板总提示词（自适应画布、排版、信息条），生成前做继承自校，生成后做图像质检，然后输出【项目交接包 B】。
+- **怎么用：** 提示词型：把提示词文件和交接包 A 一起粘贴到文本大模型。注意：这个压缩包里的文件名是 `03_阶段3_分镜图转Seedance视频提示词转换器.txt`，但内容其实是阶段 2 装配器——阶段 2 和阶段 3 的内部文件名互换了，压缩包名是对的。
+- **最适合：** 把锁定的导演设计变成风格一致的分镜图。
 
 <a id="s-zh-5a8eb463"></a>
 ### 分镜设计大师阶段3：视频提示词转换器
 
-[分镜设计大师阶段3：视频提示词转换器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B53%EF%BC%9A%E8%A7%86%E9%A2%91%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%BD%AC%E6%8D%A2%E5%99%A8.zip) · *prompt-type* · entry: `内层包/分镜设计大师/分镜设计大师/02_阶段2_自适应画布分镜图Skill装配器_项目交接包B.txt`
+[分镜设计大师阶段3：视频提示词转换器.zip](%E5%88%86%E9%95%9C%E8%AE%BE%E8%AE%A1%E5%A4%A7%E5%B8%88%E9%98%B6%E6%AE%B53%EF%BC%9A%E8%A7%86%E9%A2%91%E6%8F%90%E7%A4%BA%E8%AF%8D%E8%BD%AC%E6%8D%A2%E5%99%A8.zip) · *提示词型* · 入口：`内层包/分镜设计大师/分镜设计大师/02_阶段2_自适应画布分镜图Skill装配器_项目交接包B.txt`
 
-- **What it does:** "Storyboard Design Master — Stage 3: Video Prompt Converter". Reads Project Handoff Pack B and writes per-shot Seedance / AI-video prompts constrained by the original plot, director design, storyboard prompt and final storyboard board — so motion follows the design instead of being improvised from the pictures.
-- **How to use:** Prompt-type: paste the prompt file into a text LLM together with Pack B. Heads-up: inside this zip the file is named `02_阶段2_自适应画布分镜图Skill装配器_项目交接包B.txt`, but its content is the Stage 3 converter (file names swapped with Stage 2).
-- **Best suited for:** Faithful shot-by-shot video prompts from approved storyboards.
+- **能做什么：** 读取【项目交接包 B】，在原始剧情、导演设计、分镜图提示词和最终分镜板的共同约束下，逐镜写出 Seedance / AI 视频提示词——让运动服从设计，而不是看图即兴发挥。
+- **怎么用：** 提示词型：把提示词文件和交接包 B 一起粘贴到文本大模型。注意：这个压缩包里的文件名是 `02_阶段2_自适应画布分镜图Skill装配器_项目交接包B.txt`，但内容其实是阶段 3 转换器（与阶段 2 的文件名互换了）。
+- **最适合：** 从已定稿的分镜得到忠实的逐镜视频提示词。
 
 <a id="s-zh-8927f55c"></a>
 ### 解说漫制片教练
 
-[解说漫制片教练.zip](%E8%A7%A3%E8%AF%B4%E6%BC%AB%E5%88%B6%E7%89%87%E6%95%99%E7%BB%83.zip) · *prompt-type* · entry: `解说漫生产系统_v3.0_完整管理版_RELEASE/学生公开运行时/00_直接发给AI.md`
+[解说漫制片教练.zip](%E8%A7%A3%E8%AF%B4%E6%BC%AB%E5%88%B6%E7%89%87%E6%95%99%E7%BB%83.zip) · *提示词型* · 入口：`解说漫生产系统_v3.0_完整管理版_RELEASE/学生公开运行时/00_直接发给AI.md`
 
-- **What it does:** "Recap-comic Production Coach v3.0" — compiles a source story into a recap-style motion comic: plot ledger → high-quality narration script (four automatic revision passes, internal dual-draft competition, 100-point acceptance) → shot production cards and character/location continuity → image tasks → motion video tasks → voice, subtitles and edit → final check. Built for complete beginners: each turn shows only "where we are / what AI did / what you do now / what to copy / what correct looks like".
-- **How to use:** Prompt-type: send `00_直接发给AI.md` together with your source material to a chat AI that can read long files, then say `开始制作`. Only six phrases needed: 开始制作, 下一步, 我不会, 检查这个, 只修这个 + number, 准备交付. Student quick-start and FAQ files are included.
-- **Best suited for:** Beginners producing narrated recap comics (解说漫) step by step.
+- **能做什么：** “解说漫生产系统 v3.0”——把原始故事编译成解说漫：剧情账本 → 高质量解说稿（四遍自动改稿、内部双稿竞争、100 分硬验收）→ 镜头生产卡和角色/场景连续性 → 图片任务 → 动态视频任务 → 配音、字幕和剪辑 → 成片终检。专为完全零基础的学生设计：每轮只显示“现在做到哪 / AI 已完成什么 / 你现在只做什么 / 复制什么 / 正确结果长什么样”。
+- **怎么用：** 提示词型：把 `00_直接发给AI.md` 和你的原作资料一起发给能读长文件的聊天 AI，然后说“开始制作”。只需要六句话：开始制作、下一步、我不会、检查这个、只修这个 + 编号、准备交付。包里还有学生极速上手和常见问题文件。
+- **最适合：** 零基础学生一步一步制作解说漫。
 
 <a id="cat-story"></a>
-## Screenwriting & storytelling
+## 编剧与讲故事
 
-Feature films, short dramas, sitcoms, fiction continuation and story-world simulation.
+电影长片、短剧、情景喜剧、小说续写和故事世界模拟。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`audience-psychology-engine`](#s-audience-psychology-engine) | Checking whether intended emotional beats actually land, before shooting or after a rough cut. |
-| [`brand-short-drama`](#s-brand-short-drama) | Branded / product-placement short dramas and local-business story ads. |
-| [`fanqie-shortstory-forge`](#s-fanqie-shortstory-forge) | High-completion short fiction tuned to Fanqie readers. |
-| [`genre-writer`](#s-genre-writer) | Long-form genre stories that need solid design before prose. |
-| [`hollywood-omni-screenplay-master`](#s-hollywood-omni-screenplay-master) | Feature-length screenplays with strong structure and memorable dialogue. |
-| [`mass-appeal-super-screenwriter`](#s-mass-appeal-super-screenwriter) | Making stories instantly gripping for a mass audience. |
-| [`screenplay-factory`](#s-screenplay-factory) | Script development that respects the difference between films and short dramas. |
-| [`screenwriting-master`](#s-screenwriting-master) | Guided, step-by-step screenwriting in any format. |
-| [`story-dynamics-workbench`](#s-story-dynamics-workbench) | Long, complex stories where causality and character psychology must stay consistent. |
-| [`story-forge-engine`](#s-story-forge-engine) | Continuing an existing story in a causally convincing way. |
-| [`viral-framework-analyzer`](#s-viral-framework-analyzer) | Learning what actually makes a genre's top performers work. |
-| [`writing-ensemble-sitcoms`](#s-writing-ensemble-sitcoms) | Recurring-cast comedy with natural dialogue rather than stage banter. |
-| [`微短剧剧本创作`](#s-zh-b6e6af54) | Writing a full paid micro-drama series for short-video platforms. |
-| [`故事世界模拟-v4.0.0`](#s-zh-a64c64af) | Rigorous, canon-safe simulation of complex story worlds. |
+| [`audience-psychology-engine`](#s-audience-psychology-engine) | 在开拍前或粗剪后检验预期的情绪点是否真的能打动观众。 |
+| [`brand-short-drama`](#s-brand-short-drama) | 品牌/植入类短剧和本地商家剧情广告。 |
+| [`fanqie-shortstory-forge`](#s-fanqie-shortstory-forge) | 适合番茄读者的高完成度短篇小说。 |
+| [`genre-writer`](#s-genre-writer) | 需要先做扎实设计再动笔的长篇类型故事。 |
+| [`hollywood-omni-screenplay-master`](#s-hollywood-omni-screenplay-master) | 结构扎实、对白令人难忘的电影长片剧本。 |
+| [`mass-appeal-super-screenwriter`](#s-mass-appeal-super-screenwriter) | 让故事一上来就抓住大众观众。 |
+| [`screenplay-factory`](#s-screenplay-factory) | 尊重电影与短剧差异的剧本开发。 |
+| [`screenwriting-master`](#s-screenwriting-master) | 任何格式下有引导、分步骤的剧本创作。 |
+| [`story-dynamics-workbench`](#s-story-dynamics-workbench) | 因果和人物心理都必须保持一致的长篇复杂故事。 |
+| [`story-forge-engine`](#s-story-forge-engine) | 以令人信服的因果逻辑续写已有故事。 |
+| [`viral-framework-analyzer`](#s-viral-framework-analyzer) | 弄清某个类型里头部作品到底强在哪里。 |
+| [`writing-ensemble-sitcoms`](#s-writing-ensemble-sitcoms) | 对白自然、而不是舞台式抖包袱的固定班底喜剧。 |
+| [`微短剧剧本创作`](#s-zh-b6e6af54) | 为短视频平台写一部完整的付费微短剧。 |
+| [`故事世界模拟-v4.0.0`](#s-zh-a64c64af) | 严谨、不破坏正史地模拟复杂的故事世界。 |
 
 <a id="s-audience-psychology-engine"></a>
 ### audience-psychology-engine
 
-[audience-psychology-engine.zip](audience-psychology-engine.zip) · entry: `audience-psychology-engine/SKILL.md`
+[audience-psychology-engine.zip](audience-psychology-engine.zip) · 入口：`audience-psychology-engine/SKILL.md`
 
-- **What it does:** An "audience judge" for AI film, TV, short dramas and motion comics. Simulates a real viewer with no future knowledge and limited attention and memory, tracks a Viewer State timeline, and tests hooks, suspense, twists, character investment and rough cuts, then traces each problem to the writer, director or editor with a feedback packet. Never invents audience statistics.
-- **How to use:** Give it a script, storyboard or rough cut and ask "will viewers get this?", "where do they lose interest?", or "does this twist land?". Can plug in alongside writing, directing and editing skills.
-- **Best suited for:** Checking whether intended emotional beats actually land, before shooting or after a rough cut.
+- **能做什么：** 面向 AI 电影、影视、短剧和漫剧的“观众心理审判层”。模拟一个不知道后文、注意力和记忆都有限的真实观众，跟踪“观众状态时间线”，检验开场钩子、悬念、反转、角色投入和粗剪，再把每个问题归因到编剧、导演或剪辑并给出反馈包。绝不编造观众数据。
+- **怎么用：** 给它剧本、分镜或粗剪，问“观众看得懂吗？”“观众会在哪里流失？”或“这个反转成立吗？”。可以和编剧、导演、剪辑类技能联动。
+- **最适合：** 在开拍前或粗剪后检验预期的情绪点是否真的能打动观众。
 
 <a id="s-brand-short-drama"></a>
 ### brand-short-drama
 
-[brand-short-drama.zip](brand-short-drama.zip) · entry: `短剧植入技能包/brand-short-drama/SKILL.md`
+[brand-short-drama.zip](brand-short-drama.zip) · 入口：`短剧植入技能包/brand-short-drama/SKILL.md`
 
-- **What it does:** Writes viral-style short dramas with a product or local service woven in (e-commerce goods, hot springs, rafting, restaurants, scenic spots, hotels, shops). Breaks down selling points, matches audience to trending genres, designs the placement, then writes episode outlines, full scripts and a dual quality check (hook strength and naturalness of placement). Core rule: the product is the story's "cheat code" or "weak spot" — characters never read ad copy.
-- **How to use:** Give the product or venue, target audience and number of episodes ("write a branded short drama for my hot-spring resort"). It delivers product cards, three concepts with a pick, character bios, an emotion curve, scripts, a QC report and shooting/compliance notes.
-- **Best suited for:** Branded / product-placement short dramas and local-business story ads.
+- **能做什么：** 写带产品或本地服务植入的爆款短剧（电商商品、温泉、漂流、餐饮、景区、民宿酒店、门店）。拆解卖点，把目标人群匹配到热门题材，设计植入方式，再写分集大纲、正文剧本，并做双重质检（爆款感和植入自然度）。核心原则：产品是故事里的“金手指”或“命门”——角色永远不替它念广告。
+- **怎么用：** 提供产品或门店、目标人群和集数（“给我的温泉度假村写一部品牌短剧”）。它会交付产品拆解卡、三个方案及推荐、人物小传、情绪曲线、剧本、质检报告以及拍摄与合规备注。
+- **最适合：** 品牌/植入类短剧和本地商家剧情广告。
 
 <a id="s-fanqie-shortstory-forge"></a>
 ### fanqie-shortstory-forge
 
-[fanqie-shortstory-forge.zip](fanqie-shortstory-forge.zip) · entry: `fanqie-shortstory-forge-v1.1.0/SKILL.md`
+[fanqie-shortstory-forge.zip](fanqie-shortstory-forge.zip) · 入口：`fanqie-shortstory-forge-v1.1.0/SKILL.md`
 
-- **What it does:** Writing and editing skill for short stories on the Fanqie (Tomato) platform: concept, selling point, opening hook, emotion curve, short-form structure, characters, full text, title and blurb, platform review, adaptation potential and rewrites. Handles many genres (urban romance, revenge, suspense, healing realism, period drama, xuanhuan, sci-fi, rule-horror).
-- **How to use:** Give an idea, outline or draft plus optional length, genre, audience and mood. It routes automatically: idea → story, outline, full draft, rewrite, review, reference deconstruction or trend check (verifies current platform rules online when asked).
-- **Best suited for:** High-completion short fiction tuned to Fanqie readers.
+- **能做什么：** 番茄短故事专用的创作与审稿技能：选题、卖点、开篇钩子、情绪曲线、短篇结构、人物、正文、标题简介、平台化审查、改编潜力和返工。支持多种题材（都市情感、复仇逆袭、悬疑、现实治愈、古言、玄幻、科幻、规则怪谈等）。
+- **怎么用：** 提供脑洞、大纲或旧稿，可附字数、题材、受众和情绪。它会自动路由：脑洞成文、出大纲、写全文、改写、审稿、对标拆解或平台风向（被要求时会联网核实当前平台规则）。
+- **最适合：** 适合番茄读者的高完成度短篇小说。
 
 <a id="s-genre-writer"></a>
 ### genre-writer
 
-[genre-writer.zip](genre-writer.zip) · entry: `genre-writer/SKILL.md`
+[genre-writer.zip](genre-writer.zip) · 入口：`genre-writer/SKILL.md`
 
-- **What it does:** Genre fiction and script writing system for mystery, fantasy, sci-fi, screenplays (film, short drama, murder-mystery games) and world-building. Workflow: project contract → dissect reference works and build a style profile → design (truth table, rules-and-costs table, core-variable extrapolation, scene table) → write chapter by chapter → role-based review and an AI-flavour check script. All state lives in a `story/` folder so sessions can resume.
-- **How to use:** Say you want to write a novel or script, design a mystery trick, build a magic system or world, dissect a benchmark work, extract a writing style, check consistency or remove AI flavour.
-- **Best suited for:** Long-form genre stories that need solid design before prose.
+- **能做什么：** 类型小说与剧本创作系统，覆盖悬疑推理、奇幻、科幻、剧本（影视、短剧、剧本杀）和世界观设计。流程：立项契约 → 拆解对标作品并建立文风档案 → 设计（真相表、规则代价表、核心变量推演、场景表）→ 逐章写作 → 分角色审稿和去 AI 味检查脚本。所有状态都存在 `story/` 文件夹里，换会话也能接上。
+- **怎么用：** 说你想写小说或剧本、设计诡计、搭建力量体系或世界观、拆解对标作品、提取文风、检查一致性或去 AI 味。
+- **最适合：** 需要先做扎实设计再动笔的长篇类型故事。
 
 <a id="s-hollywood-omni-screenplay-master"></a>
 ### hollywood-omni-screenplay-master
 
-[hollywood-omni-screenplay-master.zip](hollywood-omni-screenplay-master.zip) · entry: `好莱坞全能电影剧本大师系统-v3.0.0/SKILL.md`
+[hollywood-omni-screenplay-master.zip](hollywood-omni-screenplay-master.zip) · 入口：`好莱坞全能电影剧本大师系统-v3.0.0/SKILL.md`
 
-- **What it does:** "Hollywood all-round screenplay master" for feature films: auto-routes between feature, short, series, scene rewrite and dialogue surgery, then runs a pipeline of brief lock, story core, ending vector, outline, feature architecture (midpoint reframe, crisis choice, climax ownership), antagonist autonomy, scene engine, rehearsal dialogue, story-state tracking, promise–payoff, rewrite lab and final audit. Core rules: causality over beats, smart opposition, dialogue as action, fix only the failing layer.
-- **How to use:** Give a premise, outline or existing screenplay and say whether you want development, a full draft, a rewrite, diagnosis or dialogue polish.
-- **Best suited for:** Feature-length screenplays with strong structure and memorable dialogue.
+- **能做什么：** “好莱坞全能电影剧本大师”，面向电影长片：在长片、短片、剧集、单场修稿和对白手术之间自动路由，然后运行流水线：需求锁定、故事核心、结局方向、大纲、长片结构（中点反转、危机抉择、高潮归属）、反派自主性、场景引擎、排练式对白、故事状态追踪、伏笔回收、改稿实验室和最终审计。核心规则：因果高于节拍、对手同样聪明、对白即行动、只修失败的那一层。
+- **怎么用：** 提供故事前提、大纲或已有剧本，说明是要开发、写完整初稿、改写、诊断还是打磨对白。
+- **最适合：** 结构扎实、对白令人难忘的电影长片剧本。
 
 <a id="s-mass-appeal-super-screenwriter"></a>
 ### mass-appeal-super-screenwriter
 
-[mass-appeal-super-screenwriter.zip](mass-appeal-super-screenwriter.zip) · entry: `mass-appeal-super-screenwriter-v1.0.0/SKILL.md`
+[mass-appeal-super-screenwriter.zip](mass-appeal-super-screenwriter.zip) · 入口：`mass-appeal-super-screenwriter-v1.0.0/SKILL.md`
 
-- **What it does:** Screenwriting for broad audiences: low comprehension cost, high emotional voltage, immediate conflict, strong episode hooks and escape from repetitive AI-style plotting. Eight engines (starting with a "nuclear opening") and gates; workflows for idea → story, episode writing, diagnose & rescue, and rewrite.
-- **How to use:** Give a premise, episode brief or existing draft and say whether to create, write, diagnose or rewrite. Works for short drama, film, series, vertical video and narrative ads.
-- **Best suited for:** Making stories instantly gripping for a mass audience.
+- **能做什么：** 面向大众的编剧：理解成本低、情绪电压高、冲突即刻出现、每集有强钩子，摆脱重复的 AI 式剧情。八个引擎（从“核爆式开场”开始）和多道关卡；工作流包括想法成故事、分集写作、诊断与抢救、改写。
+- **怎么用：** 提供故事前提、分集简报或已有草稿，说明要创作、写作、诊断还是改写。适用于短剧、电影、剧集、竖屏视频和剧情广告。
+- **最适合：** 让故事一上来就抓住大众观众。
 
 <a id="s-screenplay-factory"></a>
 ### screenplay-factory
 
-[screenplay-factory.zip](screenplay-factory.zip) · entry: `screenplay-factory/SKILL.md`
+[screenplay-factory.zip](screenplay-factory.zip) · 入口：`screenplay-factory/SKILL.md`
 
-- **What it does:** Dual-engine screenplay factory: decides first whether the work is a FEATURE_FILM or a SHORT_DRAMA (short drama, micro-drama, motion comic) and uses that engine's structure, pacing, character change, information release and endings — with shared foundations for character, scene, dialogue, causality, adaptation and format. Develops, adapts (e.g. novel → script), writes, continues, rewrites and reviews. Text only; no storyboards or media.
-- **How to use:** Give an idea, novel, synopsis, characters or existing script and say what you need (outline, episode list, scene list, full script, rewrite, de-AI, review).
-- **Best suited for:** Script development that respects the difference between films and short dramas.
+- **能做什么：** 双引擎剧本工厂：先判断作品是 FEATURE_FILM（电影长片）还是 SHORT_DRAMA（短剧、微短剧、漫剧），再使用对应引擎的结构、节奏、人物变化、信息释放和结局——人物、场景、对白、因果、改编和格式共享同一底层。可开发、改编（如小说改剧本）、写作、续写、重写和审稿。只做文本，不做分镜或媒体生成。
+- **怎么用：** 提供点子、小说、梗概、人物或已有剧本，说明你需要什么（大纲、分集、场景表、完整剧本、重写、去 AI 味、审查）。
+- **最适合：** 尊重电影与短剧差异的剧本开发。
 
 <a id="s-screenwriting-master"></a>
 ### screenwriting-master
 
-[screenwriting-master.zip](screenwriting-master.zip) · entry: `screenwriting-master/SKILL.md`
+[screenwriting-master.zip](screenwriting-master.zip) · 入口：`screenwriting-master/SKILL.md`
 
-- **What it does:** "Shanyin Super Screenwriter" (by @山音): full-format screenwriting from 1–3 minute concept shorts (how-to-tell / what-if) and 5–10 minute narrative shorts to 90-minute features and multi-episode series, covering character design, structure (Save the Cat, Story Circle, McKee), scene breakdown and full script. Strict red lines: no inner-thought description, no explanatory dialogue, everything must be filmable.
-- **How to use:** Say "write a script / short / film / series", "help me come up with a story" or "this scene isn't working". It works step by step and waits for your approval after each step; ask for "[自检]" to see its checklist review.
-- **Best suited for:** Guided, step-by-step screenwriting in any format.
+- **能做什么：** “山音超级编剧大师”（由 @山音 设计）：全格式编剧，从 1–3 分钟概念短片（how-to-tell / what-if）、5–10 分钟叙事短片，到 90 分钟长片和多集剧集，覆盖人物设计、结构（Save the Cat、Story Circle、McKee）、场景拆解和完整剧本。严格红线：不写心理描写、不写解释性台词，一切都必须能被摄影机拍到。
+- **怎么用：** 说“写剧本 / 短片 / 电影 / 剧集”“帮我想个故事”或“这场戏不对”。它按步骤推进，每步完成后等你批准；说“[自检]”可查看它的检查清单评估。
+- **最适合：** 任何格式下有引导、分步骤的剧本创作。
 
 <a id="s-story-dynamics-workbench"></a>
 ### story-dynamics-workbench
 
-[story-dynamics-workbench.zip](story-dynamics-workbench.zip) · entry: `story-dynamics-workbench-v2.0.0/SKILL.md`
+[story-dynamics-workbench.zip](story-dynamics-workbench.zip) · 入口：`story-dynamics-workbench-v2.0.0/SKILL.md`
 
-- **What it does:** Long-form fiction and screenplay workbench that simulates narrative state: character lives, temporal world state, what each character knows and believes, social and audience state, causal plot simulation with independent actor passes, continuity, adaptation and scene writing — keeping drafts separate from canon.
-- **How to use:** Modes: DISCOVER, CHARACTER, SIMULATE, NOVEL, SCREENPLAY, ADAPT, AUDIT, REPAIR. Say "continue this novel", "plot the next arc", "simulate what happens next", "build this character", "novel to screenplay" or "continuity check".
-- **Best suited for:** Long, complex stories where causality and character psychology must stay consistent.
+- **能做什么：** 模拟叙事状态的长篇小说和剧本工作台：人物的生活、随时间变化的世界状态、每个角色知道什么和相信什么、社会与观众状态、带独立角色推演的因果剧情模拟、连续性、改编和场景写作——草稿与正史分开保存。
+- **怎么用：** 模式：DISCOVER、CHARACTER、SIMULATE、NOVEL、SCREENPLAY、ADAPT、AUDIT、REPAIR。说“续写这部小说”“规划下一段剧情”“模拟接下来会发生什么”“塑造这个角色”“小说改剧本”或“连续性检查”。
+- **最适合：** 因果和人物心理都必须保持一致的长篇复杂故事。
 
 <a id="s-story-forge-engine"></a>
 ### story-forge-engine
 
-[story-forge-engine.zip](story-forge-engine.zip) · entry: `story-forge-engine/SKILL.md`
+[story-forge-engine.zip](story-forge-engine.zip) · 入口：`story-forge-engine/SKILL.md`
 
-- **What it does:** "Plot simulation engine": builds a story bible from your characters, world rules, prior text and outline, then projects what happens next from each character's goals, knowledge and misbeliefs, costs and the opposition's reactions. Delivers directions, arc/chapter outlines, scenes, prose or script, checks continuity, and can export a standalone continuation skill for that specific work.
-- **How to use:** Say "推演剧情", "what would these characters do next?", "outline what comes after this", "continue with these settings" or "export a continuation skill for this book". Needs existing story material.
-- **Best suited for:** Continuing an existing story in a causally convincing way.
+- **能做什么：** “剧情推演引擎”：根据你提供的角色、世界规则、前文和大纲整理故事圣经，再从每个角色的目标、所知与误信、行动代价以及对手的反应推演后续。交付走向、卷章大纲、场景、小说正文或剧本，检查连续性，还能导出这部作品专属的续写技能。
+- **怎么用：** 说“推演剧情”“这些人物接下来会怎么做？”“根据前文排后续大纲”“按这些设定接着写”或“导出这部作品的续写 skill”。需要已有的故事材料。
+- **最适合：** 以令人信服的因果逻辑续写已有故事。
 
 <a id="s-viral-framework-analyzer"></a>
 ### viral-framework-analyzer
 
-[viral-framework-analyzer.zip](viral-framework-analyzer.zip) · entry: `viral-framework-analyzer-v2.0.0/SKILL.md`
+[viral-framework-analyzer.zip](viral-framework-analyzer.zip) · 入口：`viral-framework-analyzer-v2.0.0/SKILL.md`
 
-- **What it does:** "Viral framework analysis factory": takes a batch of short dramas, AI dramas, motion comics, recap dramas or short fiction (scripts, subtitles, links, ranking data) and automatically builds a sample library, dissects each work, compares across samples, runs counterfactual checks and synthesises the genre's reusable hit framework, with templates for the first 3 / first 10 episodes and long-run escalation — plus what not to copy and where evidence is thin.
-- **How to use:** Upload the batch and say "analyse this batch". It picks single, full-batch, tiered, map-reduce or corpus mode based on size. See `QUICKSTART.md`.
-- **Best suited for:** Learning what actually makes a genre's top performers work.
+- **能做什么：** “爆款框架分析工厂”：接收一批短剧、AI 短剧、漫剧、解说剧或短篇内容（剧本、字幕、链接、榜单数据），自动建立样本库，逐部拆解，跨样本对比，做反事实检验，提炼出该类型可复用的爆款框架，并给出前三集、前十集和长线升级模板——同时说明哪些不能照搬、哪些结论证据不足。
+- **怎么用：** 上传这批资料，说“分析这批作品”。它会根据数量自动选择单作、全量批量、分层、map-reduce 或语料库模式。见 `QUICKSTART.md`。
+- **最适合：** 弄清某个类型里头部作品到底强在哪里。
 
 <a id="s-writing-ensemble-sitcoms"></a>
 ### writing-ensemble-sitcoms
 
-[writing-ensemble-sitcoms.zip](writing-ensemble-sitcoms.zip) · entry: `sitcom-writers-room-public-v1.0/SKILL.md`
+[writing-ensemble-sitcoms.zip](writing-ensemble-sitcoms.zip) · 入口：`sitcom-writers-room-public-v1.0/SKILL.md`
 
-- **What it does:** Writes, plans, revises and diagnoses episodic ensemble sitcoms: treats a sitcom as a stable social system under fresh pressure, with series, episode, scene and dialogue engines, distinct character voices, relationship-driven humour, causal scene turns, screen-ready action and a continuity ledger.
-- **How to use:** Give the series premise and cast (or existing episodes) and ask for an episode, a scene, a dialogue pass or a diagnosis.
-- **Best suited for:** Recurring-cast comedy with natural dialogue rather than stage banter.
+- **能做什么：** 编写、规划、修改和诊断群像情景喜剧：把情景喜剧看作承受新压力的稳定社交系统，配有剧集、单集、场景和对白四个引擎，以及鲜明的角色声音、源于关系的幽默、因果驱动的场景转折、可拍摄的动作和连续性账本。
+- **怎么用：** 提供剧集设定和角色（或已有剧集），要求写一集、一场戏、打磨对白或做诊断。
+- **最适合：** 对白自然、而不是舞台式抖包袱的固定班底喜剧。
 
 <a id="s-zh-b6e6af54"></a>
 ### 微短剧剧本创作
 
-[微短剧剧本创作.zip](%E5%BE%AE%E7%9F%AD%E5%89%A7%E5%89%A7%E6%9C%AC%E5%88%9B%E4%BD%9C.zip) · *prompt-type* · entry: `短剧编剧SKILL.md`
+[微短剧剧本创作.zip](%E5%BE%AE%E7%9F%AD%E5%89%A7%E5%89%A7%E6%9C%AC%E5%88%9B%E4%BD%9C.zip) · *提示词型* · 入口：`短剧编剧SKILL.md`
 
-- **What it does:** "Micro short-drama scriptwriting" — guides you from topic to a finished 50–100 episode micro-drama: genre choice (13 genres plus overseas markets), opening rules, paywall cliff design, rhythm curve, five satisfaction-payoff types, four-layer villain system, hooks and a compliance checklist. Saves progress to the project folder and resumes automatically.
-- **How to use:** Prompt-type file `短剧编剧SKILL.md` with slash-style commands: `/start`, `/plan`, `/characters`, `/outline`, `/episode {N}`, `/review {N}`, `/compliance`, `/export`. Best used in an agent that can read and write files.
-- **Best suited for:** Writing a full paid micro-drama series for short-video platforms.
+- **能做什么：** 带你从选题一直写到完整的 50–100 集微短剧：题材选择（13 种题材及出海题材）、开篇法则、付费卡点设计、节奏曲线、五大爽点类型、四层反派体系、钩子和合规清单。进度保存在项目文件夹中，下次自动恢复。
+- **怎么用：** 提示词型文件 `短剧编剧SKILL.md`，使用斜杠命令：`/start`、`/plan`、`/characters`、`/outline`、`/episode {N}`、`/review {N}`、`/compliance`、`/export`。最好在能读写文件的 agent 里使用。
+- **最适合：** 为短视频平台写一部完整的付费微短剧。
 
 <a id="s-zh-a64c64af"></a>
 ### 故事世界模拟-v4.0.0
 
-[故事世界模拟-v4.0.0.zip](%E6%95%85%E4%BA%8B%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F-v4.0.0.zip) · entry: `故事世界模拟-v4.0.0/SKILL.md`
+[故事世界模拟-v4.0.0.zip](%E6%95%85%E4%BA%8B%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F-v4.0.0.zip) · 入口：`故事世界模拟-v4.0.0/SKILL.md`
 
-- **What it does:** "Story World Simulation 4.0" — a tool-backed story engine that separates facts, character knowledge, character interpretation, candidate futures and accepted canon. SIMULATE proposes structured intents and candidate events (never written straight into canon), characters may only act on knowledge they actually have at that time, world rules and resources are checked by tools, STEER changes external conditions with costs, NOVEL/SCREENPLAY render from a chosen event path, and COMMIT requires an audit.
-- **How to use:** Start from the README (command reference) and a `project.json`; ask to analyse, continue, simulate, adapt or audit a story. Ships with schemas, tools and tests.
-- **Best suited for:** Rigorous, canon-safe simulation of complex story worlds.
+- **能做什么：** “故事世界模拟 4.0”——由工具支撑的故事引擎，把事实、角色所知、角色的解释、候选未来和已接受的正史分开。SIMULATE 只提出结构化意图和候选事件（绝不直接写入正史），角色只能根据当时确实已获得的信息行动，世界规则和资源由工具检查，STEER 以一定代价改变外部条件，NOVEL/SCREENPLAY 从选定的事件路径渲染，COMMIT 之前必须先审计。
+- **怎么用：** 从 README（命令说明）和 `project.json` 开始；要求分析、续写、推演、改编或审计一个故事。附带 schema、工具和测试。
+- **最适合：** 严谨、不破坏正史地模拟复杂的故事世界。
 
 <a id="cat-image"></a>
-## AI image & photography
+## AI 图像与摄影
 
-Image direction, portraits and fashion, character and asset consistency, retouching and repair.
+图像导演、人像与时尚、角色和资产一致性、修图与修复。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`aquamuse-swimwear-editorial-v1.0.0`](#s-aquamuse-swimwear-editorial-v1-0-0) | Swimwear, resort and poolside fashion imagery. |
-| [`asset-continuity-imagegen`](#s-asset-continuity-imagegen) | Multi-image projects that need consistency — storyboards, product sets, character sheets. |
-| [`character-asset-capture-kit`](#s-character-asset-capture-kit) | Turning a character that already exists in footage or art into a consistent asset for later generations. |
-| [`fantasy-life-force-portrait-photography`](#s-fantasy-life-force-portrait-photography) | Making everyday portraits look like candid editorial photography for social posts. |
-| [`fashion-shoot-twin`](#s-fashion-shoot-twin) | Fashion e-commerce lookbook sets in a borrowed photographic style. |
-| [`fidelity-4k-upscale-skill-v1.0`](#s-fidelity-4k-upscale-skill-v1-0) | Getting a high-resolution "archival copy" of an image that must stay identical. |
-| [`guided-image-director`](#s-guided-image-director) | Getting confident creative direction instead of a menu of prompt options. |
-| [`huazhao-portrait-director`](#s-huazhao-portrait-director) | Credible, consistent portrait series with controlled identity and costume. |
-| [`huazhao-portrait-engine`](#s-huazhao-portrait-engine) | Hanfu / classical-beauty portraits where costume logic and realism both matter. |
-| [`image-factory`](#s-image-factory) | A general-purpose, model-agnostic image prompting workflow across many genres. |
-| [`mj-aesthetic-lab-v2.0.0`](#s-mj-aesthetic-lab-v2-0-0) | Systematic Midjourney exploration and prompting. |
-| [`nexuswear-persona-fashion-director`](#s-nexuswear-persona-fashion-director) | Original apparel concepts and character wardrobes. |
-| [`photoreal-face-asset-engine`](#s-photoreal-face-asset-engine) | A consistent, reusable photoreal character face for image and video projects. |
-| [`pic-fix-oneshot`](#s-pic-fix-oneshot) | Repairing AI-generated storyboard frames and illustrations without drifting. |
-| [`portrait-retouch`](#s-portrait-retouch) | Making a portrait look better and more human without becoming a different person. |
-| [`public-character-continuity`](#s-public-character-continuity) | Everyday "same character, new picture" requests. |
-| [`realistic-social-selfie-retouch`](#s-realistic-social-selfie-retouch) | Natural "same me, but better" social-media selfies. |
-| [`style-composition-lora-forge`](#s-style-composition-lora-forge) | Capturing a visual style in a LoRA when prompting alone can't reproduce it. |
-| [`threadlock-wardrobe-skill-v1.0.0`](#s-threadlock-wardrobe-skill-v1-0-0) | Keeping outfits exactly consistent across characters, poses and shots. |
-| [`wardrobe-extractor-skill-v1.0.0`](#s-wardrobe-extractor-skill-v1-0-0) | Pulling an outfit out of a reference image as a reusable sheet. |
-| [`zhuangbi-portrait`](#s-zhuangbi-portrait) | Powerful, understated status portraits instead of flex-template images. |
-| [`刺猬星球superi的超级skill`](#s-zh-b5e804a7) | Cinematic guofeng period-drama stills and short image-to-video clips. |
-| [`古风短剧场景设计师`](#s-zh-8fa780ee) | Consistent set design references for costume short dramas. |
+| [`aquamuse-swimwear-editorial-v1.0.0`](#s-aquamuse-swimwear-editorial-v1-0-0) | 泳装、度假和泳池边的时尚影像。 |
+| [`asset-continuity-imagegen`](#s-asset-continuity-imagegen) | 需要保持一致性的多图项目——分镜、产品组图、角色设定图。 |
+| [`character-asset-capture-kit`](#s-character-asset-capture-kit) | 把已在画面或作品中出现的角色变成后续生成可用的一致资产。 |
+| [`fantasy-life-force-portrait-photography`](#s-fantasy-life-force-portrait-photography) | 让日常人像看起来像社交平台上的抓拍大片。 |
+| [`fashion-shoot-twin`](#s-fashion-shoot-twin) | 借用某种摄影风格拍摄的服装电商套图。 |
+| [`fidelity-4k-upscale-skill-v1.0`](#s-fidelity-4k-upscale-skill-v1-0) | 得到一份必须与原图完全一致的高清“存档版”。 |
+| [`guided-image-director`](#s-guided-image-director) | 想要果断的创意方向，而不是一堆提示词选项。 |
+| [`huazhao-portrait-director`](#s-huazhao-portrait-director) | 身份和服装都可控、可信且一致的人像系列。 |
+| [`huazhao-portrait-engine`](#s-huazhao-portrait-engine) | 服装逻辑和真实感都很重要的汉服 / 古典美人写真。 |
+| [`image-factory`](#s-image-factory) | 适用于多种题材、与模型无关的通用生图工作流。 |
+| [`mj-aesthetic-lab-v2.0.0`](#s-mj-aesthetic-lab-v2-0-0) | 系统化地探索和编写 Midjourney 提示词。 |
+| [`nexuswear-persona-fashion-director`](#s-nexuswear-persona-fashion-director) | 原创服装概念和角色衣橱。 |
+| [`photoreal-face-asset-engine`](#s-photoreal-face-asset-engine) | 在图像和视频项目中可复用、保持一致的写实人物脸。 |
+| [`pic-fix-oneshot`](#s-pic-fix-oneshot) | 修复 AI 生成的分镜图和插画而不发生漂移。 |
+| [`portrait-retouch`](#s-portrait-retouch) | 让人像更好看、更有人味，但不变成另一个人。 |
+| [`public-character-continuity`](#s-public-character-continuity) | 日常的“同一个角色，新的一张图”需求。 |
+| [`realistic-social-selfie-retouch`](#s-realistic-social-selfie-retouch) | 自然的“还是我，但更好看”的社交平台自拍。 |
+| [`style-composition-lora-forge`](#s-style-composition-lora-forge) | 当单靠提示词无法还原某种视觉风格时，用 LoRA 把它固定下来。 |
+| [`threadlock-wardrobe-skill-v1.0.0`](#s-threadlock-wardrobe-skill-v1-0-0) | 让服装在不同角色、姿势和镜头之间完全一致。 |
+| [`wardrobe-extractor-skill-v1.0.0`](#s-wardrobe-extractor-skill-v1-0-0) | 把参考图里的一套衣服提取成可复用的服装表。 |
+| [`zhuangbi-portrait`](#s-zhuangbi-portrait) | 低调而有力量感的身份写真，而不是炫富模板图。 |
+| [`刺猬星球superi的超级skill`](#s-zh-b5e804a7) | 电影感国风古装剧剧照和图生视频短片。 |
+| [`古风短剧场景设计师`](#s-zh-8fa780ee) | 为古装短剧提供风格统一的场景设计参考。 |
 
 <a id="s-aquamuse-swimwear-editorial-v1-0-0"></a>
 ### aquamuse-swimwear-editorial-v1.0.0
 
-[aquamuse-swimwear-editorial-v1.0.0.zip](aquamuse-swimwear-editorial-v1.0.0.zip) · entry: `aquamuse-swimwear-editorial-v1.0.0/SKILL.md`
+[aquamuse-swimwear-editorial-v1.0.0.zip](aquamuse-swimwear-editorial-v1.0.0.zip) · 入口：`aquamuse-swimwear-editorial-v1.0.0/SKILL.md`
 
-- **What it does:** Prompt-planning skill for premium adult (21+) swimwear and resortwear editorials that read as real photography, not AI glamour. Uses a 7-layer engine (editorial thesis, subject, wardrobe, body action, camera geometry, light, reality pass), an anti-AI gate and a prompt compiler, with three modes: clean resort, cinematic coastal portrait, fashion campaign.
-- **How to use:** Fill in the one-click brief (location, look, mood, target model, optional references); it returns the compiled prompt, avoid-list and QA notes.
-- **Best suited for:** Swimwear, resort and poolside fashion imagery.
+- **能做什么：** 面向成人（21+）高端泳装与度假装大片的提示词规划技能，让画面像真实摄影而不是 AI 网红图。使用七层引擎（大片主题、人物、服装逻辑、身体动作、镜头几何、光线、真实感检查）、反 AI 闸门和提示词编译器，有三种模式：清爽度假、电影感海岸人像、时尚广告。
+- **怎么用：** 填写一键简报（地点、造型、氛围、目标模型、可选参考图），它会返回编译好的提示词、避免清单和质检要点。
+- **最适合：** 泳装、度假和泳池边的时尚影像。
 
 <a id="s-asset-continuity-imagegen"></a>
 ### asset-continuity-imagegen
 
-[asset-continuity-imagegen.zip](asset-continuity-imagegen.zip) · entry: `asset-continuity-imagegen-v1.0.0/skills/asset-continuity-imagegen/SKILL.md`
+[asset-continuity-imagegen.zip](asset-continuity-imagegen.zip) · 入口：`asset-continuity-imagegen-v1.0.0/skills/asset-continuity-imagegen/SKILL.md`
 
-- **What it does:** Keeps recurring characters, props, products, costumes, vehicles and locations recognisably the same across generated or edited images. Builds an asset registry (immutable anchors / controlled variables / free variables), writes shot contracts, enforces reference discipline and diagnoses and repairs drift.
-- **How to use:** Provide reference images and ask for new shots, variations or multi-asset scenes, or ask it to fix an image that drifted. Uses the built-in image tool when available.
-- **Best suited for:** Multi-image projects that need consistency — storyboards, product sets, character sheets.
+- **能做什么：** 让反复出现的人物、道具、产品、服装、载具和地点在生成或编辑的多张图里保持可辨认的一致。建立资产登记表（不可变锚点 / 受控变量 / 自由变量），编写镜头合同，规范参考图的使用，并诊断和修复“漂移”。
+- **怎么用：** 提供参考图，要求生成新镜头、变体或多资产场景，或让它修复已经漂移的图。有内置生图工具时会优先使用。
+- **最适合：** 需要保持一致性的多图项目——分镜、产品组图、角色设定图。
 
 <a id="s-character-asset-capture-kit"></a>
 ### character-asset-capture-kit
 
-[character-asset-capture-kit.zip](character-asset-capture-kit.zip) · entry: `character-asset-capture-kit-v1.0.0/SKILL.md`
+[character-asset-capture-kit.zip](character-asset-capture-kit.zip) · 入口：`character-asset-capture-kit-v1.0.0/SKILL.md`
 
-- **What it does:** Extracts a reusable character asset from an existing image, screenshot, reference set or video while preserving visible identity, body proportions, outfit, personal props and the original visual style — extraction, not redesign. Flow: scan → capture → normalise → package → reuse.
-- **How to use:** Commands: `/人物提取` (extract a character record or cutout), `/人物资产` (build a full asset package or board), `/批量提取` (batch extract from video). Hidden areas stay marked as unconfirmed or as completion candidates.
-- **Best suited for:** Turning a character that already exists in footage or art into a consistent asset for later generations.
+- **能做什么：** 从现有图片、截图、参考图组或视频中提取可复用的人物资产，同时保留可见的身份特征、身体比例、服装、个人道具和原始画风——是提取，不是重新设计。流程：扫描 → 捕获 → 规范化 → 打包 → 复用。
+- **怎么用：** 命令：`/人物提取`（提取人物档案或抠图）、`/人物资产`（建立完整资产包或资产板）、`/批量提取`（从视频批量提取）。被遮挡的部分会标为“未确认”或“补全候选”。
+- **最适合：** 把已在画面或作品中出现的角色变成后续生成可用的一致资产。
 
 <a id="s-fantasy-life-force-portrait-photography"></a>
 ### fantasy-life-force-portrait-photography
 
-[fantasy-life-force-portrait-photography.zip](fantasy-life-force-portrait-photography.zip) · entry: `fantasy-life-force-portrait-photography-main/SKILL.md`
+[fantasy-life-force-portrait-photography.zip](fantasy-life-force-portrait-photography.zip) · 入口：`fantasy-life-force-portrait-photography-main/SKILL.md`
 
-- **What it does:** "Life-force" portrait photography workflow: turns tourist snaps, casual phone shots or reference portraits into vivid, intimate, sun-lit, share-worthy portraits that feel like a photographer caught a real moment. Mode A upgrades a photo with strict identity lock, Mode C turns it into an atmospheric hero shot, Mode B creates original sample shots. Includes composition, face, hair, wardrobe and colour standards.
-- **How to use:** Upload a photo and choose the mode, or describe a scene for an original. Reference images are analysed but never redrawn into someone else; public-figure features are de-identified.
-- **Best suited for:** Making everyday portraits look like candid editorial photography for social posts.
+- **能做什么：** “生命感”人像摄影工作流：把游客照、随手拍或参考人像变成色彩鲜明、镜头亲密、阳光真实、适合分享的作品，像摄影师抓拍到的真实瞬间。模式 A 严格锁定身份地升级照片，模式 C 变成氛围感大片，模式 B 生成原创样片。包含构图、面部、发丝、服装和色彩标准。
+- **怎么用：** 上传照片并选择模式，或描述场景生成原创作品。参考图只用于分析，不会被重绘成别人；公众人物特征会被脱敏处理。
+- **最适合：** 让日常人像看起来像社交平台上的抓拍大片。
 
 <a id="s-fashion-shoot-twin"></a>
 ### fashion-shoot-twin
 
-[fashion-shoot-twin.zip](fashion-shoot-twin.zip) · entry: `fashion-shoot-twin/SKILL.md`
+[fashion-shoot-twin.zip](fashion-shoot-twin.zip) · 入口：`fashion-shoot-twin/SKILL.md`
 
-- **What it does:** Rebuilds a photographer's shooting language for your garments: from style references (A), garment photos (B) and optional model (C) and location (D) references, it infers the photographer's light, lenses, composition, grading and set rhythm, builds a garment evidence map, and plans 6–8 new shots that look like the same photographer, same day, connected locations — while selling the clothes better. Routes to GPT Image or ComfyUI, with anchor → coverage → repair generation and three-level QC.
-- **How to use:** Upload 4–12 style references plus front, back, side and detail garment shots. There is a single confirmation point before generation.
-- **Best suited for:** Fashion e-commerce lookbook sets in a borrowed photographic style.
+- **能做什么：** 为你的服装复刻某位摄影师的拍摄语言：根据风格参考（A 组）、服装图（B 组）以及可选的模特（C 组）和地点（D 组）参考，归纳摄影师的光线、镜头、构图、调色和组照节奏，建立服装证据图谱，规划 6–8 张新照片——像同一摄影师、同一天、在相连场景里拍的——同时更会卖衣服。可路由到 GPT Image 或 ComfyUI，按“锚定 → 覆盖 → 修复”生成，并做三层质检。
+- **怎么用：** 上传 4–12 张风格参考，加上服装正面、背面、侧面和细节图。生成前只有一个确认点。
+- **最适合：** 借用某种摄影风格拍摄的服装电商套图。
 
 <a id="s-fidelity-4k-upscale-skill-v1-0"></a>
 ### fidelity-4k-upscale-skill-v1.0
 
-[fidelity-4k-upscale-skill-v1.0.zip](fidelity-4k-upscale-skill-v1.0.zip) · entry: `fidelity-4k-upscale-skill-v1.0/SKILL.md`
+[fidelity-4k-upscale-skill-v1.0.zip](fidelity-4k-upscale-skill-v1.0.zip) · 入口：`fidelity-4k-upscale-skill-v1.0/SKILL.md`
 
-- **What it does:** Pure fidelity upscaling: makes an image larger and clearer without changing anything — faces, text, logos, products, colours, even flaws and watermarks stay as they are. If sharpening would alter content, it keeps the original.
-- **How to use:** Upload an image and ask for an HD / 4K / higher-resolution version. Requests to retouch, change backgrounds, remove watermarks or restyle are out of scope (use a retouching skill).
-- **Best suited for:** Getting a high-resolution "archival copy" of an image that must stay identical.
+- **能做什么：** 纯保真的高清放大：把图片变大变清楚，但不改变任何内容——人脸、文字、Logo、商品、颜色，甚至瑕疵和水印都保持原样。如果“更清楚”会改变内容，就保留原样。
+- **怎么用：** 上传图片，要求高清版 / 4K / 提高分辨率。修图、换背景、去水印或改风格不在范围内（请用修图类技能）。
+- **最适合：** 得到一份必须与原图完全一致的高清“存档版”。
 
 <a id="s-guided-image-director"></a>
 ### guided-image-director
 
-[guided-image-director.zip](guided-image-director.zip) · entry: `guided-image-director/SKILL.md`
+[guided-image-director.zip](guided-image-director.zip) · 入口：`guided-image-director/SKILL.md`
 
-- **What it does:** A decisive image director: converts vague intent into one coherent visual decision and writes it in language the target image model can execute. Routes silently between concept, reference-guided, production (ads, posters, covers, product), series and repair work; asks only when a missing fact would change the core subject.
-- **How to use:** Describe what you want (with references if any) and the target model; it returns a strong recommendation and a compiled prompt, or a focused fix for an existing image.
-- **Best suited for:** Getting confident creative direction instead of a menu of prompt options.
+- **能做什么：** 果断的图像导演：把模糊的意图转成一个统一的视觉决定，并用目标图像模型能执行的语言写出来。会在概念、参考图引导、商业制作（广告、海报、封面、产品）、系列图和修图之间自动选择路线；只有缺失的信息会改变核心主体时才提问。
+- **怎么用：** 描述你想要什么（如有参考图一并提供）和目标模型；它会给出明确的推荐和编译好的提示词，或对现有图片做定点修复。
+- **最适合：** 想要果断的创意方向，而不是一堆提示词选项。
 
 <a id="s-huazhao-portrait-director"></a>
 ### huazhao-portrait-director
 
-[huazhao-portrait-director.zip](huazhao-portrait-director.zip) · entry: `huazhao-portrait-director-v5.0.0-public/SKILL.md` · `huazhao-portrait-director-v6.0.0-public/SKILL.md`
+[huazhao-portrait-director.zip](huazhao-portrait-director.zip) · 入口：`huazhao-portrait-director-v5.0.0-public/SKILL.md` · `huazhao-portrait-director-v6.0.0-public/SKILL.md`
 
-- **What it does:** "Huazhao portrait director" — a public black-box director for portrait shoots, Chinese-style (guofeng) and fashion portraits, identity- and costume-referenced images and series. Produces structured shot specs, reference-role assignment, camera and spatial logic, light/material constraints, a continuity ledger, QA and targeted repair decisions; it does not ship its private underlying prompts. The zip contains v5.0 and v6.0.
-- **How to use:** Just describe the person, setting and what's happening (plus references). Use v6.0 (newer, adds tool-capability matching and shot-variation tables) unless you need v5. With an image tool available it generates and reviews; otherwise it delivers the spec.
-- **Best suited for:** Credible, consistent portrait series with controlled identity and costume.
+- **能做什么：** “华照写真导演”——面向人物写真、古风和时装人像、身份与服装参考图以及系列组图的外发版导演系统。产出结构化拍摄规格、参考图职责分配、镜头与空间逻辑、光线/材质约束、连续性账本、质检和定点返修决定；不分发底层生成文本。压缩包里有 v5.0 和 v6.0。
+- **怎么用：** 直接描述人物、场景和正在发生的事（加上参考图）。除非需要 v5，否则用 v6.0（更新，增加了工具能力匹配和镜头变化表）。环境里有生图工具时会直接出图并复核；没有时交付拍摄规格。
+- **最适合：** 身份和服装都可控、可信且一致的人像系列。
 
 <a id="s-huazhao-portrait-engine"></a>
 ### huazhao-portrait-engine
 
-[huazhao-portrait-engine.zip](huazhao-portrait-engine.zip) · entry: `huazhao-portrait-engine-v1.1.0/SKILL.md`
+[huazhao-portrait-engine.zip](huazhao-portrait-engine.zip) · 入口：`huazhao-portrait-engine-v1.1.0/SKILL.md`
 
-- **What it does:** "Huazhao Portrait System · Vitality 1.1" — treats Chinese-style portrait, hanfu and guofeng fashion image generation as a directed photo shoot built on separate controls for subject, action, space, light/material, vitality and series consistency. Modes cover text-only briefs, subject references and more.
-- **How to use:** Describe the portrait or series, optionally with a person or costume reference; it outputs a shoot plan and generation prompts and can repair or extend existing images. See `QUICKSTART.md`.
-- **Best suited for:** Hanfu / classical-beauty portraits where costume logic and realism both matter.
+- **能做什么：** “华照写真系统 · Vitality 1.1”——把中国风人像、汉服和国风时装的生图当作一场有导演的拍摄，分别控制人物、动作、空间、光线/材质、生命感和系列一致性。模式涵盖纯文字简报、人物参考等。
+- **怎么用：** 描述想要的写真或系列，可附人物或服装参考；它会输出拍摄方案和生成提示词，也能修复或扩展已有图片。见 `QUICKSTART.md`。
+- **最适合：** 服装逻辑和真实感都很重要的汉服 / 古典美人写真。
 
 <a id="s-image-factory"></a>
 ### image-factory
 
-[image-factory.zip](image-factory.zip) · entry: `image-factory-skill-v1.0.0/SKILL.md`
+[image-factory.zip](image-factory.zip) · 入口：`image-factory-skill-v1.0.0/SKILL.md`
 
-- **What it does:** Translates image requests, references, briefs, story beats or product requirements into structured prompts, shot plans, controlled variants, quality gates and targeted repair instructions. Splits every job into six layers (intent, scene, camera, look, constraints, QA/repair) and has domain recipes for film stills, photoreal portraits, products, anime/illustration, concept art, architecture/interiors and image editing.
-- **How to use:** Describe the image you want (with references if any); it returns a compiled prompt plus variants, and after a bad result tells you which layer to fix.
-- **Best suited for:** A general-purpose, model-agnostic image prompting workflow across many genres.
+- **能做什么：** 把生图需求、参考图、简报、剧情节点或产品要求转成结构化提示词、镜头计划、受控变体、质检关卡和定点修复指令。把每个任务拆成六层（意图、场景、镜头、外观、约束、质检/修复），并为电影剧照、写实人像、产品、动漫/插画、概念设计、建筑/室内和图片编辑提供领域配方。
+- **怎么用：** 描述你想要的图（如有参考图一并提供）；它会返回编译好的提示词和变体，生成效果不好时告诉你该修哪一层。
+- **最适合：** 适用于多种题材、与模型无关的通用生图工作流。
 
 <a id="s-mj-aesthetic-lab-v2-0-0"></a>
 ### mj-aesthetic-lab-v2.0.0
 
-[mj-aesthetic-lab-v2.0.0.zip](mj-aesthetic-lab-v2.0.0.zip) · entry: `mj-aesthetic-lab-v2.0.0/SKILL.md`
+[mj-aesthetic-lab-v2.0.0.zip](mj-aesthetic-lab-v2.0.0.zip) · 入口：`mj-aesthetic-lab-v2.0.0/SKILL.md`
 
-- **What it does:** Turns Midjourney into a controlled visual development lab ("search before freeze"): aesthetic upgrades, style search, prompt compiling, image critique and repair, controlled experiments, style-DNA consistency and character casting. Uses a 9-axis aesthetic scan, a three-lever rule, a 9-layer prompt compiler, anti-slop rules and an adapter for current Midjourney parameters (as of Aug 2026).
-- **How to use:** Pick a mode (A–G) or just describe the image; works for portraits, cinematic stills, fashion, products, architecture, concept art, illustration and Niji. See `INSTALL.md`.
-- **Best suited for:** Systematic Midjourney exploration and prompting.
+- **能做什么：** 把 Midjourney 变成可控的视觉开发实验室（“先搜索再定型”）：美学升级、风格搜索、提示词编译、图片评析与修复、对照实验、风格 DNA 一致性和角色选角。使用九轴美学扫描、三杠杆原则、九层提示词编译器、反套路规则，以及针对当前 Midjourney 参数（截至 2026 年 8 月）的适配器。
+- **怎么用：** 选择模式（A–G）或直接描述图片；适用于人像、电影剧照、时尚、产品、建筑、概念设计、插画和 Niji。见 `INSTALL.md`。
+- **最适合：** 系统化地探索和编写 Midjourney 提示词。
 
 <a id="s-nexuswear-persona-fashion-director"></a>
 ### nexuswear-persona-fashion-director
 
-[nexuswear-persona-fashion-director.zip](nexuswear-persona-fashion-director.zip) · entry: `nexuswear-persona-fashion-director/SKILL.md`
+[nexuswear-persona-fashion-director.zip](nexuswear-persona-fashion-director.zip) · 入口：`nexuswear-persona-fashion-director/SKILL.md`
 
-- **What it does:** Designs the person-in-context first, then the clothes that make them believable: original trend-aware garments, T-shirts, full character styling, looks, capsule collections and lookbook/editorial prompts for male, female or unisex wearers, with consistent garment presentation.
-- **How to use:** Describe the wearer, audience, setting, trend appetite and limits; it reconstructs intent, locks a persona and delivers garment designs plus image direction.
-- **Best suited for:** Original apparel concepts and character wardrobes.
+- **能做什么：** 先设计“处在情境中的人”，再设计让这个人显得可信的衣服：原创的潮流服装、T 恤、完整角色造型、穿搭、胶囊系列和画册/大片提示词，适用于男性、女性或中性穿着者，并保证服装呈现一致。
+- **怎么用：** 描述穿着者、受众、场合、对潮流的接受度和限制；它会还原需求、锁定人设，并交付服装设计和画面方向。
+- **最适合：** 原创服装概念和角色衣橱。
 
 <a id="s-photoreal-face-asset-engine"></a>
 ### photoreal-face-asset-engine
 
-[photoreal-face-asset-engine.zip](photoreal-face-asset-engine.zip) · entry: `photoreal-face-asset-engine-v1.1.0/SKILL.md`
+[photoreal-face-asset-engine.zip](photoreal-face-asset-engine.zip) · 入口：`photoreal-face-asset-engine-v1.1.0/SKILL.md`
 
-- **What it does:** Builds an original or authorised photoreal human face as a long-term identity asset: generates genuinely diverse candidate faces, locks the chosen one into a mother identity with a fingerprint, edits parameters precisely, compiles a structure-and-skin-realism contract and produces multi-view asset sheets and a full character pack — with identity and realism gates. Adults only, photographic look.
-- **How to use:** Follow the workflow in the SKILL.md: generate candidates → `lock` one → fine edits → compile → multi-view atlas → one-click asset pack. Scripts and schemas are included.
-- **Best suited for:** A consistent, reusable photoreal character face for image and video projects.
+- **能做什么：** 把一张原创或经授权的写实人脸建立成可长期复用的身份资产：生成差异足够大的候选脸，锁定选中的一张为母身份并生成指纹，精确编辑参数，编译结构与真人材质合同，产出多视角资产图和完整人物资产包——带身份和真实感关卡。仅限成年人、摄影写实风格。
+- **怎么用：** 按 SKILL.md 中的流程：生成候选 → `lock` 锁定一张 → 精细编辑 → 编译 → 多视角图集 → 一键资产包。脚本和 schema 都已附带。
+- **最适合：** 在图像和视频项目中可复用、保持一致的写实人物脸。
 
 <a id="s-pic-fix-oneshot"></a>
 ### pic-fix-oneshot
 
-[pic-fix-oneshot.zip](pic-fix-oneshot.zip) · entry: `pic-fix-oneshot/SKILL.md`
+[pic-fix-oneshot.zip](pic-fix-oneshot.zip) · 入口：`pic-fix-oneshot/SKILL.md`
 
-- **What it does:** "Fix it in one go" image repair for comic storyboards, illustrations, posters and e-commerce images: health check → multi-round fixes (max three items per round, structure before detail) → re-check after each round → roll back or switch method if a fix fails → deliver the best version. Covers perspective/composition, AI artefacts, hands, face drift, props and multi-panel continuity.
-- **How to use:** Upload the image (plus references) and use commands like "全修" (fix all), "只体检" (check only), "只修手" (hands only), "只修透视", "只修脸", "建档" (build an asset card), "连贯检查", "继续", "退回", "换个方法". Not for new creative images, video or real-person face swaps.
-- **Best suited for:** Repairing AI-generated storyboard frames and illustrations without drifting.
+- **能做什么：** “改图一把过”，面向漫剧分镜、插画、海报和电商图：体检 → 多轮修复（每轮最多三项，先结构后细节）→ 每轮复检 → 修坏就回退或换方法 → 择优交付。处理透视/构图、AI 崩坏、手部、面貌漂移、道具和多分镜连贯性。
+- **怎么用：** 上传图片（加上参考图），使用口令如“全修”“只体检”“只修手”“只修透视”“只修脸”“建档”“连贯检查”“继续”“退回”“换个方法”。不用于从零创作新图、视频修复或真人换脸。
+- **最适合：** 修复 AI 生成的分镜图和插画而不发生漂移。
 
 <a id="s-portrait-retouch"></a>
 ### portrait-retouch
 
-[portrait-retouch.zip](portrait-retouch.zip) · entry: `portrait-retouch-skill-v2.0.0/SKILL.md`
+[portrait-retouch.zip](portrait-retouch.zip) · 入口：`portrait-retouch-skill-v2.0.0/SKILL.md`
 
-- **What it does:** Retouches existing AI or photographic portraits with a conversational image-edit model (GPT-style) so they look more attractive, alive and believable while keeping identity, age, anatomy, expression, pose, camera and scene. Fast triage of defects, an explicit edit contract (hard locks vs allowed changes), a human-realism stack (skin, eyes, lips, hair, scene integration, camera credibility) and beauty lift without identity drift.
-- **How to use:** Upload the portrait and say what bothers you (or just "retouch this"). Modes: direct edit (default), prompt only, or no target image.
-- **Best suited for:** Making a portrait look better and more human without becoming a different person.
+- **能做什么：** 用对话式图像编辑模型（GPT 类）修饰现有的 AI 或摄影人像，让人更好看、更鲜活、更可信，同时保持身份、年龄、身体结构、表情、姿势、镜头和场景不变。快速分诊缺陷，写明确的编辑合同（硬锁定与允许修改），用“真人感栈”（皮肤、眼睛、嘴唇、头发、与场景融合、镜头可信度）处理，并在不改变身份的前提下提升美感。
+- **怎么用：** 上传人像，说出哪里不满意（或直接说“修一下”）。模式：直接编辑（默认）、只出提示词、无目标图。
+- **最适合：** 让人像更好看、更有人味，但不变成另一个人。
 
 <a id="s-public-character-continuity"></a>
 ### public-character-continuity
 
-[public-character-continuity.zip](public-character-continuity.zip) · entry: `public-character-continuity-skill-v1.0.0/SKILL.md`
+[public-character-continuity.zip](public-character-continuity.zip) · 入口：`public-character-continuity-skill-v1.0.0/SKILL.md`
 
-- **What it does:** A lightweight, reference-led way to keep an established character recognisable across image generations and edits: pick the best current reference, split the request into "preserve" vs "change", write concise change prompts, and follow a simple recovery order when the character drifts.
-- **How to use:** Provide a reference image and ask for the same character in a new scene, outfit, pose, expression or angle. For heavier multi-asset work use `asset-continuity-imagegen`.
-- **Best suited for:** Everyday "same character, new picture" requests.
+- **能做什么：** 轻量、以参考图为主的方法，让既有角色在多次生图和编辑中保持可辨认：选出当前最好的参考，把请求拆成“保持”和“修改”两部分，写简洁的修改提示词，角色漂移时按简单的顺序恢复。
+- **怎么用：** 提供参考图，要求同一个角色出现在新场景、新服装、新姿势、新表情或新角度。更重的多资产工作用 `asset-continuity-imagegen`。
+- **最适合：** 日常的“同一个角色，新的一张图”需求。
 
 <a id="s-realistic-social-selfie-retouch"></a>
 ### realistic-social-selfie-retouch
 
-[realistic-social-selfie-retouch.zip](realistic-social-selfie-retouch.zip) · entry: `realistic-social-selfie-retouch/SKILL.md`
+[realistic-social-selfie-retouch.zip](realistic-social-selfie-retouch.zip) · 入口：`realistic-social-selfie-retouch/SKILL.md`
 
-- **What it does:** Creates a six-part Xiaohongshu/Pinterest-style retouch plan and a Chinese AI image-edit prompt for a casual selfie: cleaner skin with real texture, better makeup, light and colour, and social-photo polish — while keeping the same person, face proportions, expression, pose, clothing, hair direction and scene.
-- **How to use:** Upload a selfie and say e.g. "小红书网感精修", "Pinterest 自拍精修", "自然真实变美". Not for face swaps, body reshaping, scene replacement, cosplay or sexualised edits.
-- **Best suited for:** Natural "same me, but better" social-media selfies.
+- **能做什么：** 为一张随手自拍制作六部分的小红书/Pinterest 风格精修方案和中文 AI 修图提示词：皮肤更干净但保留真实纹理，妆容、光线和色彩更好，有社交平台的精致感——同时保持同一个人、五官比例、表情、姿势、服装、发型方向和场景。
+- **怎么用：** 上传自拍，说“小红书网感精修”“Pinterest 自拍精修”“自然真实变美”等。不用于换脸、修身形、换场景、cosplay 或性感化修图。
+- **最适合：** 自然的“还是我，但更好看”的社交平台自拍。
 
 <a id="s-style-composition-lora-forge"></a>
 ### style-composition-lora-forge
 
-[style-composition-lora-forge.zip](style-composition-lora-forge.zip) · entry: `style-composition-lora-forge-v1.0.0/SKILL.md`
+[style-composition-lora-forge.zip](style-composition-lora-forge.zip) · 入口：`style-composition-lora-forge-v1.0.0/SKILL.md`
 
-- **What it does:** Builds and validates style-focused LoRA training projects (e.g. one painter's oil works) while keeping composition controllable through a separate inference-time structure channel (ControlNet-style in ComfyUI): dataset curation and audit, captioning, pilot runs, backend starter files, validation matrix and winner selection.
-- **How to use:** Bring a coherent set of reference images and your training backend; start from `BOOT.md`. ComfyUI workflows are included.
-- **Best suited for:** Capturing a visual style in a LoRA when prompting alone can't reproduce it.
+- **能做什么：** 构建并验证以风格为重点的 LoRA 训练项目（例如某位画家的油画），同时通过推理时独立的结构通道（在 ComfyUI 中类似 ControlNet）保持构图可控：数据集整理与审计、打标、试训、各训练后端的起始文件、验证矩阵和选出最优模型。
+- **怎么用：** 准备一组风格统一的参考图和你的训练后端；从 `BOOT.md` 开始。附带 ComfyUI 工作流。
+- **最适合：** 当单靠提示词无法还原某种视觉风格时，用 LoRA 把它固定下来。
 
 <a id="s-threadlock-wardrobe-skill-v1-0-0"></a>
 ### threadlock-wardrobe-skill-v1.0.0
 
-[threadlock-wardrobe-skill-v1.0.0.zip](threadlock-wardrobe-skill-v1.0.0.zip) · entry: `threadlock-wardrobe-skill-v1.0.0/SKILL.md`
+[threadlock-wardrobe-skill-v1.0.0.zip](threadlock-wardrobe-skill-v1.0.0.zip) · 入口：`threadlock-wardrobe-skill-v1.0.0/SKILL.md`
 
-- **What it does:** Model-agnostic clothing asset system for anime and photoreal workflows: a garment is an asset with evidence and invariants, not prompt text. Modes EXTRACT, RECONSTRUCT (occluded parts without uncontrolled redesign), DESIGN, RENDER and VIDEO, with lock levels, backend routing and a continuity gate. Ships a Python package (`threadlock`) with a minimal CLI, schemas and tests.
-- **How to use:** Give reference images of an outfit and say what you need — extract it, rebuild hidden parts, put the same outfit on another character, or keep it consistent across shots or video. See `README.md` for the CLI.
-- **Best suited for:** Keeping outfits exactly consistent across characters, poses and shots.
+- **能做什么：** 适用于动漫和写实工作流、与模型无关的服装资产系统：一件衣服是带证据和不变量的资产，而不是一段提示词文字。模式有 EXTRACT（提取）、RECONSTRUCT（重建被遮挡部分而不随意重新设计）、DESIGN（设计）、RENDER（渲染）和 VIDEO（视频），带锁定级别、后端路由和连续性关卡。附带一个 Python 包（`threadlock`）、简单命令行、schema 和测试。
+- **怎么用：** 提供服装参考图，说明需要什么——提取、重建被挡住的部分、把同一套衣服穿到另一个角色身上，或在多个镜头和视频中保持一致。命令行用法见 `README.md`。
+- **最适合：** 让服装在不同角色、姿势和镜头之间完全一致。
 
 <a id="s-wardrobe-extractor-skill-v1-0-0"></a>
 ### wardrobe-extractor-skill-v1.0.0
 
-[wardrobe-extractor-skill-v1.0.0.zip](wardrobe-extractor-skill-v1.0.0.zip) · entry: `wardrobe-extractor-skill-v1.0.0/SKILL.md`
+[wardrobe-extractor-skill-v1.0.0.zip](wardrobe-extractor-skill-v1.0.0.zip) · 入口：`wardrobe-extractor-skill-v1.0.0/SKILL.md`
 
-- **What it does:** Turns a reference image with one or more people or characters into a clean garment-and-accessory extraction sheet — photos, film stills, anime, manga, game art, concept art, historical costume, even low-res or partial images. Labels each detail as visible, strongly implied or unknown instead of inventing, handles layers and occlusion, and supports faithful or real-world-materialised modes.
-- **How to use:** Upload the image and ask to "extract the outfit / costume". Multi-person images get one inventory per wearer.
-- **Best suited for:** Pulling an outfit out of a reference image as a reusable sheet.
+- **能做什么：** 把含有一个或多个人物/角色的参考图变成干净的服装与配饰提取表——适用于照片、电影剧照、动漫、漫画、游戏画面、概念设计、历史服饰，甚至低清或局部图。每个细节都标注为直接可见、强烈暗示或未知，而不是编造；处理层次和遮挡，支持忠实提取或现实材质化两种模式。
+- **怎么用：** 上传图片，要求“提取服装 / 服饰”。多人图会为每个人分别列出清单。
+- **最适合：** 把参考图里的一套衣服提取成可复用的服装表。
 
 <a id="s-zhuangbi-portrait"></a>
 ### zhuangbi-portrait
 
-[zhuangbi-portrait.zip](zhuangbi-portrait.zip) · entry: `zhuangbi-portrait/SKILL.md`
+[zhuangbi-portrait.zip](zhuangbi-portrait.zip) · 入口：`zhuangbi-portrait/SKILL.md`
 
-- **What it does:** "Status portrait" — makes a clearly adult subject look like they belong and have real access and influence, without flaunting wealth symbols (no supercars, diamonds or champagne). Each photo is built from one memorable "rumour", exactly two believable "access passes", a delayed reaction to something off-frame, deliberate visual silence, camera politics, facial distinction and lived-in material traces.
-- **How to use:** Only on explicit request: `$zhuangbi-portrait`, "装逼写真", "排面写真", "有位置感", or "my photo looks rented / try-hard, redo it". Works from minimal input; reads its `cards/` in order.
-- **Best suited for:** Powerful, understated status portraits instead of flex-template images.
+- **能做什么：** “装逼写真”——让一位明确成年的人物在照片里显得有位置、有权限、有影响力，却不靠炫富符号（没有豪车、钻石、香槟）。每张照片由一句令人难忘的“传闻”、恰好两项可信的“通行证”、对画外小事的“迟到反应”、刻意的留白、镜头权力关系、面部辨识度和生活痕迹构成。
+- **怎么用：** 只有明确要求时才使用：`$zhuangbi-portrait`、“装逼写真”“排面写真”“有位置感”，或“我的照片看起来像租来的 / 用力过猛，重做”。信息很少也能工作；按顺序读取 `cards/`。
+- **最适合：** 低调而有力量感的身份写真，而不是炫富模板图。
 
 <a id="s-zh-b5e804a7"></a>
 ### 刺猬星球superi的超级skill
 
-[刺猬星球superi的超级skill.zip](%E5%88%BA%E7%8C%AC%E6%98%9F%E7%90%83superi%E7%9A%84%E8%B6%85%E7%BA%A7skill.zip) · *prompt-type* · entry: `人物skill.md`
+[刺猬星球superi的超级skill.zip](%E5%88%BA%E7%8C%AC%E6%98%9F%E7%90%83superi%E7%9A%84%E8%B6%85%E7%BA%A7skill.zip) · *提示词型* · 入口：`人物skill.md`
 
-- **What it does:** "Hedgehog Planet superi's Super Skill" — a creator-style skill that reproduces the account's realistic, cinematic Chinese period-drama look (guofeng costume, key-frame-of-a-drama feel, vertical framing) from plain-language requests, then turns a finished costume image into a 5-second story-style image-to-video prompt. Includes a creator style card, image and image-to-video workflows and adaptation notes for ChatGPT, Nano Banana Pro, Kling and Jimeng.
-- **How to use:** Prompt-type: paste `人物skill.md` into your chat AI, then describe the scene in plain words or upload a generated costume image for the video prompt.
-- **Best suited for:** Cinematic guofeng period-drama stills and short image-to-video clips.
+- **能做什么：** 创作者个人风格技能：用大白话就能生成接近该账号作品的画面——真实质感、电影感的国风古装剧画面（古装、像剧中关键剧情帧、竖屏构图），并能把生成好的古装人物图变成 5 秒剧情化的图生视频提示词。包含创作者风格卡、生图和图生视频工作流，以及针对 ChatGPT、nano banana pro、可灵和即梦的适配建议。
+- **怎么用：** 提示词型：把 `人物skill.md` 粘贴到你的聊天 AI，然后用大白话描述画面，或上传生成好的古装图来获取视频提示词。
+- **最适合：** 电影感国风古装剧剧照和图生视频短片。
 
 <a id="s-zh-8fa780ee"></a>
 ### 古风短剧场景设计师
 
-[古风短剧场景设计师.zip](%E5%8F%A4%E9%A3%8E%E7%9F%AD%E5%89%A7%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1%E5%B8%88.zip) · *prompt-type* · entry: `3x3场景_skill.md`
+[古风短剧场景设计师.zip](%E5%8F%A4%E9%A3%8E%E7%9F%AD%E5%89%A7%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1%E5%B8%88.zip) · *提示词型* · 入口：`3x3场景_skill.md`
 
-- **What it does:** "Ancient-style Short Drama Scene Designer" — generates film-grade scene prompts for female-oriented costume short dramas: a 3×3 grid covering exterior, courtyard, entrance, interior wide, main seat, borrowed views, furniture details, prop close-ups and floor plan / aerial layout. Asks guided questions (scene type, character status, plot function, dynasty aesthetic, visual hook, season/time, mood, output mode). Scene images only, no video prompts.
-- **How to use:** Prompt-type: paste `3x3场景_skill.md` into your chat AI and answer its questions. Designed to work with the character skill (`刺猬星球superi的超级skill`) and the short-drama scriptwriting skill (`微短剧剧本创作`).
-- **Best suited for:** Consistent set design references for costume short dramas.
+- **能做什么：** 为古风女频短剧生成影视级场景提示词：一套 3×3 九宫格，涵盖建筑外观、庭院、入口、室内全景、主位、借景关系、家具陈设、道具特写以及平面布局/鸟瞰图。通过引导式提问（场景类型、人物身份、剧情功能、朝代美学、视觉记忆点、季节与时间、整体气质、输出模式）收集需求。只生成场景图片提示词，不生成视频提示词。
+- **怎么用：** 提示词型：把 `3x3场景_skill.md` 粘贴到你的聊天 AI 并回答它的问题。它设计为与人物技能（`刺猬星球superi的超级skill`）和短剧编剧技能（`微短剧剧本创作`）配合使用。
+- **最适合：** 为古装短剧提供风格统一的场景设计参考。
 
 <a id="cat-aesthetics"></a>
-## Visual style analysis & reverse prompting
+## 视觉风格分析与反推提示词
 
-Working out why a reference looks the way it does and turning it into reusable prompts.
+弄清参考图为什么好看，并把它变成可复用的提示词。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`aesthetic-stress-extractor`](#s-aesthetic-stress-extractor) | Understanding and faithfully recreating a cinematic look before prompting an image model. |
-| [`cinematic-style-compiler`](#s-cinematic-style-compiler) | Replicating a whole film's visual system across new shots, not just one frame. |
-| [`color-dna-card-extractor`](#s-color-dna-card-extractor) | Turning a reference frame into a reusable palette for film art, AI video, characters, scenes or brand boards. |
-| [`photographic-atmosphere-reconstruction`](#s-photographic-atmosphere-reconstruction) | Matching a photographic colour grade and mood on new images. |
-| [`reference-rendering-reader`](#s-reference-rendering-reader) | Borrowing a visual treatment for new subjects without copying the content. |
-| [`reverse-anything`](#s-reverse-anything) | Extracting reusable templates from content or sites you admire. |
-| [`strong-image-reverse-prompt`](#s-strong-image-reverse-prompt) | Image-to-prompt for faithful recreation and controlled edits. |
+| [`aesthetic-stress-extractor`](#s-aesthetic-stress-extractor) | 在用图像模型复刻之前，先真正理解并忠实还原一种电影感画面。 |
+| [`cinematic-style-compiler`](#s-cinematic-style-compiler) | 在新镜头中复刻整部影片的视觉系统，而不只是一帧。 |
+| [`color-dna-card-extractor`](#s-color-dna-card-extractor) | 把参考画面变成可复用的配色，用于电影美术、AI 视频、角色、场景或品牌板。 |
+| [`photographic-atmosphere-reconstruction`](#s-photographic-atmosphere-reconstruction) | 在新图片上还原某种摄影调色和氛围。 |
+| [`reference-rendering-reader`](#s-reference-rendering-reader) | 把一种视觉处理方式借给新主体，而不复制原图内容。 |
+| [`reverse-anything`](#s-reverse-anything) | 从你欣赏的内容或网站中提炼可复用的模板。 |
+| [`strong-image-reverse-prompt`](#s-strong-image-reverse-prompt) | 用于忠实复刻和受控编辑的图生提示词。 |
 
 <a id="s-aesthetic-stress-extractor"></a>
 ### aesthetic-stress-extractor
 
-[aesthetic-stress-extractor.zip](aesthetic-stress-extractor.zip) · entry: `aesthetic-stress-extractor/SKILL.md`
+[aesthetic-stress-extractor.zip](aesthetic-stress-extractor.zip) · 入口：`aesthetic-stress-extractor/SKILL.md`
 
-- **What it does:** Finds what actually makes a film frame's look work by stress-testing it: weakens one visual condition at a time (colour, tonal range, balance, quiet zones, detail, focal attention), judges whether the look survives, ranks the sensitivities and outputs a "minimum survival set", a safe-to-vary list and a compact reconstruction brief. Includes lab scripts and forms.
-- **How to use:** Give it one frame (Quick Sweep) or several frames (Set Run) and ask what the look depends on or for a reconstruction prompt. It can also diagnose a generated image against the reference. It will not guess camera gear or a whole film's style from one frame.
-- **Best suited for:** Understanding and faithfully recreating a cinematic look before prompting an image model.
+- **能做什么：** 通过“压力测试”找出一帧电影画面的美感到底靠什么：每次只削弱一个视觉条件（色彩、影调范围、平衡、留白区、细节、视觉焦点），判断美感是否还在，给敏感度排序，最后输出“最小存活集”、可安全改变的清单和精简的复刻简报。附带实验脚本和表单。
+- **怎么用：** 给它一帧（快速扫描）或多帧（组合运行），问这个画面的美感取决于什么，或要一份复刻提示词；也能对照参考图诊断生成结果。它不会凭一帧去猜摄影器材或整部片子的风格。
+- **最适合：** 在用图像模型复刻之前，先真正理解并忠实还原一种电影感画面。
 
 <a id="s-cinematic-style-compiler"></a>
 ### cinematic-style-compiler
 
-[cinematic-style-compiler.zip](cinematic-style-compiler.zip) · entry: `cinematic-style-compiler/SKILL.md`
+[cinematic-style-compiler.zip](cinematic-style-compiler.zip) · 入口：`cinematic-style-compiler/SKILL.md`
 
-- **What it does:** Builds an explainable FILM_AESTHETIC_MODEL from multiple stills or clips of a film, series, short drama or ad (ten-axis per-shot analysis, narrative phases, shot-function grammar, linked anchors), then compiles it into a REPLICATION_SPEC for new content and checks similarity afterwards.
-- **How to use:** Give several frames or clips and ask to "extract the film's aesthetic anchors", "analyse its shot grammar" or "transfer this film's look to my new scenes", or ask why a generated image only matches the colour. Not for a single final prompt, strict single-image copies or simple colour grading.
-- **Best suited for:** Replicating a whole film's visual system across new shots, not just one frame.
+- **能做什么：** 从一部电影、剧集、短剧或广告的多张静帧或片段中建立可解释的 FILM_AESTHETIC_MODEL（逐镜十轴分析、叙事阶段、镜头功能语法、锚点联动），再编译成用于新内容的 REPLICATION_SPEC，并在之后检验相似度。
+- **怎么用：** 提供多帧或片段，要求“提取影视美学锚点”“分析镜头语法”或“把这部片的美学迁移到新内容”，也可以问为什么生成图只有色调像。不用于单条最终提示词、单图严格复刻或简单调色。
+- **最适合：** 在新镜头中复刻整部影片的视觉系统，而不只是一帧。
 
 <a id="s-color-dna-card-extractor"></a>
 ### color-dna-card-extractor
 
-[color-dna-card-extractor.zip](color-dna-card-extractor.zip) · entry: `COLOR-DNA-CARD-EXTRACTOR-v1.0/SKILL.md`
+[color-dna-card-extractor.zip](color-dna-card-extractor.zip) · 入口：`COLOR-DNA-CARD-EXTRACTOR-v1.0/SKILL.md`
 
-- **What it does:** Extracts a functional, film/design-grade colour system from a single reference image — light colour vs material colour, value hierarchy and small but meaningful accent colours, each with a functional name — and compiles it into a prompt that generates a professional colour-card presentation page.
-- **How to use:** Give one image; optionally project name, card size (6, 9 or 13 colours — 13 by default), use case and title language. Outputs the extraction results plus a ready image-generation prompt (16:9 flat Figma-style board by default).
-- **Best suited for:** Turning a reference frame into a reusable palette for film art, AI video, characters, scenes or brand boards.
+- **能做什么：** 从单张参考图中提取影视/设计级的功能性色彩系统——区分光色与物色、明暗层级以及小面积但关键的强调色，每种颜色都有功能名称——并编译成一条能生成专业色卡展示页的提示词。
+- **怎么用：** 提供一张图；可选项目名、色卡数量（6、9 或 13 色，默认 13）、用途和标题语言。输出提取结果和可直接使用的生图提示词（默认 16:9 扁平 Figma 风格展示页）。
+- **最适合：** 把参考画面变成可复用的配色，用于电影美术、AI 视频、角色、场景或品牌板。
 
 <a id="s-photographic-atmosphere-reconstruction"></a>
 ### photographic-atmosphere-reconstruction
 
-[photographic-atmosphere-reconstruction.zip](photographic-atmosphere-reconstruction.zip) · entry: `photographic-atmosphere-reconstruction/SKILL.md`
+[photographic-atmosphere-reconstruction.zip](photographic-atmosphere-reconstruction.zip) · 入口：`photographic-atmosphere-reconstruction/SKILL.md`
 
-- **What it does:** Reverse-engineers why a photo looks the way it does — tonal order, overall colour bias, colour relationships, contrast response, material feel and air — and rewrites it as transferable grading and atmosphere instructions. Works from one reference, a set (finding the stable shared look) or reference + target, and diagnoses "the colours match but it doesn't feel the same". Protects skin tones.
-- **How to use:** Give one or more reference photos (plus a target image if transferring) and ask to extract, transfer, compare or diagnose the look. Ask for "just the prompt" to skip the analysis.
-- **Best suited for:** Matching a photographic colour grade and mood on new images.
+- **能做什么：** 反推一张照片为什么看起来是那样——亮暗秩序、整体色倾向、颜色之间的关系、明暗响应、材质观感和空气感——并改写成可迁移的调色与氛围指令。可以基于单张参考、一组参考（找出稳定共有的观感）或参考图 + 目标图，并诊断“颜色差不多但感觉不像”。会保护肤色。
+- **怎么用：** 提供一张或多张参考照片（迁移时再加目标图），要求提取、迁移、对比或诊断观感。说“只要提示词”可跳过分析过程。
+- **最适合：** 在新图片上还原某种摄影调色和氛围。
 
 <a id="s-reference-rendering-reader"></a>
 ### reference-rendering-reader
 
-[reference-rendering-reader.zip](reference-rendering-reader.zip) · entry: `reference-rendering-reader/SKILL.md`
+[reference-rendering-reader.zip](reference-rendering-reader.zip) · 入口：`reference-rendering-reader/SKILL.md`
 
-- **What it does:** Careful single-image style reader: separates what the image depicts (to ignore) from transferable rendering decisions — composition, line and edge, shading, light, surface, detail distribution, colour and tonal relationships — and returns a reusable style prompt, a style-restriction prompt and a reliability note. Avoids guessing identity, author or production technique.
-- **How to use:** Upload one reference and say "extract this style" / "提取画风" / "image to style prompt".
-- **Best suited for:** Borrowing a visual treatment for new subjects without copying the content.
+- **能做什么：** 谨慎的单图风格读取器：把图里画的内容（要忽略的）和可迁移的渲染决策分开——构图、线条与边缘、明暗塑造、光影、表面、细节分布、色彩和影调关系——并返回可复用的风格提示词、风格限制提示词和可靠性说明。不猜测身份、作者或制作手法。
+- **怎么用：** 上传一张参考图，说“提取画风”“分析这张图的风格”或“image to style prompt”。
+- **最适合：** 把一种视觉处理方式借给新主体，而不复制原图内容。
 
 <a id="s-reverse-anything"></a>
 ### reverse-anything
 
-[reverse-anything.zip](reverse-anything.zip) · entry: `reverse-anything/SKILL.md` · `reverse-anything__不同内容_0d88a8ba/SKILL.md`
+[reverse-anything.zip](reverse-anything.zip) · 入口：`reverse-anything/SKILL.md` · `reverse-anything__不同内容_0d88a8ba/SKILL.md`
 
-- **What it does:** "Reverse anything": turns great work into something you can reuse. For images and videos it derives the master prompt (fixed skeleton, variable slots, style anchors, effective parameters); for a benchmark website it breaks down positioning, features, flows and tech stack and gives build options plus step-by-step vibe-coding prompts. Every conclusion is labelled evidence / inference / guess. The zip contains v1.0 and v2.0 (evidence-driven, also covers products and workflows, with reproduction checks).
-- **How to use:** Give a set of prompts, a prompt + result, just a result, or a URL ("reverse this image's prompt", "how is this site built?", "I want a product like X"). Hermes-style skill; scripts in `scripts/`. Prefer v2.0.
-- **Best suited for:** Extracting reusable templates from content or sites you admire.
+- **能做什么：** “万能逆向”：把别人做得好的东西变成你可以复用的东西。对图片和视频，反推母版提示词（固定骨架、变量槽、风格锚点、有效参数）；对标杆网站，拆解定位、功能、流程和技术栈，给出实现方案和分步 vibe coding 提示词。每条结论都标注为证据 / 推断 / 猜测。压缩包里有 v1.0 和 v2.0（证据驱动，也覆盖产品和工作流，并做复现验证）。
+- **怎么用：** 提供一组提示词、一条提示词加成品、只有成品，或一个网址（“逆向这张图的提示词”“这个网站是怎么做的？”“我想做一个像 X 的产品”）。Hermes 风格的技能；脚本在 `scripts/`。优先用 v2.0。
+- **最适合：** 从你欣赏的内容或网站中提炼可复用的模板。
 
 <a id="s-strong-image-reverse-prompt"></a>
 ### strong-image-reverse-prompt
 
-[strong-image-reverse-prompt.zip](strong-image-reverse-prompt.zip) · entry: `strong-image-reverse-prompt/SKILL.md`
+[strong-image-reverse-prompt.zip](strong-image-reverse-prompt.zip) · 入口：`strong-image-reverse-prompt/SKILL.md`
 
-- **What it does:** Turns one or more reference images into clear, high-control generation or editing prompts — recreating a composition, keeping a product or identity while changing the setting, or comparing references — with each image assigned a role (subject, style, layout, comparison). Outputs a fast brief or a production brief with a visual fingerprint, ready prompt, control notes and model adaptations (GPT Image, Midjourney, Flux, SDXL).
-- **How to use:** Upload the image(s) and say "reverse this into a prompt" or "recreate this layout with my product".
-- **Best suited for:** Image-to-prompt for faithful recreation and controlled edits.
+- **能做什么：** 把一张或多张参考图变成清晰、可控的生成或编辑提示词——复刻构图、保留产品或人物身份而更换场景，或对比多张参考——每张图都会被分配角色（主体、风格、版式、对比）。输出快速简报或制作简报，包含视觉指纹、可用提示词、控制说明和模型适配（GPT Image、Midjourney、Flux、SDXL）。
+- **怎么用：** 上传图片，说“把这张图反推成提示词”或“用我的产品复刻这个版式”。
+- **最适合：** 用于忠实复刻和受控编辑的图生提示词。
 
 <a id="cat-image3d"></a>
-## 3D & product rendering
+## 3D 与产品渲染
 
-3D asset look-dev and e-commerce product renders.
+3D 资产外观开发和电商产品渲染。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`3d-high-fidelity-asset-forge-skill-v2.1.0`](#s-3d-high-fidelity-asset-forge-skill-v2-1-0) | Extending an existing stylized 3D animated world with new assets that must match it exactly. |
-| [`ecommerce-3d-render-assistant`](#s-ecommerce-3d-render-assistant) | Product shots for phones, tablets, earbuds, peripherals, cameras, chargers and wearables. |
+| [`3d-high-fidelity-asset-forge-skill-v2.1.0`](#s-3d-high-fidelity-asset-forge-skill-v2-1-0) | 为已有的风格化 3D 动画世界扩充新资产，并保证风格完全一致。 |
+| [`ecommerce-3d-render-assistant`](#s-ecommerce-3d-render-assistant) | 手机、平板、耳机、外设、相机、充电器和可穿戴设备的产品图。 |
 
 <a id="s-3d-high-fidelity-asset-forge-skill-v2-1-0"></a>
 ### 3d-high-fidelity-asset-forge-skill-v2.1.0
 
-[3d-high-fidelity-asset-forge-skill-v2.1.0.zip](3d-high-fidelity-asset-forge-skill-v2.1.0.zip) · entry: `3d-high-fidelity-asset-forge-skill-v2.1.0/SKILL.md`
+[3d-high-fidelity-asset-forge-skill-v2.1.0.zip](3d-high-fidelity-asset-forge-skill-v2.1.0.zip) · 入口：`3d-high-fidelity-asset-forge-skill-v2.1.0/SKILL.md`
 
-- **What it does:** Locks the look of a reference 3D animation (video or frames) as the top authority, then produces new characters, environments, props and asset sheets that look like they were lifted from the same high-end animated film. Runs a staged pipeline (ingest → style authority → class split → lookdev → prompt compile → style gates → QA) and ships with schemas, scripts and tests.
-- **How to use:** Start with `START-HERE.md`. Give it the reference video or frames plus the list of assets you need; it returns lookdev notes and generation prompts, then checks each result against style gates (no drift into photoreal CG, game art or "generic 3D cartoon").
-- **Best suited for:** Extending an existing stylized 3D animated world with new assets that must match it exactly.
+- **能做什么：** 把参考 3D 动画（视频或关键帧）的视觉风格锁定为最高权威，再生产新的人物、场景、道具和资产板，让它们看起来像是从同一部高规格 3D 动画电影里直接延伸出来的。按阶段流水线运行（导入 → 风格权威 → 类别拆分 → 外观开发 → 提示词编译 → 风格闸门 → 质检），附带 schema、脚本和测试。
+- **怎么用：** 从 `START-HERE.md` 开始。提供参考视频或关键帧，以及需要的资产清单；它会输出外观开发说明和生成提示词，并用风格闸门检查每个结果（防止滑向照片级 CG、游戏美术或“泛化 3D 卡通”）。
+- **最适合：** 为已有的风格化 3D 动画世界扩充新资产，并保证风格完全一致。
 
 <a id="s-ecommerce-3d-render-assistant"></a>
 ### ecommerce-3d-render-assistant
 
-[ecommerce-3d-render-assistant.zip](ecommerce-3d-render-assistant.zip) · entry: `ecommerce-3d-render-skill-public-v1.0.0/SKILL.md`
+[ecommerce-3d-render-assistant.zip](ecommerce-3d-render-assistant.zip) · 入口：`ecommerce-3d-render-skill-public-v1.0.0/SKILL.md`
 
-- **What it does:** E-commerce product rendering helper for existing 3D models or base renders: improves materials, lighting, reflections, studio backdrops and finish while locking product structure and camera. Auto-identifies materials (anodised, brushed or polished metal, glass, optics, plastics, rubber, ceramic, fabric) and offers five presets (white marketplace, premium white studio, dark tech, etc.).
-- **How to use:** Give a Blender/C4D/KeyShot scene, a clay or base render, or just a text description. Saying only "make it look premium" uses a sensible default and returns a copy-ready prompt; with a scene it returns material, lighting and render settings.
-- **Best suited for:** Product shots for phones, tablets, earbuds, peripherals, cameras, chargers and wearables.
+- **能做什么：** 针对已有 3D 模型或基础渲染图的电商产品渲染助手：优化材质、灯光、反射、棚拍背景和成片质感，同时锁定产品结构和相机。自动识别材质（阳极氧化、拉丝或抛光金属、玻璃、光学镜片、塑料、橡胶、陶瓷、织物），提供五种一键预设（商城白底、官网高级白棚、黑棚科技等）。
+- **怎么用：** 提供 Blender/C4D/KeyShot 场景、白模或基础渲染图，或只给文字描述。只说“渲染高级一点”会采用合理默认值并返回可直接复制的提示词；给场景时返回材质、灯光和渲染设置。
+- **最适合：** 手机、平板、耳机、外设、相机、充电器和可穿戴设备的产品图。
 
 <a id="cat-marketing"></a>
-## Ads, product demos & slides
+## 广告、产品演示与幻灯片
 
-Posters, story ads, product demo videos and slide backgrounds.
+海报、剧情广告、产品演示视频和幻灯片背景。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`beetle-poster-director`](#s-beetle-poster-director) | Concept-led ad posters that are more surprising than a product-in-use scene. |
-| [`build-product-demo`](#s-build-product-demo) | Polished software demo videos that show every key capability without a slow feature tour. |
-| [`narrative-ad-engine`](#s-narrative-ad-engine) | Short-video ads that keep viewers watching through the product reveal. |
-| [`slides`](#s-slides) | Background slides for voice-over / talking-head videos. |
+| [`beetle-poster-director`](#s-beetle-poster-director) | 比“产品使用场景图”更出人意料的创意型广告海报。 |
+| [`build-product-demo`](#s-build-product-demo) | 不拖沓地展示每项关键能力的精良软件演示视频。 |
+| [`narrative-ad-engine`](#s-narrative-ad-engine) | 让观众一直看到产品出现的短视频广告。 |
+| [`slides`](#s-slides) | 口播 / 出镜讲解视频的背景幻灯片。 |
 
 <a id="s-beetle-poster-director"></a>
 ### beetle-poster-director
 
-[beetle-poster-director.zip](beetle-poster-director.zip) · entry: `beetle-poster-director-v2.6.0/SKILL.md`
+[beetle-poster-director.zip](beetle-poster-director.zip) · 入口：`beetle-poster-director-v2.6.0/SKILL.md`
 
-- **What it does:** "Beetle-style poster creative director" — turns a real product, brand, service, event or idea into a finished advertising poster in the spirit of classic VW Beetle ads: visual proof over literal product shots, self-deprecating copy, negative-to-positive reframing, clean white space. Verifies the product online, builds a product fact ledger, writes a creative contract and runs reading tests. The job isn't done until the poster image is generated.
-- **How to use:** It first asks you to choose A (co-create, confirm each step) or B (full takeover). Then give the product name, brand, images or a product link. Web search is mandatory. Install with the bundled `install.sh`.
-- **Best suited for:** Concept-led ad posters that are more surprising than a product-in-use scene.
+- **能做什么：** “甲壳虫式海报创意导演”——把真实的产品、品牌、服务、活动或想法做成一张完整的广告海报，借鉴经典大众甲壳虫广告的思路：用画面证明观点而不是直白展示产品、自嘲式文案、把缺点反转成优点、干净的留白。会联网核实产品、建立《产品事实账本》、写创意契约并做阅读测试。没有生成最终海报图片就不算完成。
+- **怎么用：** 它会先让你选 A（共创模式，每步确认）或 B（全程接管）。然后提供产品名、品牌、图片或商品链接。必须联网搜索。用自带的 `install.sh` 安装。
+- **最适合：** 比“产品使用场景图”更出人意料的创意型广告海报。
 
 <a id="s-build-product-demo"></a>
 ### build-product-demo
 
-[build-product-demo.zip](build-product-demo.zip) · entry: `spellbook-main/skills/build-product-demo/SKILL.md`
+[build-product-demo.zip](build-product-demo.zip) · 入口：`spellbook-main/skills/build-product-demo/SKILL.md`
 
-- **What it does:** Plans, produces or diagnoses evidence-backed product demo videos and screen-recorded walkthroughs. Treats the demo as a verifiable claim about the product: evidence inventory, feature coverage, director's treatment, script, beat plan, deterministic capture tooling, pacing edit and final verification. Diagnose mode finds the first broken layer (truth, story, visible state change, narration sync, capture, encoding).
-- **How to use:** Ask for a product demo, launch video, feature showcase or app walkthrough, or "fix the dead time / narration pacing in this demo". Pick Plan, Produce or Diagnose mode.
-- **Best suited for:** Polished software demo videos that show every key capability without a slow feature tour.
+- **能做什么：** 策划、制作或诊断以真实证据为基础的产品演示视频和录屏讲解。把演示当作对产品的“可验证声明”：证据清单、功能覆盖、导演阐述、脚本、节拍计划、可重复的录制工具、节奏剪辑和最终核验。诊断模式会找出最先出问题的那一层（真实性、故事、可见的状态变化、解说同步、录制、编码）。
+- **怎么用：** 要求做产品演示、发布视频、功能展示或 App 讲解，或说“去掉这个演示里的空档 / 修好解说节奏”。选择策划、制作或诊断模式。
+- **最适合：** 不拖沓地展示每项关键能力的精良软件演示视频。
 
 <a id="s-narrative-ad-engine"></a>
 ### narrative-ad-engine
 
-[narrative-ad-engine.zip](narrative-ad-engine.zip) · entry: `narrative-ad-engine-v1.1.0/SKILL.md`
+[narrative-ad-engine.zip](narrative-ad-engine.zip) · 入口：`narrative-ad-engine-v1.1.0/SKILL.md`
 
-- **What it does:** Generates high-retention story ads: original short-drama ads, movie-recap-style commercial placements, UGC narrative ads and conversion scripts, keeping attention → curiosity → desire → choice → product value → action on one causal chain. Modes: CREATE (from product only), RECAP, GRAFT (add commerce to an existing story), DIAGNOSE, VARIANT (A/B directions).
-- **How to use:** Give just the product to auto-run, or supply an existing plot or recap script. Beginners should start with `START-HERE.md`. Targets Douyin/TikTok, Reels, Shorts, Bilibili and Xiaohongshu.
-- **Best suited for:** Short-video ads that keep viewers watching through the product reveal.
+- **能做什么：** 生成高留存的剧情广告：原创短剧广告、电影解说式商业植入、UGC 叙事广告和转化脚本，让“注意力 → 好奇 → 欲望 → 选择 → 商品价值 → 行动”沿同一条因果链推进。模式：CREATE（只给产品）、RECAP（解说感）、GRAFT（给现有故事加商业内容）、DIAGNOSE（诊断）、VARIANT（A/B 方向）。
+- **怎么用：** 只给产品就能自动运行，也可以提供现有剧情或解说稿。新手从 `START-HERE.md` 开始。面向抖音/TikTok、Reels、Shorts、B 站和小红书。
+- **最适合：** 让观众一直看到产品出现的短视频广告。
 
 <a id="s-slides"></a>
 ### slides
 
-[slides.zip](slides.zip) · entry: `spellbook-main/skills/slides/SKILL.md`
+[slides.zip](slides.zip) · 入口：`spellbook-main/skills/slides/SKILL.md`
 
-- **What it does:** Generates slide decks as 16:9 PNG sequences. Voice-over mode (default, 20–40 pages) makes minimalist one-idea-per-slide backgrounds for talking-head videos, with 13 background themes, semantic colour emphasis, content-type strategies (person, tutorial, news, opinion) and a thumbnail-style cover system. Presentation mode (5–8 pages) makes richer card-based slides.
-- **How to use:** Run with a topic or script file path, e.g. "make slides for this voice-over script".
-- **Best suited for:** Background slides for voice-over / talking-head videos.
+- **能做什么：** 生成 16:9 PNG 序列的幻灯片。口播模式（默认，20–40 页）为口播视频制作极简的“一页一观点”背景，有 13 种背景主题、语义颜色强调、按内容类型（人物、教程、新闻、观点）的策略和缩略图式封面系统。演示模式（5–8 页）制作更丰富的卡片式幻灯片。
+- **怎么用：** 带主题或讲稿文件路径运行，例如“为这份口播稿做幻灯片”。
+- **最适合：** 口播 / 出镜讲解视频的背景幻灯片。
 
 <a id="cat-social"></a>
-## Social media & creator operations
+## 社交媒体与创作者运营
 
-Xiaohongshu and multi-platform content, topic selection and native-sounding Chinese copy.
+小红书和多平台内容、选题，以及地道的中文文案。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`creator-ops-os`](#s-creator-ops-os) | Planning and iterating content for a creator account with data, not guesswork. |
-| [`topic-insight-writing`](#s-topic-insight-writing) | Creators who don't know what to write or whose pieces keep drifting off-point. |
-| [`xiaohongshu`](#s-xiaohongshu) | Researched, illustrated Xiaohongshu posts from topic to publish. |
-| [`xiaohongshu-netfeel-guardian`](#s-xiaohongshu-netfeel-guardian) | Making Chinese social posts sound native, not translated. |
+| [`creator-ops-os`](#s-creator-ops-os) | 用数据而不是猜测来规划和迭代创作者账号内容。 |
+| [`topic-insight-writing`](#s-topic-insight-writing) | 不知道写什么、或者内容总是跑题的创作者。 |
+| [`xiaohongshu`](#s-xiaohongshu) | 从选题到发布、带调研和配图的小红书笔记。 |
+| [`xiaohongshu-netfeel-guardian`](#s-xiaohongshu-netfeel-guardian) | 让中文社交内容读起来地道，而不是翻译过来的。 |
 
 <a id="s-creator-ops-os"></a>
 ### creator-ops-os
 
-[creator-ops-os.zip](creator-ops-os.zip) · entry: `creator-ops-os-v1.0.0/SKILL.md`
+[creator-ops-os.zip](creator-ops-os.zip) · 入口：`creator-ops-os-v1.0.0/SKILL.md`
 
-- **What it does:** Runs a creator account as an evidence-driven system: live market evidence and your own account metrics → topic board → platform-native content package → preflight → publishing brief → performance diagnosis → learning memory. Strongest for Xiaohongshu and Douyin; also Bilibili, Kuaishou, WeChat Official Accounts, Weibo, Zhihu, TikTok, YouTube, Instagram and X. Never invents market data.
-- **How to use:** Choose a mode (e.g. QUICK_SHOT for 3–5 topics and one finished package, MARKET_SCAN for a wider sweep). Provide your niche, account data exports if available, and target platform.
-- **Best suited for:** Planning and iterating content for a creator account with data, not guesswork.
+- **能做什么：** 把创作者账号当作由证据驱动的系统来运营：实时市场证据和自有账号数据 → 选题板 → 平台原生内容包 → 发布前检查 → 发布简报 → 表现诊断 → 经验记忆。小红书和抖音最强；也支持 B 站、快手、微信公众号、微博、知乎、TikTok、YouTube、Instagram 和 X。从不编造市场数据。
+- **怎么用：** 选择模式（例如 QUICK_SHOT 出 3–5 个选题和一份完整内容包，MARKET_SCAN 做更大范围扫描）。提供你的赛道、可用的账号数据导出和目标平台。
+- **最适合：** 用数据而不是猜测来规划和迭代创作者账号内容。
 
 <a id="s-topic-insight-writing"></a>
 ### topic-insight-writing
 
-[topic-insight-writing.zip](topic-insight-writing.zip) · entry: `topic-insight-writing-skill-v1.0.0/SKILL.md`
+[topic-insight-writing.zip](topic-insight-writing.zip) · 入口：`topic-insight-writing-skill-v1.0.0/SKILL.md`
 
-- **What it does:** Precise topic selection for self-media: audience context → real signals → pain point → concrete candidate topics → sharpened thesis → counter-examples and fact checks → discussion to lock one topic → structure → section-by-section writing → final fact and expression review. Works for video, posts and podcasts; won't write the full piece before you agree on the topic unless you ask.
-- **How to use:** Say "give me topics", "I have a vague idea but can't articulate the point", or "make an episode about X". It returns 2–3 genuinely different topic cards and one key question to decide on.
-- **Best suited for:** Creators who don't know what to write or whose pieces keep drifting off-point.
+- **能做什么：** 面向自媒体的精准选题：受众语境 → 真实信号 → 痛点 → 具体候选选题 → 提炼观点 → 找反例与查证 → 和你讨论并锁定选题 → 结构 → 分段写作 → 事实与表达终审。适用于视频、图文和播客；除非你要求，否则在选题确定前不会写成稿。
+- **怎么用：** 说“给我选题”“我有点想法但观点讲不清”或“做一期关于 X 的视频”。它会给出 2–3 个方向真正不同的选题卡，以及一个需要你拍板的关键问题。
+- **最适合：** 不知道写什么、或者内容总是跑题的创作者。
 
 <a id="s-xiaohongshu"></a>
 ### xiaohongshu
 
-[xiaohongshu.zip](xiaohongshu.zip) · entry: `spellbook-main/skills/xiaohongshu/SKILL.md`
+[xiaohongshu.zip](xiaohongshu.zip) · 入口：`spellbook-main/skills/xiaohongshu/SKILL.md`
 
-- **What it does:** End-to-end Xiaohongshu (RED) note production: understand the brief → competitor research saved to a local database → 8–10 tags → generate 3:4 (1080×1440) cover and content images from HTML styles with overflow checks → write copy within platform limits (title ≤20 characters, body ≤1000) → publish → verify. Each note lives in its own `YYYYMMDD-<slug>` folder.
-- **How to use:** Run with a topic or source material ("write a Xiaohongshu post about our new feature"). Copy `.env.example` to `.env` and install `requirements.txt`; publishing needs the configured posting tool.
-- **Best suited for:** Researched, illustrated Xiaohongshu posts from topic to publish.
+- **能做什么：** 端到端的小红书笔记生产：了解需求 → 竞品调研并存入本地数据库 → 8–10 个标签 → 用 HTML 样式生成 3:4（1080×1440）封面和配图并做溢出检查 → 在平台限制内写文案（标题 ≤20 字，正文 ≤1000 字）→ 发布 → 验证。每篇笔记存放在独立的 `YYYYMMDD-<slug>` 文件夹里。
+- **怎么用：** 带主题或素材运行（“写一篇关于我们新功能的小红书”）。把 `.env.example` 复制成 `.env` 并安装 `requirements.txt`；发布需要配置好的发布工具。
+- **最适合：** 从选题到发布、带调研和配图的小红书笔记。
 
 <a id="s-xiaohongshu-netfeel-guardian"></a>
 ### xiaohongshu-netfeel-guardian
 
-[xiaohongshu-netfeel-guardian.zip](xiaohongshu-netfeel-guardian.zip) · entry: `spellbook-main/skills/xiaohongshu-netfeel-guardian/SKILL.md`
+[xiaohongshu-netfeel-guardian.zip](xiaohongshu-netfeel-guardian.zip) · 入口：`spellbook-main/skills/xiaohongshu-netfeel-guardian/SKILL.md`
 
-- **What it does:** Fixes translation-ese in Chinese content written by Claude — stiff phrasing, Western framing, "In conclusion"-style drift halfway through long pieces. Forces a Chinese-only planning monologue first, detects English leakage in the draft, rewrites with authentic online tone, produces versions with a final self-check and can generate a persistent guard snippet. Leaves your existing CLAUDE.md / AGENTS.md persona rules intact.
-- **How to use:** Say "小红书翻译腔太重", "去除 Claude 翻译腔", "公众号写着写着变英文了", or paste a note to rewrite in natural Chinese. Works best together with `xiaohongshu`.
-- **Best suited for:** Making Chinese social posts sound native, not translated.
+- **能做什么：** 修复 Claude 写中文内容时的翻译腔——句式僵硬、西式框架、长文写到一半冒出“In conclusion”式的跑偏。先强制用纯中文做内部构思，检测初稿中的英文泄露，用真实的网络语感重写，输出多个版本并做最终自检，还能生成可长期使用的守护片段。不会改动你在 CLAUDE.md / AGENTS.md 里已有的人设要求。
+- **怎么用：** 说“小红书翻译腔太重”“去除 Claude 翻译腔”“公众号写着写着变英文了”，或贴一篇笔记让它改成纯中文网感。与 `xiaohongshu` 搭配效果最好。
+- **最适合：** 让中文社交内容读起来地道，而不是翻译过来的。
 
 <a id="cat-writing"></a>
-## Writing, author voice & de-AI polish
+## 写作、作者文风与去 AI 味
 
-Writing in a specific author's voice and removing machine-written patterns.
+用特定作者的文风写作，并去除机器写作的痕迹。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`author-style-continuation`](#s-author-style-continuation) | Continuations and fan fiction that must sound like the original author. |
-| [`cat-distillation-skill`](#s-cat-distillation-skill) | Building a reusable writing partner from a specific creator's body of work (fiction, scripts, columns, marketing copy). |
-| [`humanizer`](#s-humanizer) | Final polish of drafts that read as machine-written. |
-| [`magic-style-dna`](#s-magic-style-dna) | Long-form articles, columns and voice-over scripts in a consistent personal voice. |
+| [`author-style-continuation`](#s-author-style-continuation) | 必须读起来像原作者写的续写和同人作品。 |
+| [`cat-distillation-skill`](#s-cat-distillation-skill) | 从某位创作者的作品中打造可复用的写作搭档（小说、剧本、专栏、营销文案）。 |
+| [`humanizer`](#s-humanizer) | 给读起来像机器写的稿子做最后润色。 |
+| [`magic-style-dna`](#s-magic-style-dna) | 以统一个人风格写长文、专栏和口播稿。 |
 
 <a id="s-author-style-continuation"></a>
 ### author-style-continuation
 
-[author-style-continuation.zip](author-style-continuation.zip) · entry: `author-style-continuation/SKILL.md`
+[author-style-continuation.zip](author-style-continuation.zip) · 入口：`author-style-continuation/SKILL.md`
 
-- **What it does:** Learns an author's voice from source text or chat logs and continues in it — next chapter, side story, ending, character replies or chat-style continuations. Builds a style card, character voice cards, a plot ledger and a plan, then uses stdlib Python scripts to fingerprint the style, compare drafts against the original and flag AI-sounding phrasing.
-- **How to use:** Paste or attach the original text and say what to write ("continue in the author's voice", "接着往下写"). Works in Chinese and English; installing `jieba` improves Chinese analysis.
-- **Best suited for:** Continuations and fan fiction that must sound like the original author.
+- **能做什么：** 从原文或聊天记录中学习作者的文风并用它续写——下一章、番外、结局、角色接话或聊天体续写。会建立文风卡、人物声音卡、剧情账本和续写计划，再用只依赖标准库的 Python 脚本提取文风指纹、对比草稿与原文并标出“AI 味”表达。
+- **怎么用：** 粘贴或上传原文，说明要写什么（“按原文风格续写”“接着往下写”）。中英文都支持；安装 `jieba` 可提高中文分析精度。
+- **最适合：** 必须读起来像原作者写的续写和同人作品。
 
 <a id="s-cat-distillation-skill"></a>
 ### cat-distillation-skill
 
-[cat-distillation-skill.zip](cat-distillation-skill.zip) · entry: `cat-distillation-skill-v1.0.1-STABLE/SKILL.md`
+[cat-distillation-skill.zip](cat-distillation-skill.zip) · 入口：`cat-distillation-skill-v1.0.1-STABLE/SKILL.md`
 
-- **What it does:** "Cat Distillation" — compiles authorised novels, scripts, articles, interviews, chats and work material into a runnable creative collaborator. It learns traceable "pawprint atoms" (what the author notices first, how they judge, what move they make, what effect it has, when not to use it), contrasted against weak samples and genre norms. Run modes: MAKE (create), REWORK (edit), PLAN, TALK. Explicitly does not claim to clone a person.
-- **How to use:** Feed it authorised material from a writer, then ask it to write, rework or plan in that person's creative manner. Missing evidence is flagged rather than invented.
-- **Best suited for:** Building a reusable writing partner from a specific creator's body of work (fiction, scripts, columns, marketing copy).
+- **能做什么：** “猫咪蒸馏”——把经授权的小说、剧本、文章、访谈、聊天和工作材料编译成一个可运行的创作协作者。它学习可追溯的“爪印原子”（作者先注意什么、怎么判断、采取什么动作、产生什么效果、何时不该用），并和弱样本及题材惯例做对照。运行模式：MAKE（创作）、REWORK（改稿）、PLAN（策划）、TALK（协作对话）。明确不宣称复制某个人。
+- **怎么用：** 输入某位创作者经授权的材料，然后让它按此人的创作方式写作、改稿或策划。证据不足的地方会标出来，而不是编造。
+- **最适合：** 从某位创作者的作品中打造可复用的写作搭档（小说、剧本、专栏、营销文案）。
 
 <a id="s-humanizer"></a>
 ### humanizer
 
-[humanizer.zip](humanizer.zip) · entry: `spellbook-main/skills/humanizer/SKILL.md`
+[humanizer.zip](humanizer.zip) · 入口：`spellbook-main/skills/humanizer/SKILL.md`
 
-- **What it does:** Removes signs of AI-generated writing based on Wikipedia's "Signs of AI writing" guide — inflated symbolism, promotional tone, shallow "-ing" analysis, vague attributions, em-dash overuse, rule of three, AI vocabulary, negative parallelisms — while keeping meaning and voice.
-- **How to use:** Point it at a text or file and ask to make it sound human / natural.
-- **Best suited for:** Final polish of drafts that read as machine-written.
+- **能做什么：** 依据维基百科的“AI 写作特征”指南去除文字中的 AI 痕迹——夸大的象征意义、推销腔、浅薄的“-ing”式分析、含糊的出处、破折号过多、三段式排比、AI 常用词、否定式排比——同时保留原意和语气。
+- **怎么用：** 指定一段文字或文件，让它改得更像人写的、更自然。
+- **最适合：** 给读起来像机器写的稿子做最后润色。
 
 <a id="s-magic-style-dna"></a>
 ### magic-style-dna
 
-[magic-style-dna.zip](magic-style-dna.zip) · entry: `magic-style-dna-v1.0.0/SKILL.md`
+[magic-style-dna.zip](magic-style-dna.zip) · 入口：`magic-style-dna-v1.0.0/SKILL.md`
 
-- **What it does:** "Magic Style · Writing DNA" — learns observable writing patterns from an author's own articles (as a "writing transfer map": situation → choice → reader effect → evidence) and writes new, original articles that read like that author, plus titles, openings and cover text. Iterates the style pack from your feedback; includes offline analysis scripts. Refuses to impersonate a real author for deception.
-- **How to use:** Put sample articles in `samples/`, let it build the style pack, then give a topic and facts for a new piece. Say "this part doesn't sound like them" to refine.
-- **Best suited for:** Long-form articles, columns and voice-over scripts in a consistent personal voice.
+- **能做什么：** “魔法文风 · 写作 DNA”——从作者自己的文章中学习可观察的写作规律（以“写作转移图”呈现：场景 → 写作选择 → 读者感受 → 证据），写出读起来像这位作者、但内容全新的原创文章，并配上标题、开头和封面文字。根据你的反馈迭代文风包；附离线分析脚本。拒绝冒充真实作者用于欺骗。
+- **怎么用：** 把样本文章放进 `samples/`，让它建立文风包，然后给出新文章的主题和素材。说“这里不像”来继续打磨。
+- **最适合：** 以统一个人风格写长文、专栏和口播稿。
 
 <a id="cat-research"></a>
-## Research, search & intelligence
+## 调研、搜索与情报
 
-Web search tools, research methods, industry and AI news intelligence, explainers.
+联网搜索工具、调研方法、行业和 AI 资讯情报、原理讲解。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`ai-intel-officer`](#s-ai-intel-officer) | Staying current on AI releases with verified sources and no hype. |
-| [`anysearch`](#s-anysearch) | Giving an agent that lacks built-in web search a search-and-extract tool. |
-| [`ask-opencli`](#s-ask-opencli) | Quick second opinions from Grok or Gemini without API keys. |
-| [`consulting-analysis`](#s-consulting-analysis) | Formal market, industry or competitor reports with a clear analytical framework. |
-| [`github-trending`](#s-github-trending) | Spotting genuinely rising open-source projects and tech trends. |
-| [`industry-intelligence-engine`](#s-industry-intelligence-engine) | Getting up to speed on an unfamiliar industry before a business decision. |
-| [`multi-ai-research`](#s-multi-ai-research) | Deep research where independent agreement matters more than a single deep answer. |
-| [`research-guide`](#s-research-guide) | Rigorous, well-cited research. |
-| [`research-hub`](#s-research-hub) | One front door for all research requests when you have the full research skill set installed. |
-| [`universal-research-architect`](#s-universal-research-architect) | Any research question where you want a method, not just links. |
-| [`universal-web-harvester`](#s-universal-web-harvester) | Reliable content collection from websites, including dynamic ones. |
-| [`xray`](#s-xray) | Evidence-backed explainers of complex systems for yourself or a team. |
+| [`ai-intel-officer`](#s-ai-intel-officer) | 用可核实的来源、不带炒作地跟进 AI 新发布。 |
+| [`anysearch`](#s-anysearch) | 给没有内置联网搜索的 agent 加上搜索和网页提取能力。 |
+| [`ask-opencli`](#s-ask-opencli) | 不用 API key，快速听听 Grok 或 Gemini 的第二意见。 |
+| [`consulting-analysis`](#s-consulting-analysis) | 有清晰分析框架的正式市场、行业或竞品报告。 |
+| [`github-trending`](#s-github-trending) | 发现真正在上升的开源项目和技术趋势。 |
+| [`industry-intelligence-engine`](#s-industry-intelligence-engine) | 在做商业决策前快速搞懂一个陌生行业。 |
+| [`multi-ai-research`](#s-multi-ai-research) | 独立来源的一致结论比单个深度回答更重要的深度调研。 |
+| [`research-guide`](#s-research-guide) | 严谨、引用充分的调研。 |
+| [`research-hub`](#s-research-hub) | 在装齐全套调研技能时，作为所有调研请求的统一入口。 |
+| [`universal-research-architect`](#s-universal-research-architect) | 想要方法、而不只是一堆链接的任何调研问题。 |
+| [`universal-web-harvester`](#s-universal-web-harvester) | 可靠地从网站（包括动态网站）采集内容。 |
+| [`xray`](#s-xray) | 为自己或团队制作有证据支撑的复杂系统讲解。 |
 
 <a id="s-ai-intel-officer"></a>
 ### ai-intel-officer
 
-[ai-intel-officer.zip](ai-intel-officer.zip) · entry: `ai-intel-officer-v1.0.0/SKILL.md`
+[ai-intel-officer.zip](ai-intel-officer.zip) · 入口：`ai-intel-officer-v1.0.0/SKILL.md`
 
-- **What it does:** High-signal AI news and intelligence built on primary sources (release notes, papers, repos, pricing pages) rather than influencers, with a hard no-X/Twitter rule. Verifies claims, dedupes and ranks. Modes: Daily Brief, Weekly Radar, Verification Desk, Open-source Scout, Pricing & Quota Watch.
-- **How to use:** Ask "give me today's AI brief", "weekly radar on agent tooling", "verify this rumour about model X", or "track API pricing and deprecations". Needs web access.
-- **Best suited for:** Staying current on AI releases with verified sources and no hype.
+- **能做什么：** 高信噪比的 AI 资讯与情报，以一手来源（发布说明、论文、代码仓库、价格页）为准而不是网红，严格不用 X/Twitter。会核实说法、去重并排序。模式：每日简报、每周雷达、核查台、开源侦察、价格与配额监控。
+- **怎么用：** 说“给我今天的 AI 简报”“agent 工具的每周雷达”“核实一下关于某模型的传闻”或“追踪 API 价格和下线通知”。需要联网。
+- **最适合：** 用可核实的来源、不带炒作地跟进 AI 新发布。
 
 <a id="s-anysearch"></a>
 ### anysearch
 
-[anysearch.zip](anysearch.zip) · entry: `大调查/anysearch.md`
+[anysearch.zip](anysearch.zip) · 入口：`大调查/anysearch.md`
 
-- **What it does:** Real-time search through the AnySearch service — web search, vertical-domain search, parallel batch search and URL-to-Markdown extraction — via a bundled cross-platform CLI (no MCP server). This package (`大调查` / "big investigation") also bundles the `consulting-analysis`, `research-guide` and `research-hub` companion files.
-- **How to use:** Install the folder; the agent calls the CLI whenever it needs live information. Optional `ANYSEARCH_API_KEY` (in `.env` or env var) raises rate limits; anonymous use works. Run the CLI's `doc` command if the interface is unclear.
-- **Best suited for:** Giving an agent that lacks built-in web search a search-and-extract tool.
+- **能做什么：** 通过 AnySearch 服务进行实时搜索——网页搜索、垂直领域搜索、并行批量搜索和网页转 Markdown 提取——使用自带的跨平台命令行工具（无需 MCP 服务器）。这个包（`大调查`）还同时带有 `consulting-analysis`、`research-guide` 和 `research-hub` 的配套文件。
+- **怎么用：** 安装该文件夹后，agent 需要实时信息时会自动调用命令行工具。可选的 `ANYSEARCH_API_KEY`（写在 `.env` 或环境变量里）可提高频率上限，不填也能匿名使用。接口不清楚时运行命令行的 `doc` 命令。
+- **最适合：** 给没有内置联网搜索的 agent 加上搜索和网页提取能力。
 
 <a id="s-ask-opencli"></a>
 ### ask-opencli
 
-[ask-opencli.zip](ask-opencli.zip) · entry: `spellbook-main/skills/ask-opencli/SKILL.md`
+[ask-opencli.zip](ask-opencli.zip) · 入口：`spellbook-main/skills/ask-opencli/SKILL.md`
 
-- **What it does:** Asks Grok or Gemini through `opencli`, which drives your already-logged-in Chrome — no API cost.
-- **How to use:** Setup: `npm install -g @jackwener/opencli` (Node ≥20), run `opencli doctor` to install the Chrome bridge extension, log in to grok.com and gemini.google.com once, and set `OPENCLI_BROWSER_COMMAND_TIMEOUT=300`. Then say "ask Grok …" / "问 gemini …". For multi-model research use `multi-ai-research`.
-- **Best suited for:** Quick second opinions from Grok or Gemini without API keys.
+- **能做什么：** 通过 `opencli` 驱动你已登录的 Chrome 去问 Grok 或 Gemini——不花 API 费用。
+- **怎么用：** 准备：`npm install -g @jackwener/opencli`（Node ≥20），运行 `opencli doctor` 安装 Chrome 桥接扩展，在 grok.com 和 gemini.google.com 各登录一次，并设置 `OPENCLI_BROWSER_COMMAND_TIMEOUT=300`。然后说“问 grok ……”/“ask gemini ……”。多模型调研请用 `multi-ai-research`。
+- **最适合：** 不用 API key，快速听听 Grok 或 Gemini 的第二意见。
 
 <a id="s-consulting-analysis"></a>
 ### consulting-analysis
 
-[consulting-analysis.zip](consulting-analysis.zip) · entry: `大调查/consulting-analysis.md`
+[consulting-analysis.zip](consulting-analysis.zip) · 入口：`大调查/consulting-analysis.md`
 
-- **What it does:** Produces consulting-grade research reports in Markdown — market, consumer, brand, financial, industry, competitive intelligence, investment due diligence. Phase 1 designs the analysis framework (models, chapter skeleton, per-chapter data requirements, chart plan); Phase 2, after data is collected, writes the final report with structured narrative, embedded charts and strategic insights. Strict data-authenticity rules.
-- **How to use:** Ask for a research report on a subject. Pair with a search/collection skill (`anysearch`, `research-hub`) between the two phases. Ships inside the same `大调查` bundle as `anysearch`; entry is `大调查/consulting-analysis.md`.
-- **Best suited for:** Formal market, industry or competitor reports with a clear analytical framework.
+- **能做什么：** 生成 Markdown 格式的咨询级研究报告——市场、消费者、品牌、财务、行业、竞争情报、投资尽调。第一阶段设计分析框架（模型、章节骨架、每章数据需求、图表规划）；收集数据后，第二阶段写出带结构化叙述、内嵌图表和战略洞察的最终报告。有严格的数据真实性规则。
+- **怎么用：** 要求就某个主题写研究报告。两个阶段之间搭配搜索/采集类技能（`anysearch`、`research-hub`）。它和 `anysearch` 在同一个 `大调查` 包里；入口是 `大调查/consulting-analysis.md`。
+- **最适合：** 有清晰分析框架的正式市场、行业或竞品报告。
 
 <a id="s-github-trending"></a>
 ### github-trending
 
-[github-trending.zip](github-trending.zip) · entry: `spellbook-main/skills/github-trending/SKILL.md`
+[github-trending.zip](github-trending.zip) · 入口：`spellbook-main/skills/github-trending/SKILL.md`
 
-- **What it does:** GitHub Trending exploration and analysis that treats the list as hype-polluted: pulls structured data via a script (never raw HTML), filters for real star growth and writes a genuine angle for each pick. Produces daily/weekly trend reports by language or topic.
-- **How to use:** Ask "what's hot on GitHub today?", "trending Rust projects this week", or "AI/agent trending report". Install the script dependencies from `requirements.txt`. Turning results into posts or deep research belongs to other skills.
-- **Best suited for:** Spotting genuinely rising open-source projects and tech trends.
+- **能做什么：** GitHub Trending 探索与分析，把这个榜单当作被炒作污染的数据来看待：用脚本获取结构化数据（绝不直接抓原始 HTML），筛选真实的 star 增长，并为每个入选项目写出真正的看点。按语言或主题生成日报/周报。
+- **怎么用：** 问“今天 GitHub 什么火了？”“本周热门 Rust 项目”或“AI/agent 方向的 trending 报告”。先安装 `requirements.txt` 里的脚本依赖。把结果改写成帖子或深度调研属于其他技能。
+- **最适合：** 发现真正在上升的开源项目和技术趋势。
 
 <a id="s-industry-intelligence-engine"></a>
 ### industry-intelligence-engine
 
-[industry-intelligence-engine.zip](industry-intelligence-engine.zip) · entry: `industry-intelligence-engine/SKILL.md`
+[industry-intelligence-engine.zip](industry-intelligence-engine.zip) · 入口：`industry-intelligence-engine/SKILL.md`
 
-- **What it does:** Turns one industry name ("pet funerals", "industrial robots", "how do short dramas make money?") into an evidence-backed model of how the industry really works: who pays whom, where margins and power sit, what drives demand, what's changing now, where the frictions and opportunities are, and an entry playbook — checked against counter-evidence.
-- **How to use:** Name an industry and your decision (understand it, enter it, invest, partner). Needs web research; outputs a structured industry reality model and recommendations.
-- **Best suited for:** Getting up to speed on an unfamiliar industry before a business decision.
+- **能做什么：** 只需一个行业名（“宠物殡葬”“工业机器人”“短剧行业到底怎么赚钱？”），就能建立一个有证据支撑的行业运作模型：谁付钱给谁、利润和话语权在哪里、需求由什么驱动、现在正在发生什么变化、摩擦和机会在哪里，以及入局打法——并用反面证据检验。
+- **怎么用：** 说出行业名和你要做的决定（了解、入局、投资、合作）。需要联网调研；输出结构化的行业真实模型和建议。
+- **最适合：** 在做商业决策前快速搞懂一个陌生行业。
 
 <a id="s-multi-ai-research"></a>
 ### multi-ai-research
 
-[multi-ai-research.zip](multi-ai-research.zip) · entry: `spellbook-main/skills/multi-ai-research/SKILL.md`
+[multi-ai-research.zip](multi-ai-research.zip) · 入口：`spellbook-main/skills/multi-ai-research/SKILL.md`
 
-- **What it does:** Parallel multi-AI cross-validation research: decomposes the question, dispatches several internal sub-agents plus Grok and Gemini (via opencli) at once, cross-validates the answers, tiers findings by confidence (strong consensus / partial / conflict / insufficient) and generates tiered action items with arbitration.
-- **How to use:** Say "multi-AI research on …", "cross-validate this", "三脑调研". Requires opencli set up as in `ask-opencli`. Not for quick facts or code reasoning.
-- **Best suited for:** Deep research where independent agreement matters more than a single deep answer.
+- **能做什么：** 并行多 AI 交叉验证调研：拆解问题，同时派出多个内部子 agent 加上 Grok 和 Gemini（通过 opencli），交叉验证答案，按置信度分级（强共识 / 部分共识 / 冲突 / 证据不足），并生成带仲裁的分级行动清单。
+- **怎么用：** 说“多 AI 调研……”“交叉验证一下”或“三脑调研”。需要按 `ask-opencli` 的说明配置好 opencli。不适合简单事实或代码推理。
+- **最适合：** 独立来源的一致结论比单个深度回答更重要的深度调研。
 
 <a id="s-research-guide"></a>
 ### research-guide
 
-[research-guide.zip](research-guide.zip) · entry: `大调查/research-guide.md`
+[research-guide.zip](research-guide.zip) · 入口：`大调查/research-guide.md`
 
-- **What it does:** The research "conductor": classifies intent (fact, comparison, trend, system modelling, exploratory), calibrates depth (L1–L3), and enforces source hierarchy, an iterative evidence loop, conflict resolution, cross-validation and citation standards, routing deliverables (reports, competitive analyses) to sub-skills.
-- **How to use:** Activates for searching, fact-finding, comparisons and evidence-based deliverables. Part of the `大调查` bundle with `anysearch`, `consulting-analysis` and `research-hub`; entry is `大调查/research-guide.md`.
-- **Best suited for:** Rigorous, well-cited research.
+- **能做什么：** 调研“总指挥”：给意图分类（求事实、对比、趋势、系统建模、探索），设定深度（L1–L3），执行信源层级、迭代证据循环、冲突处理、交叉验证和引用规范，并把交付物（报告、竞品分析）路由给子技能。
+- **怎么用：** 搜索、查事实、对比和基于证据的交付任务时自动激活。和 `anysearch`、`consulting-analysis`、`research-hub` 同属 `大调查` 包；入口是 `大调查/research-guide.md`。
+- **最适合：** 严谨、引用充分的调研。
 
 <a id="s-research-hub"></a>
 ### research-hub
 
-[research-hub.zip](research-hub.zip) · entry: `大调查/research-hub.md`
+[research-hub.zip](research-hub.zip) · 入口：`大调查/research-hub.md`
 
-- **What it does:** A unified search-and-research entry point that only routes: scores intent and sends the request to `anysearch`, `research-guide`, `consulting-analysis`, or video-download / book-ingest / knowledge-search / knowledge-ingest sub-skills, choosing a quick, semi-formal or deep-research channel with confidence labels and citation rules.
-- **How to use:** Say "search / look up / research / analyse / write a report / download this video / import this book". Several referenced sub-skills (video-download, book-ingest, knowledge-*) are not in this repo. Entry is `大调查/research-hub.md`.
-- **Best suited for:** One front door for all research requests when you have the full research skill set installed.
+- **能做什么：** 统一的搜索研究入口，只负责路由：为意图打分，把请求交给 `anysearch`、`research-guide`、`consulting-analysis` 或视频下载 / 书籍导入 / 知识库检索 / 知识库导入等子技能，选择快查、半正式或深研通道，并带置信度标签和引用规则。
+- **怎么用：** 说“搜索 / 查找 / 调研 / 分析 / 写报告 / 下载这个视频 / 导入这本书”。它引用的几个子技能（video-download、book-ingest、knowledge-*）不在本仓库中。入口是 `大调查/research-hub.md`。
+- **最适合：** 在装齐全套调研技能时，作为所有调研请求的统一入口。
 
 <a id="s-universal-research-architect"></a>
 ### universal-research-architect
 
-[universal-research-architect.zip](universal-research-architect.zip) · entry: `universal-research-architect/SKILL.md`
+[universal-research-architect.zip](universal-research-architect.zip) · 入口：`universal-research-architect/SKILL.md`
 
-- **What it does:** Turns a one-sentence question into a defensible research process and deliverable — research reports, questionnaire or interview design, market or industry analysis, renovation or project research, product/vendor comparisons, literature reviews, fact-checks. Chooses the method before chasing answers, sets depth (fast / standard / deep), tracks evidence states and stops intelligently.
-- **How to use:** Ask in plain language ("research how to renovate my flat on a 150k budget", "design a canteen satisfaction survey", "is this claim true?"). Beginners can start with `START-HERE.md`.
-- **Best suited for:** Any research question where you want a method, not just links.
+- **能做什么：** 把一句话问题变成站得住脚的调研过程和交付物——调研报告、问卷或访谈设计、市场或行业分析、装修或项目调研、产品/供应商对比、文献综述、事实核查。先选方法再找答案，设定深度（快速 / 标准 / 深入），追踪证据状态，并在合适的时候停止。
+- **怎么用：** 用大白话提问（“帮我研究一下全屋装修，预算 15 万”“帮我做一份食堂满意度问卷”“网上这个说法是真的吗？”）。新手可以从 `START-HERE.md` 开始。
+- **最适合：** 想要方法、而不只是一堆链接的任何调研问题。
 
 <a id="s-universal-web-harvester"></a>
 ### universal-web-harvester
 
-[universal-web-harvester.zip](universal-web-harvester.zip) · entry: `universal-web-harvester-v2.1.0-PURE/SKILL.md`
+[universal-web-harvester.zip](universal-web-harvester.zip) · 入口：`universal-web-harvester-v2.1.0-PURE/SKILL.md`
 
-- **What it does:** Adaptive website harvesting for Codex: crawls, scrapes, downloads, archives and structures content from public pages, JavaScript-heavy sites, paginated listings and files, and sites you are authorised to log into. Probes first, picks the cheapest route that works, escalates to a browser only when needed, handles media, galleries and stylesheets, and verifies output before reporting.
-- **How to use:** Say "scrape / archive / download everything from this site" with the URL and what you want. Install the core, browser and archive requirements as needed (`INSTALL.md`); respects access boundaries.
-- **Best suited for:** Reliable content collection from websites, including dynamic ones.
+- **能做什么：** 面向 Codex 的自适应网站采集：抓取、爬取、下载、归档并结构化公开页面、重 JavaScript 网站、分页列表和文件中的内容，也包括你有权登录的网站。先探测，选最省事又能拿到内容的路线，必要时才升级到浏览器，处理媒体、图库和样式表，报告前先核验输出。
+- **怎么用：** 说“抓取 / 归档 / 下载这个网站的全部内容”，并提供网址和你要的内容。按需安装核心、浏览器和归档依赖（见 `INSTALL.md`）；会遵守访问边界。
+- **最适合：** 可靠地从网站（包括动态网站）采集内容。
 
 <a id="s-xray"></a>
 ### xray
 
-[xray.zip](xray.zip) · entry: `spellbook-main/skills/xray/SKILL.md`
+[xray.zip](xray.zip) · 入口：`spellbook-main/skills/xray/SKILL.md`
 
-- **What it does:** Investigates how something actually works — a concept, code path, app, network flow, system, incident, document or local artifact — then delivers a two-depth visual HTML explainer: a dead-simple big picture first, with source-backed technical depth behind it. Research comes first; the page is a projection of verified understanding. Safe, read-only static inspection of apps you're entitled to analyse.
-- **How to use:** Invoke `$xray` or ask "how does X work under the hood?" / "trace this request across services and explain it". Not for one-line definitions or full code audits.
-- **Best suited for:** Evidence-backed explainers of complex systems for yourself or a team.
+- **能做什么：** 调查某个东西实际上是怎么运作的——概念、代码路径、应用、网络流程、系统、事故、文档或本地文件——然后交付一份两层深度的可视化 HTML 讲解：先是极简的全局图景，背后是有来源支撑的技术细节。先调查后讲解；页面是经过验证的理解的呈现。对你有权分析的应用做安全的只读静态检查。
+- **怎么用：** 调用 `$xray`，或问“X 底层是怎么工作的？”“追踪这个请求在各服务之间的流转并讲清楚”。不用于一句话定义或完整代码审计。
+- **最适合：** 为自己或团队制作有证据支撑的复杂系统讲解。
 
 <a id="cat-product"></a>
-## Ideas, product management & strategy
+## 想法、产品管理与策略
 
-Brainstorming, idea stress-tests, PRDs, discovery, analytics and thinking frameworks.
+头脑风暴、想法压力测试、PRD、产品发现、数据分析和思维框架。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`brainstorming`](#s-brainstorming) | Turning a rough idea into a clear design through dialogue. |
-| [`elon-musk-perspective`](#s-elon-musk-perspective) | Cost breakdowns, challenging industry assumptions and aggressive-but-iterable plans. |
-| [`idea-analogist`](#s-idea-analogist) | Fresh angles on an idea from other fields. |
-| [`idea-devils-advocate`](#s-idea-devils-advocate) | Stress-testing an idea before investing in it. |
-| [`idea-research`](#s-idea-research) | A factual baseline for an idea. |
-| [`idea-team`](#s-idea-team) | Quickly seeing an idea from several angles before committing. |
-| [`idea-to-product`](#s-idea-to-product) | Turning a raw idea into a scoped, user-friendly MVP definition. |
-| [`infinite-canvas-function-architect`](#s-infinite-canvas-function-architect) | Making sense of a sprawling feature set and seeing what's missing. |
-| [`prd-master`](#s-prd-master) | Clear, measurable product requirements documents. |
-| [`product-analytics`](#s-product-analytics) | Setting up product metrics and experiments correctly. |
-| [`product-discovery`](#s-product-discovery) | Deciding what is worth building before building it. |
-| [`product-manager-toolkit`](#s-product-manager-toolkit) | Hands-on PM work that benefits from quick scripts. |
-| [`creative-ideation（网页脑洞）`](#s-zh-f33b17b8) | Breaking out of generic ideas for stories, settings, products or campaigns in a plain chat window. |
+| [`brainstorming`](#s-brainstorming) | 通过对话把粗糙的想法变成清晰的设计。 |
+| [`elon-musk-perspective`](#s-elon-musk-perspective) | 成本拆解、挑战行业默认假设、制定激进但可迭代的计划。 |
+| [`idea-analogist`](#s-idea-analogist) | 从其他领域为一个想法找新角度。 |
+| [`idea-devils-advocate`](#s-idea-devils-advocate) | 在投入之前给想法做压力测试。 |
+| [`idea-research`](#s-idea-research) | 为一个想法打下事实基础。 |
+| [`idea-team`](#s-idea-team) | 在下决定之前，快速从多个角度审视一个想法。 |
+| [`idea-to-product`](#s-idea-to-product) | 把原始想法变成范围清楚、用户友好的 MVP 定义。 |
+| [`infinite-canvas-function-architect`](#s-infinite-canvas-function-architect) | 理清庞杂的功能集，看清还缺什么。 |
+| [`prd-master`](#s-prd-master) | 清晰、可衡量的产品需求文档。 |
+| [`product-analytics`](#s-product-analytics) | 正确地搭建产品指标和实验。 |
+| [`product-discovery`](#s-product-discovery) | 在动手做之前判断什么值得做。 |
+| [`product-manager-toolkit`](#s-product-manager-toolkit) | 需要小脚本辅助的实操型产品工作。 |
+| [`creative-ideation（网页脑洞）`](#s-zh-f33b17b8) | 在普通聊天窗口里跳出套路，为故事、设定、产品或活动想点子。 |
 
 <a id="s-brainstorming"></a>
 ### brainstorming
 
-[brainstorming.zip](brainstorming.zip) · entry: `spellbook-main/skills/brainstorming.SKILL.md`
+[brainstorming.zip](brainstorming.zip) · 入口：`spellbook-main/skills/brainstorming.SKILL.md`
 
-- **What it does:** Socratic design refinement (from obra/superpowers): understands the idea by asking one question at a time, explores 2–3 approaches with a recommendation, then presents the design incrementally while cutting anything not needed (YAGNI).
-- **How to use:** Say "let's brainstorm X", "help me design this feature" or "think through the architecture with me" before any code is written. Not for mechanical tasks with an obvious implementation. Entry file is `skills/brainstorming.SKILL.md` inside the spellbook bundle.
-- **Best suited for:** Turning a rough idea into a clear design through dialogue.
+- **能做什么：** 苏格拉底式的设计打磨（来自 obra/superpowers）：一次只问一个问题来理解想法，给出 2–3 种方案并推荐一种，然后分步呈现设计，同时砍掉不需要的东西（YAGNI 原则）。
+- **怎么用：** 在写代码之前说“我们来头脑风暴一下 X”“帮我设计这个功能”或“和我一起想想架构”。不适合实现方式显而易见的机械任务。入口文件是 spellbook 包里的 `skills/brainstorming.SKILL.md`。
+- **最适合：** 通过对话把粗糙的想法变成清晰的设计。
 
 <a id="s-elon-musk-perspective"></a>
 ### elon-musk-perspective
 
-[elon-musk-perspective.zip](elon-musk-perspective.zip) · entry: `elon-musk-skill/SKILL.md`
+[elon-musk-perspective.zip](elon-musk-perspective.zip) · 入口：`elon-musk-skill/SKILL.md`
 
-- **What it does:** An Elon Musk "thinking OS" distilled from biographies, podcasts, posts, court testimony and critics: five mental models (asymptotic-limit thinking, the five-step algorithm, existential anchoring, vertical integration as physics, iterate fast), eight decision heuristics and his expression style. Answers in first person after a one-time disclaimer.
-- **How to use:** Say "use Musk's perspective", "what would Musk think", "first principles on this cost" or "idiot index". Say "exit" / "退出" to leave the role. Weak at politics, empathy-heavy problems and timelines.
-- **Best suited for:** Cost breakdowns, challenging industry assumptions and aggressive-but-iterable plans.
+- **能做什么：** 马斯克的“思维操作系统”，提炼自传记、播客、推文、法庭证词和批评者的资料：五个心智模型（渐近极限、五步算法、存在主义锚定、垂直整合即物理、快速迭代）、八条决策启发式和他的表达风格。一次免责声明后以第一人称回答。
+- **怎么用：** 说“用马斯克的视角”“马斯克会怎么看”“从第一性原理算算这个成本”或“白痴指数”。说“退出”离开角色。不擅长政治、需要共情的问题和时间预估。
+- **最适合：** 成本拆解、挑战行业默认假设、制定激进但可迭代的计划。
 
 <a id="s-idea-analogist"></a>
 ### idea-analogist
 
-[idea-analogist.zip](idea-analogist.zip) · entry: `spellbook-main/skills/idea-analogist/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-analogist/SKILL.md`
+[idea-analogist.zip](idea-analogist.zip) · 入口：`spellbook-main/skills/idea-analogist/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-analogist/SKILL.md`
 
-- **What it does:** The "analogist" role of the idea group chat: cross-industry analogies and yes-and expansion only — no judging, nitpicking or demands for evidence. Used by `idea-team` or on its own.
-- **How to use:** Say "give me analogies", "has another industry done this?", "yes-and this idea" or "跨界启示". Standalone it returns 5–7 cross-domain analogies.
-- **Best suited for:** Fresh angles on an idea from other fields.
+- **能做什么：** 想法群聊室里的“类比者”角色：只做跨界类比和 yes-and 扩展——不评判、不挑刺、不要求证据。由 `idea-team` 调用，也可单独使用。
+- **怎么用：** 说“类比一下”“别的行业有没有这样做的？”“yes-and 扩展这个想法”或“跨界启示”。单独使用时返回 5–7 个跨界类比。
+- **最适合：** 从其他领域为一个想法找新角度。
 
 <a id="s-idea-devils-advocate"></a>
 ### idea-devils-advocate
 
-[idea-devils-advocate.zip](idea-devils-advocate.zip) · entry: `spellbook-main/skills/idea-devils-advocate/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-devils-advocate/SKILL.md`
+[idea-devils-advocate.zip](idea-devils-advocate.zip) · 入口：`spellbook-main/skills/idea-devils-advocate/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-devils-advocate/SKILL.md`
 
-- **What it does:** The "devil's advocate" role of the idea group chat: finds holes, hidden assumptions and counter-examples (including historical failures) without softening, but also without dismissing the whole idea.
-- **How to use:** Say "devil's advocate this", "why would this fail?", "find the holes". Standalone it returns 5–8 critiques and three questions you must be able to answer.
-- **Best suited for:** Stress-testing an idea before investing in it.
+- **能做什么：** 想法群聊室里的“反方”角色：找漏洞、隐藏假设和反例（包括历史上的失败案例），不软化，但也不全盘否定。
+- **怎么用：** 说“给我反方意见”“这个想法为什么会失败？”“找漏洞”。单独使用时返回 5–8 个挑刺点和三个你必须答得上来的问题。
+- **最适合：** 在投入之前给想法做压力测试。
 
 <a id="s-idea-research"></a>
 ### idea-research
 
-[idea-research.zip](idea-research.zip) · entry: `spellbook-main/skills/idea-research/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-research/SKILL.md`
+[idea-research.zip](idea-research.zip) · 入口：`spellbook-main/skills/idea-research/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-research/SKILL.md`
 
-- **What it does:** The "researcher" role of the idea group chat: uses web search to pull current facts, competitors and data with cited sources, explicitly lists what it couldn't find, and never judges or advises.
-- **How to use:** Say "research X", "what are the competitors / current data for X?". Needs web search.
-- **Best suited for:** A factual baseline for an idea.
+- **能做什么：** 想法群聊室里的“调研员”角色：联网获取当前的事实、竞品和数据并注明来源，明确列出搜不到的内容，从不评判或给建议。
+- **怎么用：** 说“调研一下 X”“X 的现状 / 竞品 / 数据是什么？”。需要联网搜索。
+- **最适合：** 为一个想法打下事实基础。
 
 <a id="s-idea-team"></a>
 ### idea-team
 
-[idea-team.zip](idea-team.zip) · entry: `spellbook-main/skills/idea-team/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-team/SKILL.md`
+[idea-team.zip](idea-team.zip) · 入口：`spellbook-main/skills/idea-team/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-team/SKILL.md`
 
-- **What it does:** Moderator of the idea group chat: throws a one-line idea to a three-agent team (researcher, devil's advocate, analogist) who talk in rounds and @ each other while you can interject anytime. Produces a `team-report.md` with facts, holes, analogies and angles you may have missed. It expands ideas; it doesn't score or veto them.
-- **How to use:** Say "assemble a team to discuss X", "group review X", or run `/idea-coach:idea-team <idea>` if installed as a plugin. If you've already decided and need a PRD, use `idea-to-product`.
-- **Best suited for:** Quickly seeing an idea from several angles before committing.
+- **能做什么：** 想法群聊室的主持人：把一句话想法交给三人小组（调研员、反方、类比者），他们按回合发言、互相 @，你可以随时插话。最后产出 `team-report.md`，包含事实、漏洞、类比和你可能漏掉的角度。它是扩展想法的工具，不打分也不否决。
+- **怎么用：** 说“组个团队聊一下 X”“群聊一下 X”，或作为插件安装时运行 `/idea-coach:idea-team <想法>`。如果已经决定要做、需要 PRD，用 `idea-to-product`。
+- **最适合：** 在下决定之前，快速从多个角度审视一个想法。
 
 <a id="s-idea-to-product"></a>
 ### idea-to-product
 
-[idea-to-product.zip](idea-to-product.zip) · entry: `spellbook-main/skills/idea-to-product/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-to-product/SKILL.md`
+[idea-to-product.zip](idea-to-product.zip) · 入口：`spellbook-main/skills/idea-to-product/SKILL.md` · `spellbook-main/plugins/idea-coach/skills/idea-to-product/SKILL.md`
 
-- **What it does:** End-to-end product coach that takes a one-line idea through seven stages to a PRD and a clickable HTML prototype. Deliberately pushes back, forces feature cuts and runs a Nielsen + Norman usability check. Saves state so you can resume, list and export projects.
-- **How to use:** Say "I have an idea for …", "build an MVP", "write a PRD", or run `/idea-coach:idea <idea>` (also `resume`, `list`, `export <slug>`) if installed as a plugin. Not for teams that already have a running PRD, or for pure brainstorming.
-- **Best suited for:** Turning a raw idea into a scoped, user-friendly MVP definition.
+- **能做什么：** 端到端产品教练，带你把一句话想法经过七个阶段做成 PRD 和可点击的 HTML 原型。会故意顶嘴、强制砍功能，并用 Nielsen + Norman 原则做可用性检查。会保存进度，可以恢复、列出和导出项目。
+- **怎么用：** 说“我有一个想法……”“做个 MVP”“写 PRD”，或作为插件安装时运行 `/idea-coach:idea <想法>`（以及 `resume`、`list`、`export <slug>`）。不适合已经有 PRD 在跑的团队，也不适合纯头脑风暴。
+- **最适合：** 把原始想法变成范围清楚、用户友好的 MVP 定义。
 
 <a id="s-infinite-canvas-function-architect"></a>
 ### infinite-canvas-function-architect
 
-[infinite-canvas-function-architect.zip](infinite-canvas-function-architect.zip) · entry: `infinite-canvas-function-architect-v1.1.0/SKILL.md`
+[infinite-canvas-function-architect.zip](infinite-canvas-function-architect.zip) · 入口：`infinite-canvas-function-architect-v1.1.0/SKILL.md`
 
-- **What it does:** Turns messy product notes, feature lists or workflows into a structured, editable infinite canvas showing goals, modules, features, flows, data, integrations, constraints, risks, dependencies, gaps and priorities. Builds a canonical graph model first, diagnoses it (orphan features, goal gaps, missing acceptance criteria, hidden prerequisites, circular dependencies), then renders a portable single-file canvas or a React Flow app.
-- **How to use:** Paste your notes or feature list and ask to "organise this into a canvas / system map". Pick a rendering lane (portable canvas, React Flow app, whiteboard-first).
-- **Best suited for:** Making sense of a sprawling feature set and seeing what's missing.
+- **能做什么：** 把杂乱的产品笔记、功能清单或工作流整理成结构化、可编辑的无限画布，展示目标、模块、功能、流程、数据、集成、约束、风险、依赖、缺口和优先级。先建立规范的图模型，诊断问题（孤立功能、目标缺口、缺少验收标准、隐藏前置条件、循环依赖），再渲染成可移植的单文件画布或 React Flow 应用。
+- **怎么用：** 粘贴笔记或功能清单，要求“整理成画布 / 系统地图”。选择渲染方式（便携画布、React Flow 应用、白板优先）。
+- **最适合：** 理清庞杂的功能集，看清还缺什么。
 
 <a id="s-prd-master"></a>
 ### prd-master
 
-[prd-master.zip](prd-master.zip) · entry: `spellbook-main/skills/prd-master/SKILL.md`
+[prd-master.zip](prd-master.zip) · 入口：`spellbook-main/skills/prd-master/SKILL.md`
 
-- **What it does:** PRD and product-definition guide: problem-first structure, quantified goals (no vague metrics), INVEST user stories, acceptance criteria, RICE/MoSCoW prioritisation and a full PRD template (summary, context, goals, personas, stories, requirements, out of scope, design, technical notes, rollout, risks).
-- **How to use:** Trigger when writing a PRD, user stories or acceptance criteria, or prioritising features.
-- **Best suited for:** Clear, measurable product requirements documents.
+- **能做什么：** PRD 与产品定义指南：先讲问题的结构、量化目标（不允许含糊指标）、符合 INVEST 的用户故事、验收标准、RICE/MoSCoW 优先级，以及完整 PRD 模板（摘要、背景、目标、用户画像、故事、需求、不做什么、设计、技术考虑、发布计划、风险）。
+- **怎么用：** 写 PRD、用户故事或验收标准，或给功能排优先级时触发。
+- **最适合：** 清晰、可衡量的产品需求文档。
 
 <a id="s-product-analytics"></a>
 ### product-analytics
 
-[product-analytics.zip](product-analytics.zip) · entry: `spellbook-main/skills/product-analytics/SKILL.md`
+[product-analytics.zip](product-analytics.zip) · 入口：`spellbook-main/skills/product-analytics/SKILL.md`
 
-- **What it does:** Product analytics and growth: North Star metric, AARRR funnel, event tracking design (object_action naming, no PII), cohort and retention analysis, A/B testing with statistical rigour, and templates.
-- **How to use:** Trigger when designing event tracking, defining metrics or dashboards, planning experiments or analysing retention.
-- **Best suited for:** Setting up product metrics and experiments correctly.
+- **能做什么：** 产品分析与增长：北极星指标、AARRR 漏斗、埋点设计（object_action 命名、不含个人隐私信息）、同期群和留存分析、统计严谨的 A/B 测试，以及模板。
+- **怎么用：** 设计埋点、定义指标或看板、规划实验或分析留存时触发。
+- **最适合：** 正确地搭建产品指标和实验。
 
 <a id="s-product-discovery"></a>
 ### product-discovery
 
-[product-discovery.zip](product-discovery.zip) · entry: `spellbook-main/skills/product-discovery/SKILL.md`
+[product-discovery.zip](product-discovery.zip) · 入口：`spellbook-main/skills/product-discovery/SKILL.md`
 
-- **What it does:** Product discovery and market research: continuous discovery habits, Jobs-to-be-Done, Kano model, Value Proposition Canvas, Cagan's ten opportunity-assessment questions, user interviews, assumption testing and opportunity mapping. Hard rules: problem before solution, evidence-based decisions, falsifiable assumptions.
-- **How to use:** Trigger when validating an idea, planning interviews, assessing an opportunity or doing competitive analysis.
-- **Best suited for:** Deciding what is worth building before building it.
+- **能做什么：** 产品发现与市场调研：持续发现习惯、Jobs-to-be-Done、Kano 模型、价值主张画布、Cagan 的十个机会评估问题、用户访谈、假设验证和机会地图。硬性规则：先问题后方案、基于证据决策、假设必须可证伪。
+- **怎么用：** 验证想法、规划访谈、评估机会或做竞品分析时触发。
+- **最适合：** 在动手做之前判断什么值得做。
 
 <a id="s-product-manager-toolkit"></a>
 ### product-manager-toolkit
 
-[product-manager-toolkit.zip](product-manager-toolkit.zip) · entry: `spellbook-main/skills/product-manager-toolkit/SKILL.md`
+[product-manager-toolkit.zip](product-manager-toolkit.zip) · 入口：`spellbook-main/skills/product-manager-toolkit/SKILL.md`
 
-- **What it does:** A PM toolkit with scripts: `rice_prioritizer.py` scores a CSV of features with RICE (with team capacity), `customer_interview_analyzer.py` analyses interview transcripts, plus PRD templates, discovery frameworks (opportunity-solution tree, hypothesis template) and go-to-market guidance.
-- **How to use:** Ask for feature prioritisation (provide a CSV with name, reach, impact, confidence, effort), interview analysis or a PRD from a template.
-- **Best suited for:** Hands-on PM work that benefits from quick scripts.
+- **能做什么：** 带脚本的产品经理工具箱：`rice_prioritizer.py` 用 RICE（含团队容量）给功能 CSV 打分，`customer_interview_analyzer.py` 分析访谈记录，另有 PRD 模板、发现框架（机会-方案树、假设模板）和上市策略指导。
+- **怎么用：** 要求做功能优先级排序（提供含 name、reach、impact、confidence、effort 的 CSV）、访谈分析或按模板写 PRD。
+- **最适合：** 需要小脚本辅助的实操型产品工作。
 
 <a id="s-zh-f33b17b8"></a>
 ### creative-ideation（网页脑洞）
 
-[creative-ideation（网页脑洞）.zip](creative-ideation%EF%BC%88%E7%BD%91%E9%A1%B5%E8%84%91%E6%B4%9E%EF%BC%89.zip) · *prompt-type* · entry: `网页脑洞Skill-.md`
+[creative-ideation（网页脑洞）.zip](creative-ideation%EF%BC%88%E7%BD%91%E9%A1%B5%E8%84%91%E6%B4%9E%EF%BC%89.zip) · *提示词型* · 入口：`网页脑洞Skill-.md`
 
-- **What it does:** "Web brainstorm" — a standalone, web-chat version of the Hermes `creative-ideation` skill: a routed library of named creative methods with anti-slop rules (refuse the first three ideas, force specificity, a weirdness budget, use real proper nouns). Picks a method based on your phase and domain and produces specific, non-generic ideas.
-- **How to use:** Not a SKILL.md skill: paste `网页脑洞Skill-.md` as the system prompt, custom instructions or first message of any web AI, then give your topic, setting, characters or plot need.
-- **Best suited for:** Breaking out of generic ideas for stories, settings, products or campaigns in a plain chat window.
+- **能做什么：** “网页脑洞”——Hermes `creative-ideation` 技能的网页聊天独立版：一个按场景路由的创意方法库，配有“反套路”规则（否掉前三个想法、强制具体、怪异预算、使用真实专有名词）。根据你所处阶段和领域选择方法，产出具体、不泛泛的点子。
+- **怎么用：** 不是 SKILL.md 技能：把 `网页脑洞Skill-.md` 作为系统提示词、自定义指令或第一条消息粘贴到任意网页 AI，然后给出你的题材、设定、人物或剧情需求。
+- **最适合：** 在普通聊天窗口里跳出套路，为故事、设定、产品或活动想点子。
 
 <a id="cat-frontend"></a>
-## Frontend, UI & design systems
+## 前端、UI 与设计系统
 
-Web and mobile UI design, design systems, Figma-to-code, React and UX reviews.
+网页和移动端 UI 设计、设计系统、Figma 转代码、React 和 UX 评审。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`app-ui-design`](#s-app-ui-design) | Native-feeling, accessible mobile app interfaces. |
-| [`css-debug`](#s-css-debug) | "Why is this element clipped / mispositioned / invisible?" problems. |
-| [`figma-to-code`](#s-figma-to-code) | Faithful Figma-to-React/Next.js implementation with Tailwind. |
-| [`figma-to-react`](#s-figma-to-react) | Same as `figma-to-code` — pick whichever name fits your setup. |
-| [`frontend-art-director`](#s-frontend-art-director) | Ambitious web UI work that must look authored, not templated, and survive production. |
-| [`frontend-design`](#s-frontend-design) | Web pages and components with a strong, intentional visual identity. |
-| [`personal-profile-mini-program-builder`](#s-personal-profile-mini-program-builder) | A polished personal profile or portfolio inside WeChat. |
-| [`product-ux-expert`](#s-product-ux-expert) | Structured UX critiques and accessibility checks. |
-| [`react-best-practices`](#s-react-best-practices) | Performance reviews of React/Next.js apps. |
-| [`react-hooks-best-practices`](#s-react-hooks-best-practices) | Avoiding effect-related bugs and needless re-renders in React. |
-| [`ui-design-system`](#s-ui-design-system) | Generating design tokens fast from a brand colour. |
-| [`ui-designer`](#s-ui-designer) | Building an MVP that matches the look of reference designs. |
-| [`ui-ux-pro-max`](#s-ui-ux-pro-max) | A broad UI/UX reference you can lean on for any stack. |
-| [`web-artifacts-builder`](#s-web-artifacts-builder) | Rich, app-like claude.ai artifacts. |
-| [`web-asset-generator`](#s-web-asset-generator) | Finishing a website's icon and social-preview assets. |
+| [`app-ui-design`](#s-app-ui-design) | 有原生质感、无障碍友好的移动应用界面。 |
+| [`css-debug`](#s-css-debug) | “这个元素为什么被裁掉 / 位置不对 / 看不见？”这类问题。 |
+| [`figma-to-code`](#s-figma-to-code) | 用 Tailwind 忠实地把 Figma 设计实现为 React/Next.js。 |
+| [`figma-to-react`](#s-figma-to-react) | 同 `figma-to-code`——按你的环境选一个名字即可。 |
+| [`frontend-art-director`](#s-frontend-art-director) | 既要有作者感、不像模板，又要经得起生产环境考验的高要求网页 UI。 |
+| [`frontend-design`](#s-frontend-design) | 视觉风格鲜明、有意图的网页和组件。 |
+| [`personal-profile-mini-program-builder`](#s-personal-profile-mini-program-builder) | 在微信里做一个精致的个人主页或作品集。 |
+| [`product-ux-expert`](#s-product-ux-expert) | 结构化的 UX 评审和无障碍检查。 |
+| [`react-best-practices`](#s-react-best-practices) | React/Next.js 应用的性能评审。 |
+| [`react-hooks-best-practices`](#s-react-hooks-best-practices) | 避免 React 中与 Effect 相关的 bug 和不必要的重渲染。 |
+| [`ui-design-system`](#s-ui-design-system) | 从一个品牌色快速生成设计 token。 |
+| [`ui-designer`](#s-ui-designer) | 做一个外观与参考设计一致的 MVP。 |
+| [`ui-ux-pro-max`](#s-ui-ux-pro-max) | 任何技术栈都能参考的全面 UI/UX 指南。 |
+| [`web-artifacts-builder`](#s-web-artifacts-builder) | 内容丰富、像应用一样的 claude.ai artifact。 |
+| [`web-asset-generator`](#s-web-asset-generator) | 补齐网站的图标和社交预览素材。 |
 
 <a id="s-app-ui-design"></a>
 ### app-ui-design
 
-[app-ui-design.zip](app-ui-design.zip) · entry: `spellbook-main/skills/app-ui-design/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/app-ui-design/SKILL.md`
+[app-ui-design.zip](app-ui-design.zip) · 入口：`spellbook-main/skills/app-ui-design/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/app-ui-design/SKILL.md`
 
-- **What it does:** Mobile app UI design for iOS and Android: Material Design 3 and Apple HIG, colour tokens, typography scales, 8-point spacing grid, touch targets, dark mode and accessibility. The zip holds two identical copies (core and the `spellbook-ui` plugin).
-- **How to use:** Ask it to design or review app screens, set up a mobile design system, or check accessibility and platform conventions.
-- **Best suited for:** Native-feeling, accessible mobile app interfaces.
+- **能做什么：** iOS 和 Android 移动应用 UI 设计：Material Design 3 与苹果 HIG、颜色 token、字体层级、8 点间距网格、触控区域、深色模式和无障碍。压缩包里有两份相同的副本（核心版和 `spellbook-ui` 插件版）。
+- **怎么用：** 让它设计或评审 App 页面、搭建移动端设计系统，或检查无障碍和平台规范。
+- **最适合：** 有原生质感、无障碍友好的移动应用界面。
 
 <a id="s-css-debug"></a>
 ### css-debug
 
-[css-debug.zip](css-debug.zip) · entry: `spellbook-main/skills/css-debug/SKILL.md`
+[css-debug.zip](css-debug.zip) · 入口：`spellbook-main/skills/css-debug/SKILL.md`
 
-- **What it does:** Diagnoses CSS and frontend layout bugs: positioning, overflow clipping, Tailwind classes that don't apply, z-index stacking, Flexbox/Grid issues and React components that don't render or show. Gives a diagnosis, the CSS mechanism behind it and a fix.
-- **How to use:** Invoke `/css-debug` or describe the bug; share the HTML structure, computed styles of the element and its parents, and a screenshot if possible.
-- **Best suited for:** "Why is this element clipped / mispositioned / invisible?" problems.
+- **能做什么：** 诊断 CSS 和前端布局问题：定位、溢出裁剪、Tailwind 类不生效、z-index 层叠、Flexbox/Grid 问题以及 React 组件不渲染或不显示。给出诊断结论、背后的 CSS 机制和修复方法。
+- **怎么用：** 调用 `/css-debug` 或描述问题；提供 HTML 结构、该元素及父元素的 computed styles，最好附截图。
+- **最适合：** “这个元素为什么被裁掉 / 位置不对 / 看不见？”这类问题。
 
 <a id="s-figma-to-code"></a>
 ### figma-to-code
 
-[figma-to-code.zip](figma-to-code.zip) · entry: `spellbook-main/skills/figma-to-code/SKILL.md`
+[figma-to-code.zip](figma-to-code.zip) · 入口：`spellbook-main/skills/figma-to-code/SKILL.md`
 
-- **What it does:** Extracts Figma designs (via Figma MCP) and generates production-ready React/Next.js components with TypeScript and Tailwind CSS at pixel-level accuracy. Strict rules: never truncate MCP output, flatten `absolute contents` wrappers, take dimensions from metadata, map fonts, inline SVGs.
-- **How to use:** Give a Figma URL or frame and ask to convert it to code. Needs the Figma MCP server connected.
-- **Best suited for:** Faithful Figma-to-React/Next.js implementation with Tailwind.
+- **能做什么：** 通过 Figma MCP 提取 Figma 设计，生成可上线的 React/Next.js 组件（TypeScript + Tailwind CSS），像素级还原。严格规则：绝不截断 MCP 输出、展平 `absolute contents` 容器、从元数据取尺寸、映射字体、内联 SVG。
+- **怎么用：** 提供 Figma 链接或画框，要求转成代码。需要已连接 Figma MCP 服务器。
+- **最适合：** 用 Tailwind 忠实地把 Figma 设计实现为 React/Next.js。
 
 <a id="s-figma-to-react"></a>
 ### figma-to-react
 
-[figma-to-react.zip](figma-to-react.zip) · entry: `spellbook-main/skills/figma-to-react/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/figma-to-react/SKILL.md`
+[figma-to-react.zip](figma-to-react.zip) · 入口：`spellbook-main/skills/figma-to-react/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/figma-to-react/SKILL.md`
 
-- **What it does:** Same Figma-to-React/Next.js generator as `figma-to-code` (TypeScript + Tailwind, lossless use of Figma MCP output, flattened `absolute contents`, metadata-driven dimensions, inlined SVGs) under the name used by the `spellbook-ui` plugin. The zip holds the core and plugin copies.
-- **How to use:** Give a Figma URL and ask for React/Next.js components; requires the Figma MCP server. Install only one of `figma-to-code` / `figma-to-react` to avoid duplicate triggers.
-- **Best suited for:** Same as `figma-to-code` — pick whichever name fits your setup.
+- **能做什么：** 与 `figma-to-code` 相同的 Figma 转 React/Next.js 生成器（TypeScript + Tailwind，完整使用 Figma MCP 输出，展平 `absolute contents`，按元数据取尺寸，内联 SVG），只是用了 `spellbook-ui` 插件里的名字。压缩包里有核心版和插件版两份。
+- **怎么用：** 提供 Figma 链接，要求生成 React/Next.js 组件；需要 Figma MCP 服务器。`figma-to-code` 和 `figma-to-react` 只装一个，避免重复触发。
+- **最适合：** 同 `figma-to-code`——按你的环境选一个名字即可。
 
 <a id="s-frontend-art-director"></a>
 ### frontend-art-director
 
-[frontend-art-director.zip](frontend-art-director.zip) · entry: `frontend-art-director/SKILL.md`
+[frontend-art-director.zip](frontend-art-director.zip) · 入口：`frontend-art-director/SKILL.md`
 
-- **What it does:** Full-spectrum frontend art direction, UX, design-system stewardship, visual QA and production hardening. Infers the brief, writes a change contract, builds a coherent "visual world" with seven locks, handles edge states, then runs a strict pre-flight, a deterministic detector (`detector_rules.json`), browser verification and a final gate. Includes a block library and anti-template rules.
-- **How to use:** Invocable with `[command] [target]` (canonical and extended commands are listed in the SKILL.md), or just ask for a new site, dashboard, redesign, design-system extraction, visual audit, dark mode or responsive pass.
-- **Best suited for:** Ambitious web UI work that must look authored, not templated, and survive production.
+- **能做什么：** 全方位的前端艺术指导、UX、设计系统维护、视觉质检和生产加固。推断需求、写变更合同，用“七把锁”构建统一的视觉世界，处理边缘状态，然后运行严格的预检、确定性检测器（`detector_rules.json`）、浏览器验证和最终关卡。附带区块库和反模板规则。
+- **怎么用：** 可用 `[command] [target]` 调用（标准和扩展命令见 SKILL.md），或直接要求新网站、仪表盘、改版、提取设计系统、视觉审计、深色模式或响应式适配。
+- **最适合：** 既要有作者感、不像模板，又要经得起生产环境考验的高要求网页 UI。
 
 <a id="s-frontend-design"></a>
 ### frontend-design
 
-[frontend-design.zip](frontend-design.zip) · entry: `spellbook-main/skills/frontend-design/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/frontend-design/SKILL.md`
+[frontend-design.zip](frontend-design.zip) · 入口：`spellbook-main/skills/frontend-design/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/frontend-design/SKILL.md`
 
-- **What it does:** Builds distinctive, production-grade web interfaces that avoid generic "AI slop" aesthetics — bold design thinking, typography, colour, motion and composition, implemented as real working code. Only applies when the target is a browser-rendered web UI (not native, GPU, game or terminal UIs). Zip holds core and `spellbook-ui` copies.
-- **How to use:** Ask explicitly to build or substantially redesign a web component, page or app; give purpose, audience and constraints.
-- **Best suited for:** Web pages and components with a strong, intentional visual identity.
+- **能做什么：** 构建有辨识度、可上线的网页界面，避免千篇一律的“AI 味”审美——大胆的设计思考、字体、颜色、动效和构图，并实现为真正可运行的代码。只适用于浏览器渲染的网页 UI（不适用于原生、GPU、游戏或终端界面）。压缩包里有核心版和 `spellbook-ui` 版。
+- **怎么用：** 明确要求构建或大幅重新设计网页组件、页面或应用；说明用途、受众和约束。
+- **最适合：** 视觉风格鲜明、有意图的网页和组件。
 
 <a id="s-personal-profile-mini-program-builder"></a>
 ### personal-profile-mini-program-builder
 
-[personal-profile-mini-program-builder.zip](personal-profile-mini-program-builder.zip) · entry: `personal-profile-mini-program-builder/SKILL.md`
+[personal-profile-mini-program-builder.zip](personal-profile-mini-program-builder.zip) · 入口：`personal-profile-mini-program-builder/SKILL.md`
 
-- **What it does:** Turns scattered personal material (old CVs, chat logs, project lists) into a native WeChat Mini Program — personal homepage, résumé, portfolio, creator card or targeted introduction — with a single profile source of truth, privacy projection, a professional information hierarchy and a visual system. Never invents employers, degrees, numbers or awards.
-- **How to use:** Provide your material and the audience/purpose. It structures a `profile.json`, runs `scripts/compile_profile.py`, then generates WXML/WXSS/JS ready to import into WeChat DevTools. Can also extend, repair or review an existing mini program.
-- **Best suited for:** A polished personal profile or portfolio inside WeChat.
+- **能做什么：** 把零散的个人资料（旧简历、聊天记录、项目清单）变成原生微信小程序——个人主页、简历、作品集、创作者名片或定向介绍——使用单一资料源、隐私投影、专业的信息层级和视觉系统。绝不编造公司、学历、数字或奖项。
+- **怎么用：** 提供你的资料以及受众/用途。它会整理出 `profile.json`，运行 `scripts/compile_profile.py`，再生成可直接导入微信开发者工具的 WXML/WXSS/JS。也能扩展、修复或评审已有小程序。
+- **最适合：** 在微信里做一个精致的个人主页或作品集。
 
 <a id="s-product-ux-expert"></a>
 ### product-ux-expert
 
-[product-ux-expert.zip](product-ux-expert.zip) · entry: `spellbook-main/skills/product-ux-expert/SKILL.md`
+[product-ux-expert.zip](product-ux-expert.zip) · 入口：`spellbook-main/skills/product-ux-expert/SKILL.md`
 
-- **What it does:** UX review and interaction design: Nielsen's ten heuristics with severity ratings, cognitive load and key UX laws, Gestalt principles, user journey mapping, WCAG 2.2 AA accessibility checks, micro-interactions and motion design.
-- **How to use:** Ask for a heuristic evaluation, UX review, journey map or accessibility audit of a screen or flow.
-- **Best suited for:** Structured UX critiques and accessibility checks.
+- **能做什么：** UX 评审与交互设计：Nielsen 十大启发式原则及严重程度评级、认知负荷和关键 UX 定律、格式塔原则、用户旅程地图、WCAG 2.2 AA 无障碍检查、微交互和动效设计。
+- **怎么用：** 要求对某个页面或流程做启发式评估、UX 评审、旅程地图或无障碍审计。
+- **最适合：** 结构化的 UX 评审和无障碍检查。
 
 <a id="s-react-best-practices"></a>
 ### react-best-practices
 
-[react-best-practices.zip](react-best-practices.zip) · entry: `spellbook-main/skills/react-best-practices/SKILL.md`
+[react-best-practices.zip](react-best-practices.zip) · 入口：`spellbook-main/skills/react-best-practices/SKILL.md`
 
-- **What it does:** React and Next.js performance playbook distilled from Vercel Engineering guidance, in priority order: eliminate data-fetch waterfalls, protect bundle size, prefer server work, control re-renders, optimise rendering paths, clean up JS hot spots. Includes a review checklist.
-- **How to use:** Trigger when building, reviewing or refactoring React/Next.js code for performance.
-- **Best suited for:** Performance reviews of React/Next.js apps.
+- **能做什么：** 提炼自 Vercel 工程团队指南的 React 和 Next.js 性能手册，按优先级：消除数据请求瀑布、控制包体积、优先服务端处理、控制重渲染、优化渲染路径、清理 JS 热点。附评审清单。
+- **怎么用：** 构建、评审或重构 React/Next.js 代码以优化性能时触发。
+- **最适合：** React/Next.js 应用的性能评审。
 
 <a id="s-react-hooks-best-practices"></a>
 ### react-hooks-best-practices
 
-[react-hooks-best-practices.zip](react-hooks-best-practices.zip) · entry: `spellbook-main/skills/react-hooks-best-practices/SKILL.md`
+[react-hooks-best-practices.zip](react-hooks-best-practices.zip) · 入口：`spellbook-main/skills/react-hooks-best-practices/SKILL.md`
 
-- **What it does:** React hooks and component patterns: effects as escape hatches only (derived state, `useMemo`, key-based resets, event handlers instead of effects), correct dependencies (never silence the linter, updater functions, `useEffectEvent`), cleanup and fetch races, refs and `useImperativeHandle`.
-- **How to use:** Trigger when reading or writing React components with hooks or effects. The skill asks to be paired with a `typescript-best-practices` skill, which is not in this repo.
-- **Best suited for:** Avoiding effect-related bugs and needless re-renders in React.
+- **能做什么：** React Hooks 与组件模式：Effect 只是“逃生舱”（派生状态、`useMemo`、用 key 重置、用事件处理代替 Effect），正确处理依赖（不要关掉 lint、使用更新函数、`useEffectEvent`），清理与请求竞态，以及 ref 和 `useImperativeHandle`。
+- **怎么用：** 阅读或编写使用 Hook 或 Effect 的 React 组件时触发。它要求搭配一个 `typescript-best-practices` 技能，但本仓库里没有。
+- **最适合：** 避免 React 中与 Effect 相关的 bug 和不必要的重渲染。
 
 <a id="s-ui-design-system"></a>
 ### ui-design-system
 
-[ui-design-system.zip](ui-design-system.zip) · entry: `spellbook-main/skills/ui-design-system/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/ui-design-system/SKILL.md`
+[ui-design-system.zip](ui-design-system.zip) · 入口：`spellbook-main/skills/ui-design-system/SKILL.md` · `spellbook-main/plugins/spellbook-ui/skills/ui-design-system/SKILL.md`
 
-- **What it does:** Design-system toolkit: `design_token_generator.py` generates colour palettes, a modular type scale, an 8-pt spacing grid, shadows, animation and responsive tokens from a brand colour (modern / classic / playful; JSON, CSS or SCSS), plus component architecture, accessibility and dev-handoff docs. Zip holds core and `spellbook-ui` copies.
-- **How to use:** Run `python scripts/design_token_generator.py <brand_color> <style> <format>` or ask to create or maintain a design system.
-- **Best suited for:** Generating design tokens fast from a brand colour.
+- **能做什么：** 设计系统工具箱：`design_token_generator.py` 从品牌色生成调色板、模块化字号层级、8 点间距网格、阴影、动画和响应式 token（modern / classic / playful 三种风格；输出 JSON、CSS 或 SCSS），另有组件架构、无障碍和开发交接文档。压缩包里有核心版和 `spellbook-ui` 版。
+- **怎么用：** 运行 `python scripts/design_token_generator.py <品牌色> <风格> <格式>`，或要求创建或维护设计系统。
+- **最适合：** 从一个品牌色快速生成设计 token。
 
 <a id="s-ui-designer"></a>
 ### ui-designer
 
-[ui-designer.zip](ui-designer.zip) · entry: `spellbook-main/skills/ui-designer/SKILL.md`
+[ui-designer.zip](ui-designer.zip) · 入口：`spellbook-main/skills/ui-designer/SKILL.md`
 
-- **What it does:** Extracts a design system from reference UI screenshots or mockups (palette, typography, spacing, components), generates an MVP PRD if needed and composes an implementation-ready UI prompt, then can build the UI in React.
-- **How to use:** Provide a folder of reference images and describe the app; it walks through extraction → PRD → final prompt → implementation, using the templates in `assets/`.
-- **Best suited for:** Building an MVP that matches the look of reference designs.
+- **能做什么：** 从参考 UI 截图或设计稿中提取设计系统（配色、字体、间距、组件），需要时生成 MVP 的 PRD，并组合成可直接实现的 UI 提示词，之后还能用 React 把界面做出来。
+- **怎么用：** 提供一个参考图文件夹并描述应用；它会依次完成提取 → PRD → 最终提示词 → 实现，使用 `assets/` 里的模板。
+- **最适合：** 做一个外观与参考设计一致的 MVP。
 
 <a id="s-ui-ux-pro-max"></a>
 ### ui-ux-pro-max
 
-[ui-ux-pro-max.zip](ui-ux-pro-max.zip) · entry: `spellbook-main/skills/ui-ux-pro-max/SKILL.md`
+[ui-ux-pro-max.zip](ui-ux-pro-max.zip) · 入口：`spellbook-main/skills/ui-ux-pro-max/SKILL.md`
 
-- **What it does:** High-rigour UI/UX guidance across product patterns, landing pages, dashboards, chart choices, visual styles, palettes, typography and font pairing, UX rules and nine stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui), plus design-system generation and pre-delivery review.
-- **How to use:** Triggers broadly on UI work — planning, building, reviewing or fixing pages and components; details in `references/full-guide.md`.
-- **Best suited for:** A broad UI/UX reference you can lean on for any stack.
+- **能做什么：** 高标准的 UI/UX 指导，覆盖产品模式、落地页、仪表盘、图表选择、视觉风格、配色、字体与字体搭配、UX 规则以及九种技术栈（React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind、shadcn/ui），还能生成设计系统和做交付前评审。
+- **怎么用：** 几乎所有 UI 工作都会触发——规划、构建、评审或修复页面和组件；细节见 `references/full-guide.md`。
+- **最适合：** 任何技术栈都能参考的全面 UI/UX 指南。
 
 <a id="s-web-artifacts-builder"></a>
 ### web-artifacts-builder
 
-[web-artifacts-builder.zip](web-artifacts-builder.zip) · entry: `spellbook-main/skills/web-artifacts-builder/SKILL.md`
+[web-artifacts-builder.zip](web-artifacts-builder.zip) · 入口：`spellbook-main/skills/web-artifacts-builder/SKILL.md`
 
-- **What it does:** Builds elaborate multi-component claude.ai HTML artifacts with React 18, TypeScript, Vite, Tailwind CSS and shadcn/ui: initialise with `scripts/init-artifact.sh`, develop, bundle into a single HTML file with `scripts/bundle-artifact.sh`, then share and optionally test. Includes anti-"AI slop" style rules.
-- **How to use:** Ask for a complex artifact with state, routing or many components. Not needed for simple single-file HTML/JSX.
-- **Best suited for:** Rich, app-like claude.ai artifacts.
+- **能做什么：** 用 React 18、TypeScript、Vite、Tailwind CSS 和 shadcn/ui 构建复杂的多组件 claude.ai HTML artifact：用 `scripts/init-artifact.sh` 初始化，开发，再用 `scripts/bundle-artifact.sh` 打包成单个 HTML 文件，然后分享并可选测试。附防“AI 味”的样式规则。
+- **怎么用：** 需要带状态、路由或大量组件的复杂 artifact 时使用。简单的单文件 HTML/JSX 不需要它。
+- **最适合：** 内容丰富、像应用一样的 claude.ai artifact。
 
 <a id="s-web-asset-generator"></a>
 ### web-asset-generator
 
-[web-asset-generator.zip](web-asset-generator.zip) · entry: `spellbook-main/skills/web-asset-generator/SKILL.md`
+[web-asset-generator.zip](web-asset-generator.zip) · 入口：`spellbook-main/skills/web-asset-generator/SKILL.md`
 
-- **What it does:** Generates favicons, PWA app icons and social share (Open Graph) images for Facebook, Twitter/X, WhatsApp and LinkedIn from a logo, an emoji or a text slogan, resizes them properly and provides the HTML meta tags.
-- **How to use:** Ask for "favicons from my logo", "an emoji favicon" or "OG images with this slogan"; it asks a few clarifying questions, then runs the bundled scripts (install `requirements.txt`).
-- **Best suited for:** Finishing a website's icon and social-preview assets.
+- **能做什么：** 从 Logo、emoji 或文字标语生成网站 favicon、PWA 应用图标和社交分享图（Open Graph），适用于 Facebook、Twitter/X、WhatsApp 和 LinkedIn，自动调整尺寸并提供 HTML meta 标签。
+- **怎么用：** 要求“用我的 Logo 生成 favicon”“做一个 emoji favicon”或“用这句标语做 OG 图”；它会先问几个问题，再运行自带脚本（需安装 `requirements.txt`）。
+- **最适合：** 补齐网站的图标和社交预览素材。
 
 <a id="cat-backend"></a>
-## Architecture, backend & data
+## 架构、后端与数据
 
-Architecture decisions, APIs, databases, data contracts, performance, logging and specs.
+架构决策、API、数据库、数据契约、性能、日志和技术规格。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`api-design`](#s-api-design) | Designing new APIs and their contracts. |
-| [`architecture-foundation`](#s-architecture-foundation) | Pre-implementation specs and boundary decisions, especially for Rust and Go. |
-| [`architecture-research`](#s-architecture-research) | Technology selection that needs sourced evidence, not a feature table. |
-| [`data-contract-migrations`](#s-data-contract-migrations) | Schema and payload changes where a silent break would be costly. |
-| [`database-patterns`](#s-database-patterns) | Designing Postgres schemas and Redis caching layers. |
-| [`dev-architecture-playbook`](#s-dev-architecture-playbook) | Planning a project from product intent to production with the right skills in the right order. |
-| [`elegant-architecture`](#s-elegant-architecture) | Keeping a codebase modular and small-file by design. |
-| [`performance-capacity`](#s-performance-capacity) | Turning "make it faster" into budgets and verified improvements. |
-| [`structured-logging-lite`](#s-structured-logging-lite) | The smallest logging contract that makes an app diagnosable. |
-| [`technical-spec`](#s-technical-spec) | Decision-focused engineering documents that teams actually read. |
+| [`api-design`](#s-api-design) | 设计新的 API 及其契约。 |
+| [`architecture-foundation`](#s-architecture-foundation) | 实现前的规格与边界决策，尤其适合 Rust 和 Go。 |
+| [`architecture-research`](#s-architecture-research) | 需要有据可查、而不是一张功能对比表的技术选型。 |
+| [`data-contract-migrations`](#s-data-contract-migrations) | 一旦静默出错代价很高的 schema 和数据结构变更。 |
+| [`database-patterns`](#s-database-patterns) | 设计 Postgres schema 和 Redis 缓存层。 |
+| [`dev-architecture-playbook`](#s-dev-architecture-playbook) | 按正确顺序、用正确技能把项目从产品意图推进到上线。 |
+| [`elegant-architecture`](#s-elegant-architecture) | 从设计上让代码库保持模块化、文件小巧。 |
+| [`performance-capacity`](#s-performance-capacity) | 把“让它更快”变成预算和经过验证的改进。 |
+| [`structured-logging-lite`](#s-structured-logging-lite) | 让应用可诊断的最小日志契约。 |
+| [`technical-spec`](#s-technical-spec) | 团队真的会读、以决策为中心的工程文档。 |
 
 <a id="s-api-design"></a>
 ### api-design
 
-[api-design.zip](api-design.zip) · entry: `spellbook-main/skills/api-design/SKILL.md`
+[api-design.zip](api-design.zip) · 入口：`spellbook-main/skills/api-design/SKILL.md`
 
-- **What it does:** Opinionated REST / GraphQL / gRPC API design guide: contract-first with OpenAPI 3.2, URL versioning with Sunset headers, idempotency keys, cursor pagination, RFC 7807 error bodies, GraphQL federation and gRPC streaming. Includes templates. Note its stance: delete rather than deprecate.
-- **How to use:** Trigger when designing endpoints, writing an OpenAPI spec, choosing between REST, GraphQL and gRPC, or reviewing an existing API contract.
-- **Best suited for:** Designing new APIs and their contracts.
+- **能做什么：** 观点鲜明的 REST / GraphQL / gRPC API 设计指南：契约优先、OpenAPI 3.2、带 Sunset 头的 URL 版本化、幂等键、游标分页、RFC 7807 错误格式、GraphQL 联邦和 gRPC 流式。附带模板。注意它的立场：直接删除而不是标记废弃。
+- **怎么用：** 设计接口、编写 OpenAPI 规范、在 REST/GraphQL/gRPC 之间做选择或评审现有 API 契约时触发。
+- **最适合：** 设计新的 API 及其契约。
 
 <a id="s-architecture-foundation"></a>
 ### architecture-foundation
 
-[architecture-foundation.zip](architecture-foundation.zip) · entry: `spellbook-main/skills/architecture-foundation/SKILL.md`
+[architecture-foundation.zip](architecture-foundation.zip) · 入口：`spellbook-main/skills/architecture-foundation/SKILL.md`
 
-- **What it does:** Designs architecture before code: explicit boundaries, contracts, validation gates and a small execution plan. Covers Rust/Go crate, package, module, runtime and service boundaries, comparison with mature projects, avoiding stacks of one-off PRs, and migration-debt audits.
-- **How to use:** Ask "what architecture should this use?", "write a complete spec before we code", or "is this stacked one-off work?". In existing repos it first explains the current architecture.
-- **Best suited for:** Pre-implementation specs and boundary decisions, especially for Rust and Go.
+- **能做什么：** 先设计架构再写代码：明确的边界、契约、验证关卡和小而具体的执行计划。涵盖 Rust/Go 的 crate、包、模块、运行时和服务边界，对比成熟项目，避免堆叠一次性 PR，以及迁移债务审计。
+- **怎么用：** 问“这个项目该用什么架构？”“写代码前先出一份完整规格”或“这是不是堆叠式的一次性工作？”。在已有仓库里它会先解释当前架构。
+- **最适合：** 实现前的规格与边界决策，尤其适合 Rust 和 Go。
 
 <a id="s-architecture-research"></a>
 ### architecture-research
 
-[architecture-research.zip](architecture-research.zip) · entry: `spellbook-main/skills/architecture-research/SKILL.md`
+[architecture-research.zip](architecture-research.zip) · 入口：`spellbook-main/skills/architecture-research/SKILL.md`
 
-- **What it does:** Evidence-driven architecture research: landscape studies, source-level system archaeology, build-vs-buy and adopt/adapt/build decisions, open-source vs commercial comparisons. Produces a decision record backed by an evidence ledger. Also triggers on Chinese requests such as 架构调研 / 技术选型.
-- **How to use:** Ask "how is X built?", "should we adopt or build Y?", or "compare open-source alternatives to Z". Not for small changes or for detailed design once the direction is fixed (use `architecture-foundation`).
-- **Best suited for:** Technology selection that needs sourced evidence, not a feature table.
+- **能做什么：** 基于证据的架构调研：领域全景研究、源码级系统考古、自建还是采购（采用/改造/自建）决策、开源与商业方案对比。产出一份由证据台账支撑的决策记录。中文请求如“架构调研”“技术选型”也会触发。
+- **怎么用：** 问“X 是怎么构建的？”“Y 应该采用还是自己做？”或“对比 Z 的开源替代方案”。不适合小改动，也不适合方向已定后的详细设计（那用 `architecture-foundation`）。
+- **最适合：** 需要有据可查、而不是一张功能对比表的技术选型。
 
 <a id="s-data-contract-migrations"></a>
 ### data-contract-migrations
 
-[data-contract-migrations.zip](data-contract-migrations.zip) · entry: `spellbook-main/skills/data-contract-migrations/SKILL.md`
+[data-contract-migrations.zip](data-contract-migrations.zip) · 入口：`spellbook-main/skills/data-contract-migrations/SKILL.md`
 
-- **What it does:** Designs and verifies data contract changes: schema changes, migrations, rollbacks, backfills, compatibility windows, tenant isolation and API-to-database field mapping. Treats missing fields as absent rather than inventing fallbacks.
-- **How to use:** Trigger when changing a database schema, event payloads, stored documents, analytics tables or multi-tenant boundaries. It gathers writers/readers, volume and downtime constraints before proposing a plan.
-- **Best suited for:** Schema and payload changes where a silent break would be costly.
+- **能做什么：** 设计并验证数据契约变更：schema 变更、迁移、回滚、回填、兼容窗口、租户隔离以及 API 到数据库的字段映射。字段不存在就当作不存在，不编造兜底字段。
+- **怎么用：** 修改数据库 schema、事件载荷、存储文档、分析表或多租户边界时触发。它会先收集读写方、数据量和停机约束再提方案。
+- **最适合：** 一旦静默出错代价很高的 schema 和数据结构变更。
 
 <a id="s-database-patterns"></a>
 ### database-patterns
 
-[database-patterns.zip](database-patterns.zip) · entry: `spellbook-main/skills/database-patterns/SKILL.md`
+[database-patterns.zip](database-patterns.zip) · 入口：`spellbook-main/skills/database-patterns/SKILL.md`
 
-- **What it does:** PostgreSQL + Redis data modelling: data types, schema design, index strategy, JSONB use, query optimisation, connection pooling, Redis structures and key naming, TTLs, cache-aside / write-through, invalidation, stampede and penetration protection, tiered hot/warm/cold storage and locking.
-- **How to use:** Trigger when designing tables, indexes or caching, or reviewing cache consistency.
-- **Best suited for:** Designing Postgres schemas and Redis caching layers.
+- **能做什么：** PostgreSQL + Redis 数据建模：数据类型、schema 设计、索引策略、JSONB 用法、查询优化、连接池、Redis 数据结构与键命名、TTL、旁路缓存/写穿、失效、防击穿与防穿透、冷热分层存储以及锁。
+- **怎么用：** 设计表、索引或缓存，或评审缓存一致性时触发。
+- **最适合：** 设计 Postgres schema 和 Redis 缓存层。
 
 <a id="s-dev-architecture-playbook"></a>
 ### dev-architecture-playbook
 
-[dev-architecture-playbook.zip](dev-architecture-playbook.zip) · entry: `spellbook-main/skills/dev-architecture-playbook/SKILL.md`
+[dev-architecture-playbook.zip](dev-architecture-playbook.zip) · 入口：`spellbook-main/skills/dev-architecture-playbook/SKILL.md`
 
-- **What it does:** The lifecycle router for the spellbook engineering skills: classifies a request (idea, architecture, API/data/security contract, implementation, testing, release, operations), picks the minimal skill chain, and sets gates so implementation doesn't start before the required contracts exist.
-- **How to use:** Ask for "a complete development architecture for this idea/repo" or "which skills should I combine for this?". It hands off to `product-discovery`, `prd-master`, `architecture-foundation`, `api-design`, `release-engineering`, etc.
-- **Best suited for:** Planning a project from product intent to production with the right skills in the right order.
+- **能做什么：** spellbook 工程类技能的生命周期路由器：先给请求分类（想法、架构、API/数据/安全契约、实现、测试、发布、运维），挑选最小的技能组合，并设置关卡，确保在必要的契约存在之前不开始实现。
+- **怎么用：** 要求“为这个想法/仓库做一套完整的开发架构”或问“这件事该组合哪些技能？”。它会交给 `product-discovery`、`prd-master`、`architecture-foundation`、`api-design`、`release-engineering` 等。
+- **最适合：** 按正确顺序、用正确技能把项目从产品意图推进到上线。
 
 <a id="s-elegant-architecture"></a>
 ### elegant-architecture
 
-[elegant-architecture.zip](elegant-architecture.zip) · entry: `spellbook-main/skills/elegant-architecture/SKILL.md`
+[elegant-architecture.zip](elegant-architecture.zip) · 入口：`spellbook-main/skills/elegant-architecture/SKILL.md`
 
-- **What it does:** Clean-architecture discipline with a strict 200-line-per-file limit: plan first, define interfaces, split large files into folders, use DI / factory / strategy patterns, and test real behaviour without mocks.
-- **How to use:** Trigger when starting a feature, refactoring a large file or planning module structure.
-- **Best suited for:** Keeping a codebase modular and small-file by design.
+- **能做什么：** 每个文件严格不超过 200 行的整洁架构纪律：先规划，先定接口，把大文件拆成文件夹，使用依赖注入/工厂/策略模式，测试真实行为而不用 Mock。
+- **怎么用：** 开始新功能、重构大文件或规划模块结构时触发。
+- **最适合：** 从设计上让代码库保持模块化、文件小巧。
 
 <a id="s-performance-capacity"></a>
 ### performance-capacity
 
-[performance-capacity.zip](performance-capacity.zip) · entry: `spellbook-main/skills/performance-capacity/SKILL.md`
+[performance-capacity.zip](performance-capacity.zip) · 入口：`spellbook-main/skills/performance-capacity/SKILL.md`
 
-- **What it does:** Makes performance measurable before optimising: baselines (p50/p95/p99, data size, concurrency, resource limits), performance budgets per surface, load tests, capacity estimates, bottleneck hypotheses, caching and query efficiency, queue throughput and regression gates.
-- **How to use:** Trigger when a feature may be slow, a system must scale, a regression is suspected, or release readiness depends on throughput, cost or latency.
-- **Best suited for:** Turning "make it faster" into budgets and verified improvements.
+- **能做什么：** 先让性能可度量，再做优化：基线（p50/p95/p99、数据规模、并发、资源上限）、按界面划分的性能预算、压测、容量估算、瓶颈假设、缓存与查询效率、队列吞吐和回归关卡。
+- **怎么用：** 某个功能可能很慢、系统需要扩容、怀疑性能回退，或上线取决于吞吐、成本或延迟时触发。
+- **最适合：** 把“让它更快”变成预算和经过验证的改进。
 
 <a id="s-structured-logging-lite"></a>
 ### structured-logging-lite
 
-[structured-logging-lite.zip](structured-logging-lite.zip) · entry: `spellbook-main/skills/structured-logging-lite/SKILL.md`
+[structured-logging-lite.zip](structured-logging-lite.zip) · 入口：`spellbook-main/skills/structured-logging-lite/SKILL.md`
 
-- **What it does:** Designs, audits or implements application structured logging from repository evidence: whether and where to log, choosing or migrating a logger, standard event names, fields, levels and redaction, HTTP access and panic logs, and why production logs can't answer an incident question. Read-only unless asked to implement.
-- **How to use:** Ask "where should we add logs?", "standardise our log fields", or "our logs couldn't explain last night's incident". Not for tailing logs or a full observability programme (`observability-sre`).
-- **Best suited for:** The smallest logging contract that makes an app diagnosable.
+- **能做什么：** 根据仓库证据设计、审计或实现应用的结构化日志：要不要记、在哪里记，选择或迁移日志库，统一事件名、字段、级别和脱敏，HTTP 访问日志和 panic 日志，以及为什么生产日志回答不了某个事故问题。除非要求实现，否则只读。
+- **怎么用：** 问“我们应该在哪里加日志？”“统一我们的日志字段”或“昨晚的事故日志解释不了”。不用于实时查看日志或完整的可观测性建设（那用 `observability-sre`）。
+- **最适合：** 让应用可诊断的最小日志契约。
 
 <a id="s-technical-spec"></a>
 ### technical-spec
 
-[technical-spec.zip](technical-spec.zip) · entry: `spellbook-main/skills/technical-spec/SKILL.md`
+[technical-spec.zip](technical-spec.zip) · 入口：`spellbook-main/skills/technical-spec/SKILL.md`
 
-- **What it does:** Technical design documents, RFCs and Architecture Decision Records: problem statement, proposed solution, mandatory alternatives considered, required diagrams (C4 model, diagrams as code), success metrics, risks and mitigations, and technology evaluation frameworks. Includes templates.
-- **How to use:** Trigger when writing a design doc, RFC or ADR, or comparing technology options.
-- **Best suited for:** Decision-focused engineering documents that teams actually read.
+- **能做什么：** 技术设计文档、RFC 和架构决策记录（ADR）：问题陈述、方案、必须列出的备选方案、必需的图（C4 模型、图即代码）、成功指标、风险与应对，以及技术选型评估框架。附模板。
+- **怎么用：** 写设计文档、RFC 或 ADR，或比较技术方案时触发。
+- **最适合：** 团队真的会读、以决策为中心的工程文档。
 
 <a id="cat-languages"></a>
-## Language & project starters
+## 编程语言与项目模板
 
-Opinionated project templates and idioms for Go, Python, TypeScript, Rust, Zig and HarmonyOS.
+Go、Python、TypeScript、Rust、Zig 和鸿蒙的项目模板与惯用写法。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`golang-web`](#s-golang-web) | Bootstrapping a clean, idiomatic Go service. |
-| [`harmonyos-app`](#s-harmonyos-app) | Native HarmonyOS apps. |
-| [`python-project`](#s-python-project) | Bootstrapping a clean, modern Python project. |
-| [`rust-best-practices`](#s-rust-best-practices) | Writing and reviewing idiomatic Rust. |
-| [`rust-project`](#s-rust-project) | Bootstrapping a well-structured Rust project. |
-| [`typescript-project`](#s-typescript-project) | Bootstrapping a clean TypeScript codebase. |
-| [`zig-project`](#s-zig-project) | Bootstrapping an idiomatic Zig project. |
+| [`golang-web`](#s-golang-web) | 快速搭起一个整洁、地道的 Go 服务。 |
+| [`harmonyos-app`](#s-harmonyos-app) | 原生鸿蒙应用。 |
+| [`python-project`](#s-python-project) | 快速搭起一个整洁、现代的 Python 项目。 |
+| [`rust-best-practices`](#s-rust-best-practices) | 编写和评审地道的 Rust 代码。 |
+| [`rust-project`](#s-rust-project) | 搭起一个结构良好的 Rust 项目。 |
+| [`typescript-project`](#s-typescript-project) | 搭起一个整洁的 TypeScript 代码库。 |
+| [`zig-project`](#s-zig-project) | 搭起一个地道的 Zig 项目。 |
 
 <a id="s-golang-web"></a>
 ### golang-web
 
-[golang-web.zip](golang-web.zip) · entry: `spellbook-main/skills/golang-web/SKILL.md`
+[golang-web.zip](golang-web.zip) · 入口：`spellbook-main/skills/golang-web/SKILL.md`
 
-- **What it does:** Modern Go web architecture guide: standard `cmd/internal/pkg` layout, explicit dependency wiring in `main.go`, consumer-side interfaces, error wrapping, Viper config, graceful shutdown, Makefile and checklist. Opinionated: no backwards-compatibility layers, and LLM calls go through a LiteLLM proxy.
-- **How to use:** Trigger when creating a new Go web project, API or microservice.
-- **Best suited for:** Bootstrapping a clean, idiomatic Go service.
+- **能做什么：** 现代 Go Web 架构指南：标准 `cmd/internal/pkg` 布局、在 `main.go` 里显式装配依赖、在使用方定义接口、错误包装、Viper 配置、优雅关闭、Makefile 和检查清单。观点鲜明：不保留向后兼容层，LLM 调用统一走 LiteLLM 代理。
+- **怎么用：** 新建 Go Web 项目、API 或微服务时触发。
+- **最适合：** 快速搭起一个整洁、地道的 Go 服务。
 
 <a id="s-harmonyos-app"></a>
 ### harmonyos-app
 
-[harmonyos-app.zip](harmonyos-app.zip) · entry: `spellbook-main/skills/harmonyos-app/SKILL.md`
+[harmonyos-app.zip](harmonyos-app.zip) · 入口：`spellbook-main/skills/harmonyos-app/SKILL.md`
 
-- **What it does:** HarmonyOS NEXT (API 12+) app development: ArkTS with strict typing, declarative ArkUI and state decorators, Stage model (UIAbility) only, distributed and multi-device design, atomic services, project structure and component patterns (LazyForEach, custom dialogs).
-- **How to use:** Trigger when building or reviewing a HarmonyOS app.
-- **Best suited for:** Native HarmonyOS apps.
+- **能做什么：** HarmonyOS NEXT（API 12+）应用开发：严格类型的 ArkTS、声明式 ArkUI 与状态装饰器、只用 Stage 模型（UIAbility）、分布式与多设备设计、元服务、项目结构和组件模式（LazyForEach、自定义弹窗）。
+- **怎么用：** 开发或评审鸿蒙应用时触发。
+- **最适合：** 原生鸿蒙应用。
 
 <a id="s-python-project"></a>
 ### python-project
 
-[python-project.zip](python-project.zip) · entry: `spellbook-main/skills/python-project/SKILL.md`
+[python-project.zip](python-project.zip) · 入口：`spellbook-main/skills/python-project/SKILL.md`
 
-- **What it does:** Modern Python project architecture: uv for packages and Python versions, Ruff for lint/format, Pydantic and mypy for types, src layout, pyproject.toml only, FastAPI, async all the way, and LLM calls through a LiteLLM proxy. Opinionated: delete rather than deprecate.
-- **How to use:** Trigger when creating a Python API, CLI or data pipeline; templates included.
-- **Best suited for:** Bootstrapping a clean, modern Python project.
+- **能做什么：** 现代 Python 项目架构：用 uv 管理包和 Python 版本，用 Ruff 做检查和格式化，用 Pydantic 和 mypy 管类型，src 布局，只用 pyproject.toml，FastAPI，全链路异步，LLM 调用走 LiteLLM 代理。观点鲜明：直接删除而不是标记废弃。
+- **怎么用：** 新建 Python API、命令行工具或数据管道时触发；附模板。
+- **最适合：** 快速搭起一个整洁、现代的 Python 项目。
 
 <a id="s-rust-best-practices"></a>
 ### rust-best-practices
 
-[rust-best-practices.zip](rust-best-practices.zip) · entry: `spellbook-main/skills/rust-best-practices/SKILL.md` · `spellbook-main/plugins/rust-dev/skills/rust-best-practices.SKILL.md`
+[rust-best-practices.zip](rust-best-practices.zip) · 入口：`spellbook-main/skills/rust-best-practices/SKILL.md` · `spellbook-main/plugins/rust-dev/skills/rust-best-practices.SKILL.md`
 
-- **What it does:** Idiomatic Rust following Microsoft's Pragmatic Rust Guidelines: type-driven design, ownership, `thiserror` for libraries and `anyhow` for apps, no panics in libraries, builders, newtypes, `impl Trait`, performance, async and testing. The zip holds the core skill and a `rust-dev` plugin variant.
-- **How to use:** Invoke before any Rust edit or review, or when wrestling with lifetimes, the borrow checker or async Rust.
-- **Best suited for:** Writing and reviewing idiomatic Rust.
+- **能做什么：** 遵循微软 Pragmatic Rust 指南的地道 Rust：类型驱动设计、所有权、库用 `thiserror` 而应用用 `anyhow`、库中不 panic、构建者模式、newtype、`impl Trait`、性能、异步和测试。压缩包里有核心版和 `rust-dev` 插件版。
+- **怎么用：** 在任何 Rust 编辑或评审之前调用，或在被生命周期、借用检查器、异步 Rust 困住时使用。
+- **最适合：** 编写和评审地道的 Rust 代码。
 
 <a id="s-rust-project"></a>
 ### rust-project
 
-[rust-project.zip](rust-project.zip) · entry: `spellbook-main/skills/rust-project/SKILL.md`
+[rust-project.zip](rust-project.zip) · 入口：`spellbook-main/skills/rust-project/SKILL.md`
 
-- **What it does:** Modern Rust project architecture: single crate vs Cargo workspace, web framework and ORM selection, `main.rs`/`lib.rs`/`error.rs`/handlers/services layering, Tokio + tracing, CLI structure and testing. Opinionated: delete rather than deprecate; LLM calls through a LiteLLM proxy.
-- **How to use:** Trigger when creating a Rust CLI, web service or library; templates included.
-- **Best suited for:** Bootstrapping a well-structured Rust project.
+- **能做什么：** 现代 Rust 项目架构：单 crate 与 Cargo workspace、Web 框架和 ORM 选择、`main.rs`/`lib.rs`/`error.rs`/handlers/services 分层、Tokio + tracing、命令行结构和测试。观点鲜明：直接删除而不是标记废弃；LLM 调用走 LiteLLM 代理。
+- **怎么用：** 新建 Rust 命令行工具、Web 服务或库时触发；附模板。
+- **最适合：** 搭起一个结构良好的 Rust 项目。
 
 <a id="s-typescript-project"></a>
 ### typescript-project
 
-[typescript-project.zip](typescript-project.zip) · entry: `spellbook-main/skills/typescript-project/SKILL.md`
+[typescript-project.zip](typescript-project.zip) · 入口：`spellbook-main/skills/typescript-project/SKILL.md`
 
-- **What it does:** Modern TypeScript project architecture: strict types with no `any`, Zod runtime validation, ESM on Node 22+ or Bun, `lib/services/adapters` layering, a 200-line file limit, Vitest/Bun tests with minimal mocks, delete-don't-deprecate, and LLM calls via a LiteLLM proxy.
-- **How to use:** Trigger when creating a new TS project, setting up configs or designing structure; templates included.
-- **Best suited for:** Bootstrapping a clean TypeScript codebase.
+- **能做什么：** 现代 TypeScript 项目架构：严格类型、不用 `any`、Zod 运行时校验、Node 22+ 或 Bun 上的 ESM、`lib/services/adapters` 分层、每个文件不超过 200 行、用 Vitest/Bun test 且尽量少用 Mock、直接删除而不是标记废弃、LLM 调用走 LiteLLM 代理。
+- **怎么用：** 新建 TS 项目、配置或设计结构时触发；附模板。
+- **最适合：** 搭起一个整洁的 TypeScript 代码库。
 
 <a id="s-zig-project"></a>
 ### zig-project
 
-[zig-project.zip](zig-project.zip) · entry: `spellbook-main/skills/zig-project/SKILL.md`
+[zig-project.zip](zig-project.zip) · 入口：`spellbook-main/skills/zig-project/SKILL.md`
 
-- **What it does:** Modern Zig project architecture: no hidden allocations or control flow, explicit allocator passing (arena patterns), comptime instead of macros, error unions with try/catch/errdefer, inline tests, build system and project structure. Opinionated: delete rather than deprecate; LLM calls via LiteLLM.
-- **How to use:** Trigger when creating Zig CLIs, systems code, game-dev or high-performance services; templates included.
-- **Best suited for:** Bootstrapping an idiomatic Zig project.
+- **能做什么：** 现代 Zig 项目架构：没有隐藏的内存分配或控制流，显式传递分配器（arena 模式），用 comptime 代替宏，用错误联合配合 try/catch/errdefer，内联测试、构建系统和项目结构。观点鲜明：直接删除而不是标记废弃；LLM 调用走 LiteLLM。
+- **怎么用：** 新建 Zig 命令行工具、系统程序、游戏开发或高性能服务时触发；附模板。
+- **最适合：** 搭起一个地道的 Zig 项目。
 
 <a id="cat-testing"></a>
-## Testing, debugging & code quality
+## 测试、调试与代码质量
 
-Test strategy, TDD, debugging discipline, QA passes and codebase audits.
+测试策略、TDD、调试方法、QA 和代码库审计。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`app-user-story-qa`](#s-app-user-story-qa) | A full, systematic QA pass over an entire app. |
-| [`codebase-audit`](#s-codebase-audit) | Periodic deep health checks of an entire project. |
-| [`comprehensive-testing`](#s-comprehensive-testing) | Establishing or improving a project's testing approach. |
-| [`playwright-automation`](#s-playwright-automation) | Scripted browser checks and UI tests. |
-| [`project-health-auditor`](#s-project-health-auditor) | A quick quality and debt snapshot of a repo. |
-| [`systematic-debugging`](#s-systematic-debugging) | Disciplined bug hunting. |
-| [`test-driven-development`](#s-test-driven-development) | Enforcing genuine test-first development. |
+| [`app-user-story-qa`](#s-app-user-story-qa) | 对整个 App 做一次全面、系统的 QA。 |
+| [`codebase-audit`](#s-codebase-audit) | 定期对整个项目做深度体检。 |
+| [`comprehensive-testing`](#s-comprehensive-testing) | 建立或改进项目的测试方法。 |
+| [`playwright-automation`](#s-playwright-automation) | 脚本化的浏览器检查和界面测试。 |
+| [`project-health-auditor`](#s-project-health-auditor) | 快速了解一个仓库的质量和技术债状况。 |
+| [`systematic-debugging`](#s-systematic-debugging) | 有纪律地排查 bug。 |
+| [`test-driven-development`](#s-test-driven-development) | 强制执行真正的测试先行开发。 |
 
 <a id="s-app-user-story-qa"></a>
 ### app-user-story-qa
 
-[app-user-story-qa.zip](app-user-story-qa.zip) · entry: `spellbook-main/skills/app-user-story-qa/SKILL.md`
+[app-user-story-qa.zip](app-user-story-qa.zip) · 入口：`spellbook-main/skills/app-user-story-qa/SKILL.md`
 
-- **What it does:** Turns "test every feature in this app" into a controlled loop: inventories features from the code, derives expected behaviour into a canonical tracker spreadsheet, tests each user story, classifies defects, fixes (only when authorised) and retests.
-- **How to use:** In the app's repo, ask "audit every feature", "test all user journeys", or "fix and retest the logged UX defects".
-- **Best suited for:** A full, systematic QA pass over an entire app.
+- **能做什么：** 把“测试这个 App 的每个功能”变成可控的循环：从代码中盘点功能，把预期行为写进统一的跟踪表格，逐个测试用户故事，给缺陷分类，（仅在授权时）修复并复测。
+- **怎么用：** 在 App 的仓库里说“审计每个功能”“测试所有用户路径”或“修复并复测记录在案的 UX 缺陷”。
+- **最适合：** 对整个 App 做一次全面、系统的 QA。
 
 <a id="s-codebase-audit"></a>
 ### codebase-audit
 
-[codebase-audit.zip](codebase-audit.zip) · entry: `spellbook-main/skills/codebase-audit/SKILL.md`
+[codebase-audit.zip](codebase-audit.zip) · 入口：`spellbook-main/skills/codebase-audit/SKILL.md`
 
-- **What it does:** Whole-codebase audit that adapts parallel analysis agents to your stack: frontend/backend contracts, data integrity, error handling and security, architecture and tech debt, config and caching. Critical and High findings are adversarially verified, results are diffed against the previous audit, and you get a severity-sorted report with a phased repair roadmap. Has a quick health-check mode. Strictly read-only.
-- **How to use:** Ask "audit this codebase", "health check", "find hidden bugs / silent degradation", "全面审查" or "快速体检".
-- **Best suited for:** Periodic deep health checks of an entire project.
+- **能做什么：** 全代码库审计，按你的技术栈调整并行分析 agent：前后端契约、数据完整性、异常处理与安全、架构与技术债、配置与缓存。严重和高危问题会经过对抗式验证，结果与上一次审计对比，最终得到按严重程度排序的报告和分阶段修复路线图。有快速体检模式。严格只读。
+- **怎么用：** 说“审计这个代码库”“健康检查”“找隐藏 bug / 静默降级”“全面审查”或“快速体检”。
+- **最适合：** 定期对整个项目做深度体检。
 
 <a id="s-comprehensive-testing"></a>
 ### comprehensive-testing
 
-[comprehensive-testing.zip](comprehensive-testing.zip) · entry: `spellbook-main/skills/comprehensive-testing/SKILL.md`
+[comprehensive-testing.zip](comprehensive-testing.zip) · 入口：`spellbook-main/skills/comprehensive-testing/SKILL.md`
 
-- **What it does:** Complete testing strategy: TDD workflow, the test pyramid, unit / integration / E2E / property tests, Jest, Vitest and pytest best practices, mocking strategy and CI integration.
-- **How to use:** Trigger when writing tests, reviewing test quality or setting team testing standards.
-- **Best suited for:** Establishing or improving a project's testing approach.
+- **能做什么：** 完整的测试策略：TDD 流程、测试金字塔、单元/集成/端到端/属性测试、Jest、Vitest 和 pytest 最佳实践、Mock 策略以及 CI 集成。
+- **怎么用：** 写测试、评审测试质量或制定团队测试规范时触发。
+- **最适合：** 建立或改进项目的测试方法。
 
 <a id="s-playwright-automation"></a>
 ### playwright-automation
 
-[playwright-automation.zip](playwright-automation.zip) · entry: `spellbook-main/skills/playwright-automation/SKILL.md`
+[playwright-automation.zip](playwright-automation.zip) · 入口：`spellbook-main/skills/playwright-automation/SKILL.md`
 
-- **What it does:** Browser automation and testing with Playwright: scripts that inspect pages, take screenshots, fill forms, test responsive views and collect console and network evidence.
-- **How to use:** Ask to test a web app, automate a browser task, grab screenshots or validate UI behaviour; details live in `references/full-guide.md`.
-- **Best suited for:** Scripted browser checks and UI tests.
+- **能做什么：** 用 Playwright 做浏览器自动化和测试：编写脚本来检查页面、截图、填写表单、测试响应式视图，以及收集控制台和网络证据。
+- **怎么用：** 要求测试网页应用、自动化浏览器任务、截图或验证界面行为；细节在 `references/full-guide.md`。
+- **最适合：** 脚本化的浏览器检查和界面测试。
 
 <a id="s-project-health-auditor"></a>
 ### project-health-auditor
 
-[project-health-auditor.zip](project-health-auditor.zip) · entry: `spellbook-main/skills/project-health-auditor/SKILL.md`
+[project-health-auditor.zip](project-health-auditor.zip) · 入口：`spellbook-main/skills/project-health-auditor/SKILL.md`
 
-- **What it does:** Multi-dimensional codebase health check: code quality (large files, long functions, nesting, duplication, dead code), dependencies (outdated, vulnerable, unused, bundle size), security (secrets, hard-coded credentials), test coverage, documentation and architecture, with a scored report.
-- **How to use:** Ask "assess the health of this project" or "find our technical debt". Lighter than `codebase-audit`.
-- **Best suited for:** A quick quality and debt snapshot of a repo.
+- **能做什么：** 多维度的代码库健康检查：代码质量（大文件、长函数、深嵌套、重复、死代码）、依赖（过期、有漏洞、未使用、包体积）、安全（密钥、硬编码凭据）、测试覆盖、文档和架构，并给出评分报告。
+- **怎么用：** 问“评估一下这个项目的健康状况”或“找出我们的技术债”。比 `codebase-audit` 更轻量。
+- **最适合：** 快速了解一个仓库的质量和技术债状况。
 
 <a id="s-systematic-debugging"></a>
 ### systematic-debugging
 
-[systematic-debugging.zip](systematic-debugging.zip) · entry: `spellbook-main/skills/systematic-debugging/SKILL.md`
+[systematic-debugging.zip](systematic-debugging.zip) · 入口：`spellbook-main/skills/systematic-debugging/SKILL.md`
 
-- **What it does:** Four-phase debugging framework from obra/superpowers: root-cause investigation (read errors, reproduce, check recent changes, gather evidence) → pattern analysis → hypothesis and testing → implementation, with a "three failed fixes means stop and rethink" rule.
-- **How to use:** Trigger whenever you hit a bug, error or unexpected behaviour and want to avoid random fixes.
-- **Best suited for:** Disciplined bug hunting.
+- **能做什么：** 来自 obra/superpowers 的四阶段调试框架：根因调查（读错误、复现、查最近改动、收集证据）→ 模式分析 → 假设与验证 → 实现修复，并有“三次修复失败就停下重新思考”的规则。
+- **怎么用：** 遇到 bug、报错或异常行为、想避免乱改时触发。
+- **最适合：** 有纪律地排查 bug。
 
 <a id="s-test-driven-development"></a>
 ### test-driven-development
 
-[test-driven-development.zip](test-driven-development.zip) · entry: `spellbook-main/skills/test-driven-development.SKILL.md`
+[test-driven-development.zip](test-driven-development.zip) · 入口：`spellbook-main/skills/test-driven-development.SKILL.md`
 
-- **What it does:** Strict TDD from obra/superpowers: the iron law "no production code without a failing test first", RED → GREEN → REFACTOR with mandatory verification at each step, a list of rationalisations to reject and red flags that force a restart.
-- **How to use:** Trigger when writing a feature, fixing a bug or refactoring and you want test-first discipline. Entry is `skills/test-driven-development.SKILL.md` inside the spellbook bundle.
-- **Best suited for:** Enforcing genuine test-first development.
+- **能做什么：** 来自 obra/superpowers 的严格 TDD：铁律“没有失败的测试就不写生产代码”，红 → 绿 → 重构，每一步都必须验证，列出必须拒绝的借口和需要重来的危险信号。
+- **怎么用：** 写功能、修 bug 或重构、想坚持测试先行时触发。入口是 spellbook 包里的 `skills/test-driven-development.SKILL.md`。
+- **最适合：** 强制执行真正的测试先行开发。
 
 <a id="cat-devops"></a>
-## DevOps, release & reliability
+## DevOps、发布与可靠性
 
-CI/CD, config and secrets, observability, SLOs and releases.
+CI/CD、配置与密钥、可观测性、SLO 和发布。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`config-secrets-environments`](#s-config-secrets-environments) | Clean, validated config and secret handling across environments. |
-| [`devops-excellence`](#s-devops-excellence) | Secure, modern CI/CD and infrastructure setups. |
-| [`incident-slo-runbook`](#s-incident-slo-runbook) | Turning metrics into an actual on-call and incident process. |
-| [`observability-sre`](#s-observability-sre) | Designing a monitoring stack that alerts on what users feel. |
-| [`release-engineering`](#s-release-engineering) | Safe, repeatable releases. |
+| [`config-secrets-environments`](#s-config-secrets-environments) | 在各环境中做到干净、经过校验的配置与密钥管理。 |
+| [`devops-excellence`](#s-devops-excellence) | 安全、现代的 CI/CD 和基础设施配置。 |
+| [`incident-slo-runbook`](#s-incident-slo-runbook) | 把监控指标变成真正可执行的值班和事故流程。 |
+| [`observability-sre`](#s-observability-sre) | 设计一套按用户真实感受来告警的监控体系。 |
+| [`release-engineering`](#s-release-engineering) | 安全、可重复的发布。 |
 
 <a id="s-config-secrets-environments"></a>
 ### config-secrets-environments
 
-[config-secrets-environments.zip](config-secrets-environments.zip) · entry: `spellbook-main/skills/config-secrets-environments/SKILL.md`
+[config-secrets-environments.zip](config-secrets-environments.zip) · 入口：`spellbook-main/skills/config-secrets-environments/SKILL.md`
 
-- **What it does:** Designs, audits and verifies configuration and secrets: environment separation (local/dev/staging/prod), config schemas and validation, BYOK flows, key rotation and drift checks. Never prints real secrets.
-- **How to use:** Trigger when adding env vars, changing runtime config, handling API keys or user-supplied keys, diagnosing config drift, or preparing release configuration.
-- **Best suited for:** Clean, validated config and secret handling across environments.
+- **能做什么：** 设计、审计和验证配置与密钥：环境隔离（本地/开发/预发/生产）、配置 schema 与校验、BYOK 流程、密钥轮换和漂移检查。从不打印真实密钥。
+- **怎么用：** 新增环境变量、修改运行时配置、处理 API key 或用户自带 key、排查配置漂移或准备发布配置时触发。
+- **最适合：** 在各环境中做到干净、经过校验的配置与密钥管理。
 
 <a id="s-devops-excellence"></a>
 ### devops-excellence
 
-[devops-excellence.zip](devops-excellence.zip) · entry: `spellbook-main/skills/devops-excellence/SKILL.md`
+[devops-excellence.zip](devops-excellence.zip) · 入口：`spellbook-main/skills/devops-excellence/SKILL.md`
 
-- **What it does:** DevOps and CI/CD guide with hard rules: OIDC instead of static cloud credentials, non-root containers, no secrets in images, protected production deploys. Covers GitHub Actions, Docker, Kubernetes, Terraform, GitOps, progressive delivery and deployment-strategy selection, with templates.
-- **How to use:** Trigger when setting up pipelines, containerising an app, deploying to Kubernetes or choosing a release strategy.
-- **Best suited for:** Secure, modern CI/CD and infrastructure setups.
+- **能做什么：** DevOps 与 CI/CD 指南，附硬性规则：用 OIDC 代替固定云凭据、容器不用 root、镜像里不放密钥、生产部署受保护。涵盖 GitHub Actions、Docker、Kubernetes、Terraform、GitOps、渐进式发布和部署策略选择，附模板。
+- **怎么用：** 搭建流水线、容器化应用、部署到 Kubernetes 或选择发布策略时触发。
+- **最适合：** 安全、现代的 CI/CD 和基础设施配置。
 
 <a id="s-incident-slo-runbook"></a>
 ### incident-slo-runbook
 
-[incident-slo-runbook.zip](incident-slo-runbook.zip) · entry: `spellbook-main/skills/incident-slo-runbook/SKILL.md`
+[incident-slo-runbook.zip](incident-slo-runbook.zip) · 入口：`spellbook-main/skills/incident-slo-runbook/SKILL.md`
 
-- **What it does:** Creates or audits SLOs and SLIs, burn-rate alerts, incident response steps, escalation paths, postmortems, operational runbooks and customer-impact communication — connecting observability to action for each critical user journey.
-- **How to use:** Trigger when defining production reliability, preparing launch readiness, responding to an outage, writing a runbook, tuning alerts or closing out an incident.
-- **Best suited for:** Turning metrics into an actual on-call and incident process.
+- **能做什么：** 创建或审计 SLO 与 SLI、燃烧率告警、事故响应步骤、升级路径、事后复盘、运维手册和对客户影响的沟通——为每条关键用户路径把可观测性和实际行动连接起来。
+- **怎么用：** 定义生产可靠性、准备上线就绪评审、处理故障、编写运维手册、调整告警或收尾一次事故时触发。
+- **最适合：** 把监控指标变成真正可执行的值班和事故流程。
 
 <a id="s-observability-sre"></a>
 ### observability-sre
 
-[observability-sre.zip](observability-sre.zip) · entry: `spellbook-main/skills/observability-sre/SKILL.md`
+[observability-sre.zip](observability-sre.zip) · 入口：`spellbook-main/skills/observability-sre/SKILL.md`
 
-- **What it does:** Observability and SRE guide: metrics, logs and traces with Prometheus, Grafana and OpenTelemetry; hard rules such as symptom-based alerts only, low-cardinality labels, SLO-based error budgets and trace context in logs; layered Prometheus architecture and incident-response practice. Includes templates.
-- **How to use:** Trigger when setting up monitoring, logging or tracing, defining SLOs or managing incidents.
-- **Best suited for:** Designing a monitoring stack that alerts on what users feel.
+- **能做什么：** 可观测性与 SRE 指南：用 Prometheus、Grafana 和 OpenTelemetry 做指标、日志和链路追踪；硬性规则包括只对症状告警、标签低基数、基于 SLO 的错误预算、日志里带 trace 上下文；分层 Prometheus 架构和事故响应实践。附模板。
+- **怎么用：** 搭建监控、日志或链路追踪，定义 SLO 或处理事故时触发。
+- **最适合：** 设计一套按用户真实感受来告警的监控体系。
 
 <a id="s-release-engineering"></a>
 ### release-engineering
 
-[release-engineering.zip](release-engineering.zip) · entry: `spellbook-main/skills/release-engineering/SKILL.md`
+[release-engineering.zip](release-engineering.zip) · 入口：`spellbook-main/skills/release-engineering/SKILL.md`
 
-- **What it does:** Turns "ready to merge" into a controlled release: classifies the release (patch, feature, API/SDK, DB migration, config/secret, infra) and applies the right gates — versioning, changelog, release branches, feature flags, canaries, migration gates, rollback proof, deployment checks.
-- **How to use:** Trigger when preparing a release, shipping a risky PR, coordinating app/backend/database rollout, recovering from a bad deploy or defining a repo's release policy.
-- **Best suited for:** Safe, repeatable releases.
+- **能做什么：** 把“可以合并”变成受控的发布：先给发布分类（补丁、功能、API/SDK、数据库迁移、配置/密钥、基础设施），再套用对应关卡——版本号、变更日志、发布分支、功能开关、金丝雀、迁移关卡、回滚证明、部署检查。
+- **怎么用：** 准备发布、上线有风险的 PR、协调应用/后端/数据库的发布、从糟糕的部署中恢复或制定仓库发布策略时触发。
+- **最适合：** 安全、可重复的发布。
 
 <a id="cat-security"></a>
-## Security
+## 安全
 
-Auth, threat modelling, server hardening and supply-chain checks.
+身份认证、威胁建模、服务器加固和供应链检查。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`auth-security`](#s-auth-security) | Building or auditing authentication and token management. |
-| [`npm-supply-chain-check`](#s-npm-supply-chain-check) | Rapid response when an npm supply-chain incident breaks. |
-| [`security-threat-model`](#s-security-threat-model) | Catching security risks before code ships. |
-| [`server-security`](#s-server-security) | Locking down a VPS or self-hosted server. |
+| [`auth-security`](#s-auth-security) | 构建或审计身份认证与令牌管理。 |
+| [`npm-supply-chain-check`](#s-npm-supply-chain-check) | npm 供应链事件爆发时的快速应对。 |
+| [`security-threat-model`](#s-security-threat-model) | 在代码上线前发现安全风险。 |
+| [`server-security`](#s-server-security) | 加固 VPS 或自建服务器。 |
 
 <a id="s-auth-security"></a>
 ### auth-security
 
-[auth-security.zip](auth-security.zip) · entry: `spellbook-main/skills/auth-security/SKILL.md`
+[auth-security.zip](auth-security.zip) · 入口：`spellbook-main/skills/auth-security/SKILL.md`
 
-- **What it does:** OAuth 2.1 and JWT security following RFC 9700: PKCE everywhere, short-lived access tokens, refresh-token rotation, HttpOnly cookie storage, explicit algorithm checks, DPoP, revocation and a final checklist.
-- **How to use:** Trigger when implementing login, API authorisation or token handling, or when reviewing existing auth code.
-- **Best suited for:** Building or auditing authentication and token management.
+- **能做什么：** 遵循 RFC 9700 的 OAuth 2.1 与 JWT 安全实践：全面使用 PKCE、短时效访问令牌、刷新令牌轮换、HttpOnly Cookie 存储、显式校验算法、DPoP、令牌撤销，以及最后的检查清单。
+- **怎么用：** 实现登录、API 授权或令牌处理，或评审现有认证代码时触发。
+- **最适合：** 构建或审计身份认证与令牌管理。
 
 <a id="s-npm-supply-chain-check"></a>
 ### npm-supply-chain-check
 
-[npm-supply-chain-check.zip](npm-supply-chain-check.zip) · entry: `spellbook-main/skills/npm-supply-chain-check/SKILL.md`
+[npm-supply-chain-check.zip](npm-supply-chain-check.zip) · 入口：`spellbook-main/skills/npm-supply-chain-check/SKILL.md`
 
-- **What it does:** Read-only scan of a repository, lockfiles and `node_modules` for known malicious npm package versions and install-time supply-chain indicators (e.g. Shai-Hulud, the Keyv/cacheable incident, suspicious preinstall scripts, credential stealers). Separates "a dependency references it" from "malicious code ran", and never prints secret values. Ships with a dated IOC list and a deterministic scanner.
-- **How to use:** Say "was this project exposed to the Shai-Hulud npm attack?" or "check for compromised npm packages". It scans only the current repo unless you widen the scope. Not a general CVE or licence audit.
-- **Best suited for:** Rapid response when an npm supply-chain incident breaks.
+- **能做什么：** 只读扫描仓库、锁文件和 `node_modules`，查找已知的恶意 npm 包版本和安装时供应链攻击迹象（如 Shai-Hulud、Keyv/cacheable 事件、可疑的 preinstall 脚本、窃取凭据的包）。区分“依赖里引用了它”和“恶意代码确实执行过”，从不打印密钥值。附带带日期的 IOC 列表和确定性扫描器。
+- **怎么用：** 说“这个项目有没有受到 Shai-Hulud npm 攻击影响？”或“检查有没有被投毒的 npm 包”。默认只扫描当前仓库，除非你扩大范围。不是通用 CVE 或许可证审计。
+- **最适合：** npm 供应链事件爆发时的快速应对。
 
 <a id="s-security-threat-model"></a>
 ### security-threat-model
 
-[security-threat-model.zip](security-threat-model.zip) · entry: `spellbook-main/skills/security-threat-model/SKILL.md`
+[security-threat-model.zip](security-threat-model.zip) · 入口：`spellbook-main/skills/security-threat-model/SKILL.md`
 
-- **What it does:** Threat-models features, APIs, data flows, secrets, permissions, supply-chain changes, auth boundaries and risky code paths: maps assets, actors, trust boundaries and entry points, runs a threat checklist and lists required controls. Complements `auth-security` and `server-security`.
-- **How to use:** Trigger before or during work touching auth, authorisation, payments, secrets, user data, uploads, webhooks, admin tools, `innerHTML`/`eval`/`exec`, dependency upgrades or cross-tenant access.
-- **Best suited for:** Catching security risks before code ships.
+- **能做什么：** 为功能、API、数据流、密钥、权限、供应链变更、认证边界和高风险代码路径做威胁建模：梳理资产、角色、信任边界和入口，运行威胁清单并列出必需的控制措施。与 `auth-security` 和 `server-security` 互补。
+- **怎么用：** 在开发或评审涉及认证、授权、支付、密钥、用户数据、上传、Webhook、管理后台、`innerHTML`/`eval`/`exec`、依赖升级或跨租户访问的改动之前或期间触发。
+- **最适合：** 在代码上线前发现安全风险。
 
 <a id="s-server-security"></a>
 ### server-security
 
-[server-security.zip](server-security.zip) · entry: `spellbook-main/skills/server-security/SKILL.md`
+[server-security.zip](server-security.zip) · 入口：`spellbook-main/skills/server-security/SKILL.md`
 
-- **What it does:** Server security audit and reversible hardening over SSH: SSH configuration, firewall, exposed ports, users, services, file permissions, brute-force attempts and update posture, with a report and one-step fixes.
-- **How to use:** Run with an SSH target (e.g. `root@1.2.3.4`) and say "audit / harden this server". Fixes are applied only after you confirm; details are in `references/full-guide.md`.
-- **Best suited for:** Locking down a VPS or self-hosted server.
+- **能做什么：** 通过 SSH 做服务器安全审计和可回退的加固：SSH 配置、防火墙、暴露端口、用户、服务、文件权限、暴力破解尝试和更新状况，生成报告并提供一键修复。
+- **怎么用：** 带 SSH 目标运行（如 `root@1.2.3.4`），说“审计 / 加固这台服务器”。修复只在你确认后执行；细节见 `references/full-guide.md`。
+- **最适合：** 加固 VPS 或自建服务器。
 
 <a id="cat-git"></a>
-## Git & open-source contribution
+## Git 与开源贡献
 
-Commits, repo scaffolding and contributing to other people's projects.
+提交、仓库搭建和为别人的项目做贡献。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`contribution-architect`](#s-contribution-architect) | Moving from bug fixes to architectural contributions or module ownership. |
-| [`contributor`](#s-contributor) | Contributing to someone else's project without the usual rejections. |
-| [`git-commit-smart`](#s-git-commit-smart) | Consistent, descriptive commit history. |
-| [`push-all`](#s-push-all) | Fast "ship it all" commits with a safety net. |
-| [`repo-scaffold`](#s-repo-scaffold) | Giving a new or prototype repo a solid foundation. |
+| [`contribution-architect`](#s-contribution-architect) | 从修小 bug 进阶到架构级贡献或成为模块负责人。 |
+| [`contributor`](#s-contributor) | 给别人的项目做贡献，避免常见的被拒原因。 |
+| [`git-commit-smart`](#s-git-commit-smart) | 保持一致、描述清楚的提交历史。 |
+| [`push-all`](#s-push-all) | 带安全网的快速“全部上线”提交。 |
+| [`repo-scaffold`](#s-repo-scaffold) | 给新仓库或原型仓库打下扎实基础。 |
 
 <a id="s-contribution-architect"></a>
 ### contribution-architect
 
-[contribution-architect.zip](contribution-architect.zip) · entry: `spellbook-main/skills/contribution-architect/SKILL.md`
+[contribution-architect.zip](contribution-architect.zip) · 入口：`spellbook-main/skills/contribution-architect/SKILL.md`
 
-- **What it does:** An open-source architecture mentor that looks past "good first issues" to high-value contributions: complexity hotspots, highly coupled or orphaned modules, test gaps and TODO/HACK debt. Produces a strategic investment list (high-ROI, quick wins, long-term) and drafts RFCs and design proposals.
-- **How to use:** In a project you want to contribute to, say "analyse this project and find meaningful work" or "draft an RFC for X".
-- **Best suited for:** Moving from bug fixes to architectural contributions or module ownership.
+- **能做什么：** 开源架构导师，帮你跳出“新手友好 issue”，找到高价值的贡献：复杂度热点、高耦合或无人维护的模块、测试缺口和 TODO/HACK 技术债。产出战略投资清单（高回报、速赢、长期）并起草 RFC 和设计提案。
+- **怎么用：** 在想参与的项目里说“分析这个项目，找有意义的活”或“为 X 起草一份 RFC”。
+- **最适合：** 从修小 bug 进阶到架构级贡献或成为模块负责人。
 
 <a id="s-contributor"></a>
 ### contributor
 
-[contributor.zip](contributor.zip) · entry: `spellbook-main/skills/contributor/SKILL.md`
+[contributor.zip](contributor.zip) · 入口：`spellbook-main/skills/contributor/SKILL.md`
 
-- **What it does:** End-to-end open-source contribution workflow from a GitHub repo URL to submitted PRs: scans issues, checks for competing PRs and upstream redirection, posts a solution outline first, forks and sets up the repo, follows contribution guidelines and CI, implements a minimal fix with tests and submits with proper commit conventions.
-- **How to use:** Say "I want to contribute to <repo URL>", "find good first issues" or "help me fix issue #123 and open a PR". Needs `git` and the GitHub CLI.
-- **Best suited for:** Contributing to someone else's project without the usual rejections.
+- **能做什么：** 从 GitHub 仓库地址到提交 PR 的端到端开源贡献流程：扫描 issue，检查是否有竞争 PR 或应改在上游，先在 issue 下贴解决思路，fork 并配置仓库，遵守贡献指南和 CI，实现带测试的最小修复，并按规范提交。
+- **怎么用：** 说“我想给 <仓库地址> 做贡献”“找 good first issue”或“帮我修 #123 并提 PR”。需要 `git` 和 GitHub CLI。
+- **最适合：** 给别人的项目做贡献，避免常见的被拒原因。
 
 <a id="s-git-commit-smart"></a>
 ### git-commit-smart
 
-[git-commit-smart.zip](git-commit-smart.zip) · entry: `spellbook-main/skills/git-commit-smart/SKILL.md`
+[git-commit-smart.zip](git-commit-smart.zip) · 入口：`spellbook-main/skills/git-commit-smart/SKILL.md`
 
-- **What it does:** Analyses staged changes and writes meaningful Conventional Commit messages (type, scope, subject, body, footer, breaking changes), with examples and anti-patterns.
-- **How to use:** Stage your changes and say "commit this" or "write the commit message".
-- **Best suited for:** Consistent, descriptive commit history.
+- **能做什么：** 分析已暂存的改动，写出有意义的 Conventional Commit 提交信息（类型、范围、主题、正文、脚注、破坏性变更），附示例和反面案例。
+- **怎么用：** 暂存改动后说“提交一下”或“写提交信息”。
+- **最适合：** 保持一致、描述清楚的提交历史。
 
 <a id="s-push-all"></a>
 ### push-all
 
-[push-all.zip](push-all.zip) · entry: `spellbook-main/skills/push-all.SKILL.md`
+[push-all.zip](push-all.zip) · 入口：`spellbook-main/skills/push-all.SKILL.md`
 
-- **What it does:** Stages all current changes, commits and pushes after safety checks: stops and warns on secrets (`.env`, keys, certificates, real API tokens) and large files, asks for confirmation, then writes a commit message matching the repo's style.
-- **How to use:** Only when you explicitly ask, e.g. "commit and push everything". Entry is `skills/push-all.SKILL.md` inside the spellbook bundle.
-- **Best suited for:** Fast "ship it all" commits with a safety net.
+- **能做什么：** 在安全检查后暂存全部改动、提交并推送：遇到密钥（`.env`、私钥、证书、真实 API token）和大文件会停下来警告，请你确认，再按仓库风格写提交信息。
+- **怎么用：** 只有你明确要求时使用，例如“全部提交并推送”。入口是 spellbook 包里的 `skills/push-all.SKILL.md`。
+- **最适合：** 带安全网的快速“全部上线”提交。
 
 <a id="s-repo-scaffold"></a>
 ### repo-scaffold
 
-[repo-scaffold.zip](repo-scaffold.zip) · entry: `spellbook-main/skills/repo-scaffold/SKILL.md`
+[repo-scaffold.zip](repo-scaffold.zip) · 入口：`spellbook-main/skills/repo-scaffold/SKILL.md`
 
-- **What it does:** Scaffolds or standardises a production-ready repository: specs (`PRODUCT.md`, `TECH.md`, ADRs), source layout, tests, CI, agent context, config examples, release notes and runbooks — reusing existing conventions instead of creating parallel trees.
-- **How to use:** Trigger when starting a new repo, turning a prototype into a maintainable project or filling in missing foundations. For AGENTS.md only, use `agentsmd-scaffold`.
-- **Best suited for:** Giving a new or prototype repo a solid foundation.
+- **能做什么：** 搭建或规范一个可上线的仓库：规格文档（`PRODUCT.md`、`TECH.md`、ADR）、源码布局、测试、CI、agent 上下文、配置示例、发布说明和运维手册——沿用已有约定，不另起平行目录。
+- **怎么用：** 新建仓库、把原型变成可维护项目或补齐缺失的基础设施时触发。只需要 AGENTS.md 时用 `agentsmd-scaffold`。
+- **最适合：** 给新仓库或原型仓库打下扎实基础。
 
 <a id="cat-agents"></a>
-## Coding agents: Claude Code, Codex & multi-agent work
+## 编程 agent：Claude Code、Codex 与多 agent 协作
 
-Agent instructions (AGENTS.md / CLAUDE.md), Codex integration, guardrails, orchestration and session hygiene.
+agent 指令（AGENTS.md / CLAUDE.md）、Codex 集成、护栏、编排和会话维护。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`agentsmd-optimize`](#s-agentsmd-optimize) | An instruction set that has grown messy or contradictory over time. |
-| [`agentsmd-scaffold`](#s-agentsmd-scaffold) | Onboarding a repository for Codex / Claude Code agents. |
-| [`claude-code-reverse`](#s-claude-code-reverse) | Verifying how a local tool behaves internally or what changed between versions. |
-| [`codex`](#s-codex) | Delegating a coding task to Codex from inside Claude Code. |
-| [`codex-agent`](#s-codex-agent) | Cross-model code review inside Claude Code. |
-| [`codex-fluent`](#s-codex-fluent) | Ongoing Codex session hygiene. |
-| [`codex-log-guard`](#s-codex-log-guard) | Stopping Codex from silently hammering your disk. |
-| [`codex-retrospective`](#s-codex-retrospective) | Making Codex gradually fit your style and workflows. |
-| [`flowguard`](#s-flowguard) | Long agent sessions that span many files, tools, sessions or agents. |
-| [`meta-timing`](#s-meta-timing) | Designing notification and proactive-agent timing that doesn't annoy people. |
-| [`multi-model-orchestrator`](#s-multi-model-orchestrator) | Multi-agent projects that need a shared plan and audit trail. |
-| [`overengineering-brake`](#s-overengineering-brake) | Stopping agents from gold-plating simple requests. |
-| [`persona-team`](#s-persona-team) | Hermes users building role-specialised multi-agent teams. |
-| [`recap`](#s-recap) | Weekly reflection on how you actually use your coding agent. |
-| [`repo-agent-context-audit`](#s-repo-agent-context-audit) | Checking whether a repo is easy for coding agents to work in. |
-| [`review-agent-harness`](#s-review-agent-harness) | Diagnosing systemic agent failures in a repository. |
-| [`review-gate`](#s-review-gate) | Keeping a human in the loop for agent-made changes. |
-| [`sol-luna-router`](#s-sol-luna-router) | Auditable delegate-and-verify coding with a separate worker agent. |
-| [`threads`](#s-threads) | Parallelising a queue of issues or PRs in Codex safely. |
-| [`vibeguard`](#s-vibeguard) | Keeping AI-assisted work scoped and honest without heavy tooling. |
+| [`agentsmd-optimize`](#s-agentsmd-optimize) | 已经变得杂乱或自相矛盾的指令集。 |
+| [`agentsmd-scaffold`](#s-agentsmd-scaffold) | 让一个仓库适合 Codex / Claude Code 等 agent 上手工作。 |
+| [`claude-code-reverse`](#s-claude-code-reverse) | 验证本地工具的内部行为，或查看两个版本之间改了什么。 |
+| [`codex`](#s-codex) | 在 Claude Code 里把编程任务交给 Codex。 |
+| [`codex-agent`](#s-codex-agent) | 在 Claude Code 里做跨模型代码评审。 |
+| [`codex-fluent`](#s-codex-fluent) | Codex 会话的日常维护。 |
+| [`codex-log-guard`](#s-codex-log-guard) | 阻止 Codex 悄悄大量写盘。 |
+| [`codex-retrospective`](#s-codex-retrospective) | 让 Codex 逐渐适应你的风格和工作流。 |
+| [`flowguard`](#s-flowguard) | 跨越大量文件、工具、会话或多个 agent 的长时间 agent 工作。 |
+| [`meta-timing`](#s-meta-timing) | 设计不让人厌烦的通知和主动 agent 时机。 |
+| [`multi-model-orchestrator`](#s-multi-model-orchestrator) | 需要共享计划和审计记录的多 agent 项目。 |
+| [`overengineering-brake`](#s-overengineering-brake) | 防止 agent 把简单请求做得过于复杂。 |
+| [`persona-team`](#s-persona-team) | 用 Hermes 搭建分工明确的多 agent 团队。 |
+| [`recap`](#s-recap) | 每周反思你实际是怎么使用编程 agent 的。 |
+| [`repo-agent-context-audit`](#s-repo-agent-context-audit) | 检查一个仓库是否方便编程 agent 工作。 |
+| [`review-agent-harness`](#s-review-agent-harness) | 诊断仓库中系统性的 agent 失败。 |
+| [`review-gate`](#s-review-gate) | 让人始终参与 agent 做出的改动。 |
+| [`sol-luna-router`](#s-sol-luna-router) | 可审计的“委派 + 验证”式编程，配合独立的 worker agent。 |
+| [`threads`](#s-threads) | 在 Codex 中安全地并行处理一批 issue 或 PR。 |
+| [`vibeguard`](#s-vibeguard) | 不依赖重型工具，让 AI 辅助的工作保持范围清楚、实事求是。 |
 
 <a id="s-agentsmd-optimize"></a>
 ### agentsmd-optimize
 
-[agentsmd-optimize.zip](agentsmd-optimize.zip) · entry: `spellbook-main/skills/agentsmd-optimize/SKILL.md`
+[agentsmd-optimize.zip](agentsmd-optimize.zip) · 入口：`spellbook-main/skills/agentsmd-optimize/SKILL.md`
 
-- **What it does:** Audits and tidies AI coding-agent instructions — AGENTS.md, CLAUDE.md, skills and agent definitions. Finds conflicting rules, causes of excessive approval pauses, over-broad skill triggers, duplicate guidance and broken references. Read-only unless you authorize edits.
-- **How to use:** Ask "audit my AGENTS.md / CLAUDE.md", "why does the agent keep stopping to ask?", or "clean up my skill triggers". Say explicitly if you want the fixes applied.
-- **Best suited for:** An instruction set that has grown messy or contradictory over time.
+- **能做什么：** 审计并整理 AI 编程 agent 的指令——AGENTS.md、CLAUDE.md、技能和 agent 定义。找出互相冲突的规则、导致频繁请求批准的原因、触发范围过宽的技能、重复的指导和失效的引用。除非你授权修改，否则只读。
+- **怎么用：** 说“审计我的 AGENTS.md / CLAUDE.md”“为什么 agent 老是停下来问我”或“清理我的技能触发词”。如果要它直接改，请明确说出来。
+- **最适合：** 已经变得杂乱或自相矛盾的指令集。
 
 <a id="s-agentsmd-scaffold"></a>
 ### agentsmd-scaffold
 
-[agentsmd-scaffold.zip](agentsmd-scaffold.zip) · entry: `spellbook-main/skills/agentsmd-scaffold/SKILL.md`
+[agentsmd-scaffold.zip](agentsmd-scaffold.zip) · 入口：`spellbook-main/skills/agentsmd-scaffold/SKILL.md`
 
-- **What it does:** Generates or updates repository-specific AGENTS.md files from real repo evidence — a root file plus scoped per-directory files, with validation commands, generated-file boundaries and a short onboarding router.
-- **How to use:** Inside a repo, ask "create AGENTS.md for this repo" or "split AGENTS.md by directory". It produces a plan first and writes files only when you ask it to apply them. For a health check only, use `repo-agent-context-audit` instead.
-- **Best suited for:** Onboarding a repository for Codex / Claude Code agents.
+- **能做什么：** 根据仓库里的真实证据生成或更新该仓库专用的 AGENTS.md：根目录文件加各子目录的分区文件，包含验证命令、生成文件边界和简短的上手导航。
+- **怎么用：** 在仓库里说“为这个仓库创建 AGENTS.md”或“按目录拆分 AGENTS.md”。它先给方案，只有你要求应用时才写文件。如果只想体检，用 `repo-agent-context-audit`。
+- **最适合：** 让一个仓库适合 Codex / Claude Code 等 agent 上手工作。
 
 <a id="s-claude-code-reverse"></a>
 ### claude-code-reverse
 
-[claude-code-reverse.zip](claude-code-reverse.zip) · entry: `spellbook-main/skills/claude-code-reverse/SKILL.md`
+[claude-code-reverse.zip](claude-code-reverse.zip) · 入口：`spellbook-main/skills/claude-code-reverse/SKILL.md`
 
-- **What it does:** Read-only static reverse engineering of local executables you own or are authorised to inspect — Claude Code and other CLIs, Mach-O, ELF, PE, Wasm or packaged apps: file identity, strings, symbols, dependencies, sections, and version-to-version comparisons. Never runs the target and refuses cracking, licence or billing bypass.
-- **How to use:** Ask explicitly, e.g. "reverse-engineer where this CLI gets this UI string" or "compare these two Claude Code builds". Uses the bundled `extract.sh`, caching by SHA-256.
-- **Best suited for:** Verifying how a local tool behaves internally or what changed between versions.
+- **能做什么：** 对你拥有或获得授权的本机可执行文件做只读静态逆向——Claude Code 和其他 CLI、Mach-O、ELF、PE、Wasm 或打包应用：文件身份、字符串、符号、依赖、段表，以及版本间对比。从不运行目标，拒绝破解、绕过许可或计费。
+- **怎么用：** 需要明确提出，例如“逆向一下这个 CLI 的这段界面文字来自哪里”或“对比这两个 Claude Code 版本”。使用自带的 `extract.sh`，按 SHA-256 缓存。
+- **最适合：** 验证本地工具的内部行为，或查看两个版本之间改了什么。
 
 <a id="s-codex"></a>
 ### codex
 
-[codex.zip](codex.zip) · entry: `spellbook-main/skills/codex/SKILL.md`
+[codex.zip](codex.zip) · 入口：`spellbook-main/skills/codex/SKILL.md`
 
-- **What it does:** Runs OpenAI Codex CLI (`codex exec`, `codex resume`) from Claude Code for analysis, refactoring or automated edits, with safe prompt passing, the smallest needed sandbox (read-only vs workspace-write), a batch cost gate and follow-up handling.
-- **How to use:** Say "run this with Codex" or "ask Codex to refactor X". It checks `codex --version` first and uses only flags your installed CLI supports.
-- **Best suited for:** Delegating a coding task to Codex from inside Claude Code.
+- **能做什么：** 在 Claude Code 里运行 OpenAI Codex CLI（`codex exec`、`codex resume`）做分析、重构或自动编辑，带有安全的提示词传递、最小必要沙箱（只读或工作区可写）、批量成本闸门和后续跟进处理。
+- **怎么用：** 说“用 Codex 跑这个”或“让 Codex 重构 X”。它会先检查 `codex --version`，只使用你已安装版本支持的参数。
+- **最适合：** 在 Claude Code 里把编程任务交给 Codex。
 
 <a id="s-codex-agent"></a>
 ### codex-agent
 
-[codex-agent.zip](codex-agent.zip) · entry: `spellbook-main/skills/codex-agent/SKILL.md`
+[codex-agent.zip](codex-agent.zip) · 入口：`spellbook-main/skills/codex-agent/SKILL.md`
 
-- **What it does:** Lets Claude Code call OpenAI's Codex CLI for second-opinion reviews, cross-verification after Claude implements changes, debugging analysis and alternative implementations. Codex reviews read-only; Claude applies fixes only when you ask.
-- **How to use:** Requires Codex CLI installed and authenticated (`npm i -g @openai/codex` or Homebrew). Ask "get a Codex review of this diff / file / project" or "have Codex double-check this".
-- **Best suited for:** Cross-model code review inside Claude Code.
+- **能做什么：** 让 Claude Code 调用 OpenAI 的 Codex CLI 做第二意见评审、在 Claude 实现之后交叉验证、调试分析以及提供替代实现。Codex 只读评审；只有你要求时 Claude 才会应用修复。
+- **怎么用：** 需要已安装并登录 Codex CLI（`npm i -g @openai/codex` 或 Homebrew）。说“让 Codex 评审这个 diff / 文件 / 项目”或“让 Codex 再检查一遍”。
+- **最适合：** 在 Claude Code 里做跨模型代码评审。
 
 <a id="s-codex-fluent"></a>
 ### codex-fluent
 
-[codex-fluent.zip](codex-fluent.zip) · entry: `spellbook-main/skills/codex-fluent/SKILL.md`
+[codex-fluent.zip](codex-fluent.zip) · 入口：`spellbook-main/skills/codex-fluent/SKILL.md`
 
-- **What it does:** Keeps Codex fast and light after months of heavy use: diagnoses session bloat, creates mandatory handoffs for valuable work, archives (never deletes) old sessions with clear restore paths, and verifies the result.
-- **How to use:** Say "Codex feels slow / bloated" or "clean up my Codex sessions". Starts with a report; optionally sets a recurring reminder.
-- **Best suited for:** Ongoing Codex session hygiene.
+- **能做什么：** 在长期高强度使用后让 Codex 保持轻快：诊断会话膨胀，为有价值的工作创建必须的交接文档，把旧会话归档（从不删除）并保留清晰的恢复路径，然后验证效果。
+- **怎么用：** 说“Codex 变慢 / 变臃肿了”或“清理我的 Codex 会话”。先出报告；也可以设置定期提醒。
+- **最适合：** Codex 会话的日常维护。
 
 <a id="s-codex-log-guard"></a>
 ### codex-log-guard
 
-[codex-log-guard.zip](codex-log-guard.zip) · entry: `spellbook-main/skills/codex-log-guard/SKILL.md`
+[codex-log-guard.zip](codex-log-guard.zip) · 入口：`spellbook-main/skills/codex-log-guard/SKILL.md`
 
-- **What it does:** Diagnoses excessive writes to Codex's local SQLite diagnostic log (`logs_2.sqlite`, its WAL file) that can wear SSDs. Read-only by default; can install and verify a `block_log_inserts` guard, and clean up only with backups and an explicit request.
-- **How to use:** Mention `logs_2.sqlite`, SSD/TBW wear, or ask to protect, clean up, verify or restore Codex logging. Modes: diagnose_only (default), protect, cleanup, restore.
-- **Best suited for:** Stopping Codex from silently hammering your disk.
+- **能做什么：** 诊断 Codex 本地 SQLite 诊断日志（`logs_2.sqlite` 及其 WAL 文件）写入过多、可能损耗 SSD 的问题。默认只读；可以安装并验证 `block_log_inserts` 防护，只有在你明确要求时才会在备份后清理。
+- **怎么用：** 提到 `logs_2.sqlite`、SSD/TBW 损耗，或要求保护、清理、验证、恢复 Codex 日志。模式：仅诊断（默认）、保护、清理、恢复。
+- **最适合：** 阻止 Codex 悄悄大量写盘。
 
 <a id="s-codex-retrospective"></a>
 ### codex-retrospective
 
-[codex-retrospective.zip](codex-retrospective.zip) · entry: `spellbook-main/skills/codex-retrospective/SKILL.md`
+[codex-retrospective.zip](codex-retrospective.zip) · 入口：`spellbook-main/skills/codex-retrospective/SKILL.md`
 
-- **What it does:** A self-improvement loop for Codex: reviews its own recent history (last N days or a set period), finds recurring friction and failures, and proposes minimal, high-signal updates to AGENTS.md plus tiny reusable skills — applied only after you approve.
-- **How to use:** Ask "run a Codex retrospective on the last 7 days". Pairs with `codex-fluent`.
-- **Best suited for:** Making Codex gradually fit your style and workflows.
+- **能做什么：** Codex 的自我改进循环：回顾它最近一段时间（最近 N 天或指定时期）的历史，找出反复出现的摩擦和失败，提出最小但高价值的 AGENTS.md 更新和小型可复用技能——经你批准后才应用。
+- **怎么用：** 说“对最近 7 天做一次 Codex 复盘”。可与 `codex-fluent` 搭配。
+- **最适合：** 让 Codex 逐渐适应你的风格和工作流。
 
 <a id="s-flowguard"></a>
 ### flowguard
 
-[flowguard.zip](flowguard.zip) · entry: `spellbook-main/skills/flowguard/SKILL.md`
+[flowguard.zip](flowguard.zip) · 入口：`spellbook-main/skills/flowguard/SKILL.md`
 
-- **What it does:** A single lifecycle entry point that guards long, ambiguous or stateful agent work from drift: routes the task, verifies current repo/runtime state instead of trusting summaries, runs bounded execution loops with explicit stop conditions, applies verification and review gates, and leaves a resumable handoff. Coordinates other skills rather than replacing them.
-- **How to use:** Trigger for multi-step tasks, autonomous loops, repo changes, PR readiness checks, compaction handoffs, resuming from earlier context or cost checkpoints ("continue the task from yesterday's handoff").
-- **Best suited for:** Long agent sessions that span many files, tools, sessions or agents.
+- **能做什么：** 长时间、模糊或有状态的 agent 工作的统一入口，用来防止“跑偏”：先给任务分流，核实当前仓库/运行状态而不是轻信摘要，在明确的停止条件下分段执行，设置验证和评审关卡，并留下可恢复的交接文档。它协调其他技能，而不是取代它们。
+- **怎么用：** 多步骤任务、自主循环、仓库改动、PR 就绪检查、上下文压缩交接、从之前的上下文恢复或成本检查点时触发（“从昨天的交接继续这个任务”）。
+- **最适合：** 跨越大量文件、工具、会话或多个 agent 的长时间 agent 工作。
 
 <a id="s-meta-timing"></a>
 ### meta-timing
 
-[meta-timing.zip](meta-timing.zip) · entry: `内层包/meta-timing-migration-v2.0.0/meta-timing/SKILL.md`
+[meta-timing.zip](meta-timing.zip) · 入口：`内层包/meta-timing-migration-v2.0.0/meta-timing/SKILL.md`
 
-- **What it does:** A meta-level "when to act" framework: decides when to interrupt, surface quietly, remind, act autonomously, wait, batch or escalate. Separates WHAT (explicit content gate) from WHEN (deterministic timing policy: hard no-push windows + exact allowed windows), adapts per person, and outputs a standard "timing decision contract".
-- **How to use:** Invoke when designing notifications, reminders, proactive agent behaviour or interruption policies ("when should we push this?", "通知策略"). Declares dependencies on `agent-harness-loop` and `scr-judgment`, which are not in this repo.
-- **Best suited for:** Designing notification and proactive-agent timing that doesn't annoy people.
+- **能做什么：** 元级“何时行动”框架：决定什么时候打断、静默浮现、提醒、自主行动、等待、批量或升级。把“做什么”（显式内容门）和“何时做”（确定性时机策略：硬性禁推窗口 + 精确的可推窗口）分开，按人适配，并输出标准的“时机决策契约”。
+- **怎么用：** 设计通知、提醒、主动 agent 行为或打断策略时调用（“这个什么时候推？”“通知策略”）。它声明依赖 `agent-harness-loop` 和 `scr-judgment`，这两个不在本仓库中。
+- **最适合：** 设计不让人厌烦的通知和主动 agent 时机。
 
 <a id="s-multi-model-orchestrator"></a>
 ### multi-model-orchestrator
 
-[multi-model-orchestrator.zip](multi-model-orchestrator.zip) · entry: `spellbook-main/skills/multi-model-orchestrator/SKILL.md`
+[multi-model-orchestrator.zip](multi-model-orchestrator.zip) · 入口：`spellbook-main/skills/multi-model-orchestrator/SKILL.md`
 
-- **What it does:** Lightweight coordination of complex work across multiple AI agents (Claude models, Codex or others) using a single handoff document as the source of truth: decompose → execute in parallel → synthesise feedback, with full traceability. Includes templates for Claude Code and Codex.
-- **How to use:** Ask to "plan this across agents" or "set up a handoff doc for this project"; follow the Quick Start in the SKILL.md.
-- **Best suited for:** Multi-agent projects that need a shared plan and audit trail.
+- **能做什么：** 用一份交接文档作为唯一事实来源，轻量地协调多个 AI agent（Claude 各模型、Codex 或其他）完成复杂工作：拆解 → 并行执行 → 汇总反馈，全程可追溯。附带用于 Claude Code 和 Codex 的模板。
+- **怎么用：** 要求“把这件事分给多个 agent 做”或“为这个项目建一份交接文档”；按 SKILL.md 里的快速开始操作。
+- **最适合：** 需要共享计划和审计记录的多 agent 项目。
 
 <a id="s-overengineering-brake"></a>
 ### overengineering-brake
 
-[overengineering-brake.zip](overengineering-brake.zip) · entry: `overengineering-brake/skills/overengineering-brake/SKILL.md`
+[overengineering-brake.zip](overengineering-brake.zip) · 入口：`overengineering-brake/skills/overengineering-brake/SKILL.md`
 
-- **What it does:** Keeps agent work complete but proportionate: turns your request into a bounded task contract, treats answer/review/monitor as read-only, lets later tighter instructions override broader ones, and cuts speculative extras, repeated validation, unneeded dependencies, hashes, backups, reports and sub-agents — without blocking necessary work.
-- **How to use:** Install as an always-available guard; it applies to ordinary tasks, skill creation, maintenance, migrations, audits and multi-stage work. Entry is `overengineering-brake/skills/overengineering-brake/SKILL.md`.
-- **Best suited for:** Stopping agents from gold-plating simple requests.
+- **能做什么：** 让 agent 的工作完整但不过度：把你的请求变成有边界的任务契约，把“回答 / 评审 / 监控”视为只读，后来更严格的指令立即覆盖之前更宽的范围，砍掉推测性的附加项、重复验证、不必要的依赖、哈希、备份、报告和子 agent——同时不阻碍必要的工作。
+- **怎么用：** 作为常驻防护安装；适用于普通任务、技能创建、维护、迁移、审计和多阶段工作。入口是 `overengineering-brake/skills/overengineering-brake/SKILL.md`。
+- **最适合：** 防止 agent 把简单请求做得过于复杂。
 
 <a id="s-persona-team"></a>
 ### persona-team
 
-[persona-team.zip](persona-team.zip) · entry: `persona-team/SKILL.md`
+[persona-team.zip](persona-team.zip) · 入口：`persona-team/SKILL.md`
 
-- **What it does:** Gives a multi-agent team (Hermes profiles) role-based personalities: one persona card per role (five work dimensions, duties, no-go zones) compiled into that profile's SOUL.md, role-to-personality matching (MBTI accepted as input), a kanban collaboration protocol and probes to test whether a persona holds. Default six roles: orchestrator, researcher, ideator, executor, reviewer, arbiter.
-- **How to use:** Say "set up an agent team", "what personality should my reviewer bot have?", "give me an INTJ auditor", or "this bot doesn't act like itself". Persona cards live in `~/.hermes/personas/`; needs terminal access.
-- **Best suited for:** Hermes users building role-specialised multi-agent teams.
+- **能做什么：** 给多 agent 团队（Hermes profile）配岗位人格：每个岗位一张人格卡（五个工作维度、职责、禁区），编译成该 profile 的 SOUL.md；按岗位匹配人格（可用 MBTI 输入）；用看板协议协作；用探针检验人格是否立住。默认六个岗位：调度、研究、创意、执行、审核、裁决。
+- **怎么用：** 说“搭一个 agent 团队”“我的审核 bot 该配什么性格？”“给我一个 INTJ 的审核员”或“这个 bot 不像它该有的样子”。人格卡存放在 `~/.hermes/personas/`；需要终端权限。
+- **最适合：** 用 Hermes 搭建分工明确的多 agent 团队。
 
 <a id="s-recap"></a>
 ### recap
 
-[recap.zip](recap.zip) · entry: `spellbook-main/skills/recap/SKILL.md`
+[recap.zip](recap.zip) · 入口：`spellbook-main/skills/recap/SKILL.md`
 
-- **What it does:** Reviews your last N days of Claude Code use from the raw session files (not your memory of it): groups sessions by theme, maps them onto a personal "operating system" coverage table, and outputs patterns, risks and add/remove suggestions for your workflow. Optional cross-machine aggregation.
-- **How to use:** Run `/recap` or say "what have I been doing in Claude lately?". `scripts/extract_sessions.py --days 7` for a weekly view; `--json` for structured output.
-- **Best suited for:** Weekly reflection on how you actually use your coding agent.
+- **能做什么：** 从原始会话文件（而不是你的记忆）回顾你最近 N 天的 Claude Code 使用情况：按主题分组，对照个人“操作系统”覆盖表，输出模式、风险以及工作流的增删建议。可选跨机器汇总。
+- **怎么用：** 运行 `/recap` 或说“看看我这几天用 Claude 做了什么”。周回顾用 `scripts/extract_sessions.py --days 7`；`--json` 输出结构化数据。
+- **最适合：** 每周反思你实际是怎么使用编程 agent 的。
 
 <a id="s-repo-agent-context-audit"></a>
 ### repo-agent-context-audit
 
-[repo-agent-context-audit.zip](repo-agent-context-audit.zip) · entry: `spellbook-main/skills/repo-agent-context-audit/SKILL.md`
+[repo-agent-context-audit.zip](repo-agent-context-audit.zip) · 入口：`spellbook-main/skills/repo-agent-context-audit/SKILL.md`
 
-- **What it does:** Read-only audit and scoring of a repository's agent-readable context: AGENTS.md, CLAUDE.md, WARP.md, CONTRIBUTING.md, `.agents/skills`, and `specs/PRODUCT.md` / `TECH.md`. Recommends the smallest useful change toward a three-layer standard (short routing file, task skills, specs).
-- **How to use:** Ask "review / score our agent instructions" or "standardise agent context across repos". To generate AGENTS.md files, it hands off to `agentsmd-scaffold`.
-- **Best suited for:** Checking whether a repo is easy for coding agents to work in.
+- **能做什么：** 只读审计并评分一个仓库面向 agent 的上下文：AGENTS.md、CLAUDE.md、WARP.md、CONTRIBUTING.md、`.agents/skills` 以及 `specs/PRODUCT.md` / `TECH.md`。推荐向三层标准（简短路由文件、任务技能、规格文档）靠拢的最小有效改动。
+- **怎么用：** 问“评审 / 打分我们的 agent 指令”或“统一各仓库的 agent 上下文规范”。要生成 AGENTS.md 文件时，它会交给 `agentsmd-scaffold`。
+- **最适合：** 检查一个仓库是否方便编程 agent 工作。
 
 <a id="s-review-agent-harness"></a>
 ### review-agent-harness
 
-[review-agent-harness.zip](review-agent-harness.zip) · entry: `spellbook-main/skills/review-agent-harness/SKILL.md`
+[review-agent-harness.zip](review-agent-harness.zip) · 入口：`spellbook-main/skills/review-agent-harness/SKILL.md`
 
-- **What it does:** Reviews whether a repo's coding-agent harness — rules, skills, hooks, memory, validation and recovery loops — can reliably take work from intent through controlled execution, verification, delivery and learning. Three isolated evidence passes, reconciled findings; modes: static (default), episode (with authorised session logs) and longitudinal (compare against a ledger).
-- **How to use:** Ask "is this repo agent-ready?", "why do agents keep failing here?" or "did the harness fix help?". Not for code-only or AGENTS.md-only audits.
-- **Best suited for:** Diagnosing systemic agent failures in a repository.
+- **能做什么：** 评估一个仓库的编程 agent 支撑体系——规则、技能、钩子、记忆、验证和恢复循环——能否可靠地把工作从意图推进到受控执行、验证、交付和学习。三次相互隔离的取证，再合并结论；模式：静态（默认）、情节（加上授权的会话日志）和纵向（与台账对比）。
+- **怎么用：** 问“这个仓库适合 agent 工作吗？”“为什么 agent 在这里老是失败？”或“修复支撑体系后有没有改善？”。不用于只看代码或只看 AGENTS.md 的审计。
+- **最适合：** 诊断仓库中系统性的 agent 失败。
 
 <a id="s-review-gate"></a>
 ### review-gate
 
-[review-gate.zip](review-gate.zip) · entry: `spellbook-main/skills/review-gate/SKILL.md`
+[review-gate.zip](review-gate.zip) · 入口：`spellbook-main/skills/review-gate/SKILL.md`
 
-- **What it does:** Last-mile safety checkpoint before an agent-produced diff is committed, pushed, opened as a PR, merged or applied to your files: produces a concise review pack with risks and verification and blocks landing until a human explicitly approves (or approves with required fixes).
-- **How to use:** Trigger with "review gate", "approve before landing", "diff first then land", or let it run before commit/push/PR steps. Template in `assets/review-pack-template.md`.
-- **Best suited for:** Keeping a human in the loop for agent-made changes.
+- **能做什么：** agent 生成的改动在提交、推送、开 PR、合并或应用到你的文件之前的最后一道安全检查：生成简洁的评审包（风险和验证情况），并阻止落地，直到人明确批准（或批准但要求修改）。
+- **怎么用：** 用“review gate”“落地前先批准”“先看 diff 再落地”触发，或让它在提交/推送/PR 之前自动运行。模板在 `assets/review-pack-template.md`。
+- **最适合：** 让人始终参与 agent 做出的改动。
 
 <a id="s-sol-luna-router"></a>
 ### sol-luna-router
 
-[sol-luna-router.zip](sol-luna-router.zip) · entry: `spellbook-main/skills/sol-luna-router/SKILL.md`
+[sol-luna-router.zip](sol-luna-router.zip) · 入口：`spellbook-main/skills/sol-luna-router/SKILL.md`
 
-- **What it does:** Routes substantial coding or repo-review work through a two-stage setup: "Sol" (the current agent) as commander and verifier, and a separate "Luna Max" CLI worker that does one bounded implementation or investigation, via a bundled runner, followed by Sol's review-and-correction loop. Can also inspect router config and efficiency read-only.
-- **How to use:** Only when you explicitly ask Sol to direct Luna or ask for this router; small tasks stay in the main agent. Requires the Luna CLI and the bundled scripts.
-- **Best suited for:** Auditable delegate-and-verify coding with a separate worker agent.
+- **能做什么：** 把较大的编程或仓库评审工作交给两阶段流程：“Sol”（当前 agent）作为指挥和验证者，另一个“Luna Max”命令行 worker 通过自带的运行器完成一项有边界的实现或调查，之后由 Sol 评审并要求修正。也可以只读查看路由器的配置和效率。
+- **怎么用：** 只有你明确要求 Sol 指挥 Luna，或明确要求使用这个路由器时才用；小任务留在主 agent 里。需要 Luna 命令行工具和自带脚本。
+- **最适合：** 可审计的“委派 + 验证”式编程，配合独立的 worker agent。
 
 <a id="s-threads"></a>
 ### threads
 
-[threads.zip](threads.zip) · entry: `spellbook-main/skills/threads/SKILL.md`
+[threads.zip](threads.zip) · 入口：`spellbook-main/skills/threads/SKILL.md`
 
-- **What it does:** Codex-native orchestration: turns a broad request or a GitHub issue/PR queue into controlled parallel sub-threads with explicit lanes, file ownership, worktrees, dependency-aware dispatch, verification budgets, review and merge gates, a run log and a closure audit. Falls back to a prompt pack when native sub-agents aren't available.
-- **How to use:** Only when you explicitly ask, e.g. `$threads`, "spin up a few Codex sub-agents" / "开几个子 agent", or "work through this issue queue in parallel". Codex runtime only.
-- **Best suited for:** Parallelising a queue of issues or PRs in Codex safely.
+- **能做什么：** Codex 原生编排：把一个大请求或 GitHub issue/PR 队列拆成受控的并行子线程，带明确的分道、文件归属、worktree、按依赖派发、验证预算、评审与合并关卡、运行日志和收尾审计。没有原生子 agent 能力时，退化为输出提示词包。
+- **怎么用：** 只有你明确要求时才用，例如 `$threads`、“开几个子 agent”或“并行处理这个 issue 队列”。仅适用于 Codex 运行环境。
+- **最适合：** 在 Codex 中安全地并行处理一批 issue 或 PR。
 
 <a id="s-vibeguard"></a>
 ### vibeguard
 
-[vibeguard.zip](vibeguard.zip) · entry: `spellbook-main/skills/vibeguard/SKILL.md`
+[vibeguard.zip](vibeguard.zip) · 入口：`spellbook-main/skills/vibeguard/SKILL.md`
 
-- **What it does:** Lightweight anti-hallucination guardrails for three moments: a task-contract checklist before implementation, an evidence-based scoring matrix to prioritise review findings, and a weekly regression retrospective template. Does not install hooks or run scripts.
-- **How to use:** Ask for "guardrails", "a task contract", "risk-score these findings" or "a regression retrospective".
-- **Best suited for:** Keeping AI-assisted work scoped and honest without heavy tooling.
+- **能做什么：** 针对三个时刻的轻量防幻觉护栏：开工前的任务契约清单、按证据给评审发现排序的打分矩阵，以及每周回归复盘模板。不安装钩子，也不运行脚本。
+- **怎么用：** 要求“护栏”“任务契约”“给这些发现打风险分”或“做一次回归复盘”。
+- **最适合：** 不依赖重型工具，让 AI 辅助的工作保持范围清楚、实事求是。
 
 <a id="cat-skills"></a>
-## Building & managing skills
+## 构建与管理技能
 
-Creating, auditing, repairing, archiving and measuring skills — useful for maintaining this repo itself.
+创建、审计、修复、归档和统计技能——也可用来维护本仓库。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`capability-distill`](#s-capability-distill) | Preserving hard-won decision rules from a strong model or session before they're lost. |
-| [`self-evolution`](#s-self-evolution) | Repairing an underperforming or bloated skill without losing what works. |
-| [`skill-archive-manager`](#s-skill-archive-manager) | Keeping a large personal skill library (like this repo) versioned and auditable. |
-| [`skill-audit`](#s-skill-audit) | Deciding what skills to build and how they fit together. |
-| [`skill-creator`](#s-skill-creator) | Building a skill properly, with tests and measurable improvement. |
-| [`skill-ecosystem-doctor`](#s-skill-ecosystem-doctor) | Untangling the same skills installed in several agents and scopes. |
-| [`skill-lifeguard`](#s-skill-lifeguard) | High-value workflow skills that must behave consistently. |
-| [`skill-recaster`](#s-skill-recaster) | Converting prompts and SOPs into clean skills. |
-| [`skill-reforge-foundry`](#s-skill-reforge-foundry) | Capturing a workflow you just did so you never have to correct the agent the same way again. |
-| [`skill-usage-stats`](#s-skill-usage-stats) | Finding dead weight in your skill library. |
+| [`capability-distill`](#s-capability-distill) | 在丢失之前，保存强模型或某次会话中来之不易的决策规则。 |
+| [`self-evolution`](#s-self-evolution) | 修复表现不佳或臃肿的技能，同时不丢掉原本好用的部分。 |
+| [`skill-archive-manager`](#s-skill-archive-manager) | 让一个大型个人技能库（比如本仓库）有版本、可审计。 |
+| [`skill-audit`](#s-skill-audit) | 决定要做哪些技能以及它们如何配合。 |
+| [`skill-creator`](#s-skill-creator) | 有测试、可量化改进地正确构建技能。 |
+| [`skill-ecosystem-doctor`](#s-skill-ecosystem-doctor) | 理清同一批技能在多个 agent 和范围里的安装情况。 |
+| [`skill-lifeguard`](#s-skill-lifeguard) | 必须稳定发挥的高价值工作流技能。 |
+| [`skill-recaster`](#s-skill-recaster) | 把提示词和 SOP 转成干净的技能。 |
+| [`skill-reforge-foundry`](#s-skill-reforge-foundry) | 把你刚做完的工作流保存下来，以后不必再重复同样的纠正。 |
+| [`skill-usage-stats`](#s-skill-usage-stats) | 找出技能库里的“死重”。 |
 
 <a id="s-capability-distill"></a>
 ### capability-distill
 
-[capability-distill.zip](capability-distill.zip) · entry: `spellbook-main/skills/capability-distill/SKILL.md`
+[capability-distill.zip](capability-distill.zip) · 入口：`spellbook-main/skills/capability-distill/SKILL.md`
 
-- **What it does:** Extracts non-obvious judgment rules ("why choose option A over a reasonable B") from an approved strong-model interview or a real task transcript and packages them as an auditable "judgment packet" — the input that `skill-audit` and `skill-creator` then turn into a skill.
-- **How to use:** Say "distil this model's judgment", "capture the key decisions from this task", or "the model window is closing, keep its judgment for this scenario". It only reads material you approve. Not for writing a SKILL.md directly or for generic best practices.
-- **Best suited for:** Preserving hard-won decision rules from a strong model or session before they're lost.
+- **能做什么：** 从经批准的强模型访谈或真实任务记录中提取不明显的判断规则（“为什么在两个合理选项中选 A 而不是 B”），打包成可审计的“judgment packet”——之后由 `skill-audit` 和 `skill-creator` 把它变成技能。
+- **怎么用：** 说“蒸馏这个模型的判断力”“把这次任务的关键决策固化下来”或“模型窗口要关了，保留它在这类场景的判断”。它只读取你批准的材料。不用于直接写 SKILL.md 或泛泛的最佳实践。
+- **最适合：** 在丢失之前，保存强模型或某次会话中来之不易的决策规则。
 
 <a id="s-self-evolution"></a>
 ### self-evolution
 
-[self-evolution.zip](self-evolution.zip) · entry: `self-evolution/SKILL.md`
+[self-evolution.zip](self-evolution.zip) · 入口：`self-evolution/SKILL.md`
 
-- **What it does:** "Self Evolution" — audits, diagnoses, improves, simplifies, rebuilds, cleans and validates agent skills (SKILL.md packages): locks the original intent, scans the whole package, diagnoses root causes, chooses a local patch, structural repair or full rebuild, validates behaviour before claiming improvement, and prepares clean external releases.
-- **How to use:** Point it at a skill and say "audit this skill", "why are its outputs weak?", "simplify it" or "make it safe to share".
-- **Best suited for:** Repairing an underperforming or bloated skill without losing what works.
+- **能做什么：** “自我进化”——审计、诊断、改进、精简、重建、清理和验证 agent 技能（SKILL.md 包）：锁定原始意图，扫描整个包，诊断根本原因，在局部修补、结构修复和完全重建之间选择，在声称改进之前先验证行为，并准备干净的对外发布版本。
+- **怎么用：** 指定一个技能，说“审计这个技能”“它的输出为什么很弱？”“精简它”或“让它可以安全分享”。
+- **最适合：** 修复表现不佳或臃肿的技能，同时不丢掉原本好用的部分。
 
 <a id="s-skill-archive-manager"></a>
 ### skill-archive-manager
 
-[skill-archive-manager.zip](skill-archive-manager.zip) · entry: `archive-center-suite/skill-archive-manager/SKILL.md`
+[skill-archive-manager.zip](skill-archive-manager.zip) · 入口：`archive-center-suite/skill-archive-manager/SKILL.md`
 
-- **What it does:** Governance hub for your user-level skill collection: discovers skills, registers them in an archive centre, manages versions and release status, keeps indexes and hashes, audits integrity, resolves conflicts, tracks issues to closure, refreshes a management page and packages the whole centre for migration to another machine. Five-stage pipeline: collect → verify → conflict → refresh → migrate.
-- **How to use:** Say "archive / register these skills", "audit the skill archive", "resolve this version conflict", "refresh the management page" or "build a migration pack". Install with `install.py`. It ships in `archive-center-suite/` and relies on that suite's internal tooling.
-- **Best suited for:** Keeping a large personal skill library (like this repo) versioned and auditable.
+- **能做什么：** 用户级技能集合的治理中枢：发现技能、登记进归集中心、管理版本和发布状态、维护索引和哈希、审计完整性、裁决冲突、跟踪问题直到闭环、刷新管理页面，并把整个归集中心打包迁移到另一台电脑。五阶段流水线：归集 → 校验 → 冲突处理 → 刷新 → 随迁。
+- **怎么用：** 说“把这些技能归档 / 登记”“审计技能归档”“处理这个版本冲突”“刷新管理页”或“做一个迁移包”。用 `install.py` 安装。它位于 `archive-center-suite/` 中，依赖该套件的内部工具。
+- **最适合：** 让一个大型个人技能库（比如本仓库）有版本、可审计。
 
 <a id="s-skill-audit"></a>
 ### skill-audit
 
-[skill-audit.zip](skill-audit.zip) · entry: `spellbook-main/skills/skill-audit/SKILL.md`
+[skill-audit.zip](skill-audit.zip) · 入口：`spellbook-main/skills/skill-audit/SKILL.md`
 
-- **What it does:** Strategy-level skill design and review based on Anthropic's "Lessons from building Claude Code: How we use skills" (June 2026): decides whether a workflow deserves a skill, classifies it, drafts a skill brief, designs progressive disclosure and operational details, plans library structure, distribution and usage measurement, then hands off to `skill-creator`.
-- **How to use:** Ask "should this be a skill?", "review this skill", "plan our skill library" or "help me write a better trigger description".
-- **Best suited for:** Deciding what skills to build and how they fit together.
+- **能做什么：** 基于 Anthropic 文章《Lessons from building Claude Code: How we use skills》（2026 年 6 月）的战略层面技能设计与评审：判断一个工作流是否值得做成技能，给它分类，起草技能简报，设计渐进式披露和运行细节，规划技能库结构、分发和使用度量，然后交给 `skill-creator`。
+- **怎么用：** 问“这个该做成技能吗？”“评审这个技能”“规划我们的技能库”或“帮我写一个更好的触发描述”。
+- **最适合：** 决定要做哪些技能以及它们如何配合。
 
 <a id="s-skill-creator"></a>
 ### skill-creator
 
-[skill-creator.zip](skill-creator.zip) · entry: `spellbook-main/skills/skill-creator/SKILL.md`
+[skill-creator.zip](skill-creator.zip) · 入口：`spellbook-main/skills/skill-creator/SKILL.md`
 
-- **What it does:** Creates new skills and iteratively improves existing ones: captures intent, interviews, writes the SKILL.md, runs test prompts with and without the skill, grades and aggregates results in an eval viewer, iterates, supports blind comparisons and optimises the description for triggering accuracy.
-- **How to use:** Say "create a skill for X", "improve this skill", "run evals on my skill" or "optimise the skill description". Install `requirements.txt` for the eval scripts.
-- **Best suited for:** Building a skill properly, with tests and measurable improvement.
+- **能做什么：** 创建新技能并迭代改进已有技能：明确意图、访谈、编写 SKILL.md、在有/无技能两种情况下运行测试提示词、在评测查看器中打分和汇总结果、迭代改进、支持盲测对比，并优化描述以提高触发准确率。
+- **怎么用：** 说“为 X 创建一个技能”“改进这个技能”“给我的技能跑评测”或“优化技能描述”。评测脚本需要安装 `requirements.txt`。
+- **最适合：** 有测试、可量化改进地正确构建技能。
 
 <a id="s-skill-ecosystem-doctor"></a>
 ### skill-ecosystem-doctor
 
-[skill-ecosystem-doctor.zip](skill-ecosystem-doctor.zip) · entry: `spellbook-main/skills/skill-ecosystem-doctor/SKILL.md`
+[skill-ecosystem-doctor.zip](skill-ecosystem-doctor.zip) · 入口：`spellbook-main/skills/skill-ecosystem-doctor/SKILL.md`
 
-- **What it does:** Audits and safely repairs cross-runtime skill governance: which copy is canonical, divergent or duplicate projections between tools, exposure scopes and budgets, lifecycle drift, quarantine and retirement. Deterministic audit → classified findings → repair plan → approved repairs only → cross-runtime verification. Never runs unattended.
-- **How to use:** Ask explicitly for cross-runtime or cross-scope skill governance ("my skills differ between Claude Code and Codex", "which copy is the source of truth?"). For usage stats use `skill-usage-stats`.
-- **Best suited for:** Untangling the same skills installed in several agents and scopes.
+- **能做什么：** 审计并安全修复跨运行时的技能治理：哪个副本是正本、不同工具之间分叉或重复的投影、暴露范围和预算、生命周期漂移、隔离和退役。确定性审计 → 分类结论 → 修复计划 → 只执行已批准的修复 → 跨运行时验证。从不无人值守运行。
+- **怎么用：** 明确要求跨运行时或跨范围的技能治理时使用（“我的技能在 Claude Code 和 Codex 里不一样”“哪个副本才是正本？”）。看使用统计用 `skill-usage-stats`。
+- **最适合：** 理清同一批技能在多个 agent 和范围里的安装情况。
 
 <a id="s-skill-lifeguard"></a>
 ### skill-lifeguard
 
-[skill-lifeguard.zip](skill-lifeguard.zip) · entry: `spellbook-main/skills/skill-lifeguard/SKILL.md`
+[skill-lifeguard.zip](skill-lifeguard.zip) · 入口：`spellbook-main/skills/skill-lifeguard/SKILL.md`
 
-- **What it does:** Makes brittle or drifting skills reliable by adding a Reliable Skill Contract: explicit negative examples, verification checkpoints, machine-checkable done conditions, replay or smoke hooks and drift signals — and turns failure logs into skill patches.
-- **How to use:** Say "this skill keeps failing", "make this skill reliable" or "turn this failure log into a skill patch". A contract template is in `assets/`.
-- **Best suited for:** High-value workflow skills that must behave consistently.
+- **能做什么：** 通过加上“可靠技能契约”让脆弱或漂移的技能变可靠：明确的反面示例、验证检查点、机器可检查的完成条件、回放或冒烟测试钩子以及漂移信号——并把失败日志转成技能补丁。
+- **怎么用：** 说“这个技能老是失败”“让这个技能更可靠”或“把这份失败日志变成技能补丁”。契约模板在 `assets/` 里。
+- **最适合：** 必须稳定发挥的高价值工作流技能。
 
 <a id="s-skill-recaster"></a>
 ### skill-recaster
 
-[skill-recaster.zip](skill-recaster.zip) · entry: `skill-recaster-v1.0.0/SKILL.md`
+[skill-recaster.zip](skill-recaster.zip) · 入口：`skill-recaster-v1.0.0/SKILL.md`
 
-- **What it does:** Recasts repeated tasks, old prompts, SOPs or messy skills into well-bounded, installable, maintainable agent skills: task contract → decision map (should/shouldn't trigger, conflicts, stop conditions) → behaviour path → just-enough file structure → scenario stress tests (normal, missing, ambiguous, neighbouring, conflicting, pressure) with an honest maturity label.
-- **How to use:** Say "turn this prompt / SOP into a skill", "fix my SKILL.md" or "design the trigger boundary". Entry is detected automatically: from scratch, recast an old draft, or repair an existing skill.
-- **Best suited for:** Converting prompts and SOPs into clean skills.
+- **能做什么：** 把重复任务、旧提示词、SOP 或失控的技能重构成边界清楚、可安装、可维护的 agent 技能：任务契约 → 决策地图（该触发/不该触发、冲突、停止条件）→ 行为路径 → 刚好够用的文件结构 → 场景攻防（正常、缺失、模糊、近邻、冲突、压力），并如实标注成熟度。
+- **怎么用：** 说“把这个提示词 / SOP 做成技能”“修复我的 SKILL.md”或“设计触发边界”。入口会自动识别：从零成型、旧稿重铸或修复既有技能。
+- **最适合：** 把提示词和 SOP 转成干净的技能。
 
 <a id="s-skill-reforge-foundry"></a>
 ### skill-reforge-foundry
 
-[skill-reforge-foundry.zip](skill-reforge-foundry.zip) · entry: `skill-reforge-foundry-v5.1.0/SKILL.md` · `skill-reforge-foundry/SKILL.md`
+[skill-reforge-foundry.zip](skill-reforge-foundry.zip) · 入口：`skill-reforge-foundry-v5.1.0/SKILL.md` · `skill-reforge-foundry/SKILL.md`
 
-- **What it does:** Builds, rebuilds, tests and packages reusable agent skills from a goal, rough prompt, SOP, existing skill, failure report — or the experience you just demonstrated in a conversation ("turn this chat into a skill"). Beginner-friendly seven-step flow, can create a small family of skills, writes realistic test cases and produces a release ZIP. The zip contains v5.1.0 (English, builder-focused) and a newer Chinese-first edition focused on extracting skills from conversations.
-- **How to use:** Say "把刚才的经验做成 skill", "turn this chat into a skill", "build / upgrade / patch a skill", or give an old skill or failure report.
-- **Best suited for:** Capturing a workflow you just did so you never have to correct the agent the same way again.
+- **能做什么：** 从目标、粗糙的提示词、SOP、已有技能、失败报告——或你刚在对话中展示的经验（“把刚才的经验做成 skill”）——构建、重建、测试并打包可复用的 agent 技能。适合新手的七步流程，可以生成一小组技能，编写真实的测试用例并产出发布用的 ZIP。压缩包里有 v5.1.0（英文，侧重构建）和更新的中文版（侧重从对话中萃取技能）。
+- **怎么用：** 说“把刚才的经验做成 skill”“turn this chat into a skill”“帮我做 / 升级 / 修补一个 skill”，或提供旧技能或失败报告。
+- **最适合：** 把你刚做完的工作流保存下来，以后不必再重复同样的纠正。
 
 <a id="s-skill-usage-stats"></a>
 ### skill-usage-stats
 
-[skill-usage-stats.zip](skill-usage-stats.zip) · entry: `spellbook-main/skills/skill-usage-stats/SKILL.md`
+[skill-usage-stats.zip](skill-usage-stats.zip) · 入口：`spellbook-main/skills/skill-usage-stats/SKILL.md`
 
-- **What it does:** Two read-only scanners: `agent_health.py` checks locally verifiable Claude Code and Codex configuration health, and `skill_usage_report.py` reports skill invocation evidence and low-use candidates (including enabled plugins). Reports in Chinese or English.
-- **How to use:** Ask for "agent health check", "skill usage ranking" or "which skills do I never use?". For governance and repairs use `skill-ecosystem-doctor`.
-- **Best suited for:** Finding dead weight in your skill library.
+- **能做什么：** 两个只读扫描器：`agent_health.py` 检查可在本地验证的 Claude Code 和 Codex 配置健康状况，`skill_usage_report.py` 报告技能调用证据和低使用候选（包括已启用的插件）。报告支持中文或英文。
+- **怎么用：** 要求“agent 健康检查”“技能使用排行”或“哪些技能我从来没用过？”。治理和修复用 `skill-ecosystem-doctor`。
+- **最适合：** 找出技能库里的“死重”。
 
 <a id="cat-ai-infra"></a>
-## Local models, GPUs & API gateways
+## 本地模型、GPU 与 API 网关
 
-Running local models, checking GPU servers and metering API access.
+运行本地模型、查看 GPU 服务器和 API 计费。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`cliproxy-newapi-stack`](#s-cliproxy-newapi-stack) | Adding billing and per-user tokens to a self-hosted CLIProxyAPI deployment. |
-| [`gemma4-local-deploy`](#s-gemma4-local-deploy) | Running a local Gemma 4 model server on a Mac. |
-| [`gpu-use`](#s-gpu-use) | Quick "who is using which GPU?" checks on shared servers. |
+| [`cliproxy-newapi-stack`](#s-cliproxy-newapi-stack) | 给自建的 CLIProxyAPI 部署加上计费和分用户令牌。 |
+| [`gemma4-local-deploy`](#s-gemma4-local-deploy) | 在 Mac 上运行本地 Gemma 4 模型服务。 |
+| [`gpu-use`](#s-gpu-use) | 快速查看共享服务器上“谁在用哪张卡”。 |
 
 <a id="s-cliproxy-newapi-stack"></a>
 ### cliproxy-newapi-stack
 
-[cliproxy-newapi-stack.zip](cliproxy-newapi-stack.zip) · entry: `spellbook-main/skills/cliproxy-newapi-stack/SKILL.md`
+[cliproxy-newapi-stack.zip](cliproxy-newapi-stack.zip) · 入口：`spellbook-main/skills/cliproxy-newapi-stack/SKILL.md`
 
-- **What it does:** Deploys a NewAPI (`calciumion/new-api`) billing, rate-limit and multi-user token layer in front of an already-verified CLIProxyAPI upstream, turning Codex/Claude/Gemini/Qwen subscription accounts into a metered OpenAI-compatible API. Covers Docker deploy, container-to-host bridging (172.17.0.1), model pricing ratios, quota fixes, hot-loading OAuth credentials and dual-path verification.
-- **How to use:** Give the SSH target (e.g. `root@1.2.3.4`) and ports. Triggers on phrases like "add NewAPI to my existing cliproxy" or "NewAPI prices are wrong". It does not install bare CLIProxyAPI, and it asks before installing containers or touching production quotas.
-- **Best suited for:** Adding billing and per-user tokens to a self-hosted CLIProxyAPI deployment.
+- **能做什么：** 在已验证可用的 CLIProxyAPI 上游之前部署 NewAPI（`calciumion/new-api`）计费、限流和多用户令牌层，把 Codex/Claude/Gemini/Qwen 订阅账号包装成可计费的 OpenAI 兼容 API。涵盖 Docker 部署、容器到宿主机桥接（172.17.0.1）、模型计费倍率、额度修正、OAuth 凭据热加载和双路径验证。
+- **怎么用：** 提供 SSH 目标（如 `root@1.2.3.4`）和端口。“给现有 cliproxy 加 NewAPI”“NewAPI 价格不对”等说法会触发。它不负责安装裸 CLIProxyAPI，在安装容器或修改生产额度前会先征求同意。
+- **最适合：** 给自建的 CLIProxyAPI 部署加上计费和分用户令牌。
 
 <a id="s-gemma4-local-deploy"></a>
 ### gemma4-local-deploy
 
-[gemma4-local-deploy.zip](gemma4-local-deploy.zip) · entry: `spellbook-main/skills/gemma4-local-deploy/SKILL.md`
+[gemma4-local-deploy.zip](gemma4-local-deploy.zip) · 入口：`spellbook-main/skills/gemma4-local-deploy/SKILL.md`
 
-- **What it does:** Deploys Gemma 4 12B locally on a Mac / Apple Silicon: installs or upgrades llama.cpp, downloads a GGUF quant, serves an OpenAI-compatible API with `llama-server` (or via Ollama), runs it in tmux bound to 127.0.0.1, and verifies health, chat, resource use and common failures. Profiles: default Q4_K_M, 64K/128K long context, QAT Q4_0 @ 256K, side-by-side comparison demo.
-- **How to use:** Say "deploy Gemma 4 locally", optionally with quant, port and background preference. Defaults: `ggml-org/gemma-4-12B-it-GGUF`, Q4_K_M, `http://127.0.0.1:8080`, 32K context.
-- **Best suited for:** Running a local Gemma 4 model server on a Mac.
+- **能做什么：** 在 Mac / Apple Silicon 本地部署 Gemma 4 12B：安装或升级 llama.cpp，下载 GGUF 量化模型，用 `llama-server`（或 Ollama）提供 OpenAI 兼容 API，在 tmux 中后台运行并只监听 127.0.0.1，验证健康检查、问答、资源占用和常见故障。预设：默认 Q4_K_M、64K/128K 长上下文、QAT Q4_0 @ 256K、左右对比演示。
+- **怎么用：** 说“本地部署 Gemma 4”，可指定量化、端口和是否后台运行。默认：`ggml-org/gemma-4-12B-it-GGUF`、Q4_K_M、`http://127.0.0.1:8080`、32K 上下文。
+- **最适合：** 在 Mac 上运行本地 Gemma 4 模型服务。
 
 <a id="s-gpu-use"></a>
 ### gpu-use
 
-[gpu-use.zip](gpu-use.zip) · entry: `spellbook-main/skills/gpu-use/SKILL.md`
+[gpu-use.zip](gpu-use.zip) · 入口：`spellbook-main/skills/gpu-use/SKILL.md`
 
-- **What it does:** Checks GPU usage on a remote server over SSH: per-card memory and utilisation, running processes and which Docker container owns each one, multi-instance servers inside a single container, and free capacity, with a status label per card.
-- **How to use:** Run with `user@host -p port`, or with no argument to use the default server — note the SKILL.md ships with the author's own server hard-coded, so edit that line before use. Say "check GPU usage" / "显存占用".
-- **Best suited for:** Quick "who is using which GPU?" checks on shared servers.
+- **能做什么：** 通过 SSH 查看远程服务器的 GPU 使用情况：每张卡的显存和利用率、正在运行的进程及其所属 Docker 容器、单容器多实例服务和空闲资源，并给每张卡标注状态。
+- **怎么用：** 带参数 `user@host -p port` 运行，或不带参数使用默认服务器——注意 SKILL.md 里写死的是原作者的服务器，使用前要改成你自己的。说“查看 GPU 使用”或“显存占用”。
+- **最适合：** 快速查看共享服务器上“谁在用哪张卡”。
 
 <a id="cat-network"></a>
-## Network & proxy troubleshooting
+## 网络与代理排障
 
-Clash / mihomo, IP quality, reconnects, network tuning and remote desktop.
+Clash / mihomo、IP 质量、断线重连、网络调优和远程桌面。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`clash-doctor`](#s-clash-doctor) | Fixing and managing Clash Verge proxy setups, especially routing for AI tools. |
-| [`clash-routes`](#s-clash-routes) | Quickly answering "which proxy is this app actually using?". |
-| [`ip-check`](#s-ip-check) | Vetting a proxy or VPS IP before using it for AI services. |
-| [`network-reconnect-repair`](#s-network-reconnect-repair) | "Keeps reconnecting" problems, especially with AI tools behind proxies. |
-| [`optimize-network`](#s-optimize-network) | Evidence-based network tuning on a Mac without breaking your proxy setup. |
-| [`rustdesk-doctor`](#s-rustdesk-doctor) | RustDesk issues on machines running Clash Verge. |
+| [`clash-doctor`](#s-clash-doctor) | 修复和管理 Clash Verge 代理配置，尤其是 AI 工具的分流。 |
+| [`clash-routes`](#s-clash-routes) | 快速回答“这个应用到底走的是哪个代理？”。 |
+| [`ip-check`](#s-ip-check) | 在用于 AI 服务之前先验收代理或 VPS 的 IP。 |
+| [`network-reconnect-repair`](#s-network-reconnect-repair) | “一直在重连”的问题，尤其是代理后面的 AI 工具。 |
+| [`optimize-network`](#s-optimize-network) | 在 Mac 上基于证据调优网络，又不破坏你的代理配置。 |
+| [`rustdesk-doctor`](#s-rustdesk-doctor) | 运行 Clash Verge 的电脑上的 RustDesk 问题。 |
 
 <a id="s-clash-doctor"></a>
 ### clash-doctor
 
-[clash-doctor.zip](clash-doctor.zip) · entry: `spellbook-main/skills/clash-doctor/SKILL.md`
+[clash-doctor.zip](clash-doctor.zip) · 入口：`spellbook-main/skills/clash-doctor/SKILL.md`
 
-- **What it does:** Diagnostics and profile management for Clash Verge / mihomo: proxy failures, routing AI tools, local hub topology, multi-machine alignment, TUN bypass, cloning or switching subscriptions, and configs that didn't take effect after sync. Diagnose and align are read-only; writes need confirmation.
-- **How to use:** Arguments include `status`, `profiles`, `hub`, `align`, `roles`, `switch-check <name>`, `clone <src> <dst>`, `setup-ai <name>`, `switch <name>`, `bypass <IP>`. For per-process routes use `clash-routes`; for exit-IP quality use `ip-check`.
-- **Best suited for:** Fixing and managing Clash Verge proxy setups, especially routing for AI tools.
+- **能做什么：** Clash Verge / mihomo 的诊断与配置管理：代理失败、AI 工具分流、本地 Hub 拓扑、多机对齐、TUN 绕过、克隆或切换订阅，以及同步后配置未生效。诊断和对齐是只读的；写入前需要你确认。
+- **怎么用：** 参数包括 `status`、`profiles`、`hub`、`align`、`roles`、`switch-check <name>`、`clone <src> <dst>`、`setup-ai <name>`、`switch <name>`、`bypass <IP>`。看单个进程的线路用 `clash-routes`；查出口 IP 质量用 `ip-check`。
+- **最适合：** 修复和管理 Clash Verge 代理配置，尤其是 AI 工具的分流。
 
 <a id="s-clash-routes"></a>
 ### clash-routes
 
-[clash-routes.zip](clash-routes.zip) · entry: `spellbook-main/skills/clash-routes/SKILL.md`
+[clash-routes.zip](clash-routes.zip) · 入口：`spellbook-main/skills/clash-routes/SKILL.md`
 
-- **What it does:** Read-only viewer that shows which mihomo proxy chain each local process is using right now (rule → policy group → real exit) — e.g. whether Claude, Codex, Gemini, ChatGPT or the browser goes through the intended proxy.
-- **How to use:** Run with an optional process name (defaults to all active connections). Reads the Clash Verge controller without printing secrets. Profile changes belong to `clash-doctor`.
-- **Best suited for:** Quickly answering "which proxy is this app actually using?".
+- **能做什么：** 只读查看本机每个进程当前走的是哪条 mihomo 代理链（规则 → 策略组 → 真实出口）——例如 Claude、Codex、Gemini、ChatGPT 或浏览器是否走了预期的代理。
+- **怎么用：** 可带一个进程名参数（默认显示所有活跃连接）。读取 Clash Verge 控制接口时不会打印密钥。修改配置交给 `clash-doctor`。
+- **最适合：** 快速回答“这个应用到底走的是哪个代理？”。
 
 <a id="s-ip-check"></a>
 ### ip-check
 
-[ip-check.zip](ip-check.zip) · entry: `spellbook-main/skills/ip-check/SKILL.md`
+[ip-check.zip](ip-check.zip) · 入口：`spellbook-main/skills/ip-check/SKILL.md`
 
-- **What it does:** Checks the quality of an IP or residential/datacentre proxy node: registry and geo-database consistency, ASN/org, reputation and blacklists, residential authenticity, BGP announcements, service unlock for Grok/Claude/ChatGPT and latency triangulation — to catch IPs that are physically in one country but listed in another (causing region locks). Read-only.
-- **How to use:** Say "check this IP" or give SOCKS5 proxy credentials; it runs `ipcheck.py` and returns a scorecard. Switching nodes is left to `clash-doctor`.
-- **Best suited for:** Vetting a proxy or VPS IP before using it for AI services.
+- **能做什么：** 检测 IP 或住宅/机房代理节点的质量：注册库与地理库是否一致、ASN/机构、信誉和黑名单、住宅真实性、BGP 宣告、Grok/Claude/ChatGPT 解锁情况以及延迟三角定位——识破“物理在一个国家、纸面在另一个国家”的 IP（会导致区域锁）。只读。
+- **怎么用：** 说“查这个 IP”，或给出 SOCKS5 代理凭证；它会运行 `ipcheck.py` 并给出评分卡。切换节点交给 `clash-doctor`。
+- **最适合：** 在用于 AI 服务之前先验收代理或 VPS 的 IP。
 
 <a id="s-network-reconnect-repair"></a>
 ### network-reconnect-repair
 
-[network-reconnect-repair.zip](network-reconnect-repair.zip) · entry: `network-reconnect-repair/SKILL.md`
+[network-reconnect-repair.zip](network-reconnect-repair.zip) · 入口：`network-reconnect-repair/SKILL.md`
 
-- **What it does:** Diagnoses and repairs repeated reconnects, intermittent drops, DNS failures, broken streaming or app-specific connectivity on Windows, macOS and Linux — including Codex network errors. Locates the actual break (link, app, long-lived stream, VPN/TUN switching, resolver) and applies the smallest fix instead of a generic reset.
-- **How to use:** Describe the affected app and device, OS, connection type, VPN/proxy state and when it started; it checks what it can directly and asks only for the missing essentials.
-- **Best suited for:** "Keeps reconnecting" problems, especially with AI tools behind proxies.
+- **能做什么：** 诊断并修复 Windows、macOS 和 Linux 上反复重连、间歇断网、DNS 失败、流式响应失败或某个应用连不上的问题——包括 Codex 网络错误。先定位真正的断点（链路、应用、长连接、VPN/TUN 切换、解析器），再做最小修复，而不是一键重置。
+- **怎么用：** 描述受影响的应用和设备、系统、接入方式、VPN/代理状态以及何时开始出问题；它会先直接检查能检查的，只询问缺少的关键信息。
+- **最适合：** “一直在重连”的问题，尤其是代理后面的 AI 工具。
 
 <a id="s-optimize-network"></a>
 ### optimize-network
 
-[optimize-network.zip](optimize-network.zip) · entry: `spellbook-main/skills/optimize-network/SKILL.md`
+[optimize-network.zip](optimize-network.zip) · 入口：`spellbook-main/skills/optimize-network/SKILL.md`
 
-- **What it does:** Safely diagnoses and improves local network speed, latency, jitter, DNS, Wi-Fi/Ethernet, macOS network services and bufferbloat: read-only baseline first, then small reversible experiments with before/after verification. Explicitly protects Clash Verge, Mihomo, Shadowrocket, Tailscale, V2Ray, Surge and corporate VPNs.
-- **How to use:** Arguments: `diagnose`, `optimize`, `report` plus an optional target domain. Or say "make my network faster", "why is Wi-Fi slow?", "Codex keeps lagging".
-- **Best suited for:** Evidence-based network tuning on a Mac without breaking your proxy setup.
+- **能做什么：** 安全地诊断并改善本机网络速度、延迟、抖动、DNS、Wi-Fi/有线、macOS 网络服务和缓冲膨胀：先做只读基线，再做小的可回退实验，并验证前后效果。明确保护 Clash Verge、Mihomo、Shadowrocket、Tailscale、V2Ray、Surge 和公司 VPN。
+- **怎么用：** 参数：`diagnose`、`optimize`、`report`，可加目标域名。或者说“让我的网络更快”“Wi-Fi 为什么慢？”“Codex 一直卡”。
+- **最适合：** 在 Mac 上基于证据调优网络，又不破坏你的代理配置。
 
 <a id="s-rustdesk-doctor"></a>
 ### rustdesk-doctor
 
-[rustdesk-doctor.zip](rustdesk-doctor.zip) · entry: `spellbook-main/skills/rustdesk-doctor/SKILL.md`
+[rustdesk-doctor.zip](rustdesk-doctor.zip) · 入口：`spellbook-main/skills/rustdesk-doctor/SKILL.md`
 
-- **What it does:** Diagnoses RustDesk connection problems — can't connect, no ID shown, registration fails — by checking the client process, config and logs, Clash/Mihomo interference (fake-IP DNS, TUN routing), network reachability, the self-hosted server (over SSH if possible) and the local-IP detection bug.
-- **How to use:** Run with your self-hosted server IP as an argument (optional) and say "RustDesk won't connect". It follows the steps in order and gives a combined diagnosis.
-- **Best suited for:** RustDesk issues on machines running Clash Verge.
+- **能做什么：** 诊断 RustDesk 连接问题——连不上、ID 不显示、注册失败——依次检查客户端进程、配置和日志，Clash/Mihomo 干扰（fake-IP DNS、TUN 路由），网络连通性，自建服务器（能 SSH 时）以及本机 IP 误判问题。
+- **怎么用：** 可带自建服务器 IP 参数运行，说“RustDesk 连不上”。它会按顺序执行各步骤并给出综合诊断。
+- **最适合：** 运行 Clash Verge 的电脑上的 RustDesk 问题。
 
 <a id="cat-system"></a>
-## Computer & editor maintenance
+## 电脑与编辑器维护
 
-Disk cleanup, slow-machine diagnosis and editor performance.
+磁盘清理、电脑卡顿诊断和编辑器性能。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`disk-cleaner`](#s-disk-cleaner) | Reclaiming space from `node_modules`, `target`, caches and old installers on a dev machine. |
-| [`storage-gc-guardian`](#s-storage-gc-guardian) | Safe, reversible cleanup when you are low on space. |
-| [`system-doctor`](#s-system-doctor) | Quickly finding what is bogging down your Mac. |
-| [`vscode-doctor`](#s-vscode-doctor) | Finding the real cause of editor slowness. |
+| [`disk-cleaner`](#s-disk-cleaner) | 在开发机上回收 `node_modules`、`target`、缓存和旧安装包占用的空间。 |
+| [`storage-gc-guardian`](#s-storage-gc-guardian) | 空间不足时安全、可回退的清理。 |
+| [`system-doctor`](#s-system-doctor) | 快速找出是什么拖慢了你的 Mac。 |
+| [`vscode-doctor`](#s-vscode-doctor) | 找到编辑器变慢的真正原因。 |
 
 <a id="s-disk-cleaner"></a>
 ### disk-cleaner
 
-[disk-cleaner.zip](disk-cleaner.zip) · entry: `spellbook-main/skills/disk-cleaner/SKILL.md`
+[disk-cleaner.zip](disk-cleaner.zip) · 入口：`spellbook-main/skills/disk-cleaner/SKILL.md`
 
-- **What it does:** Scans disk usage and finds safely deletable caches, build outputs and installers, then frees space interactively from a numbered menu (high value / medium / reference-only) and verifies the result. Discovers real project roots instead of assuming folder names.
-- **How to use:** Run with an optional path (defaults to the home directory), e.g. "clean up my disk" or `disk-cleaner ~/code`. It only deletes what you pick.
-- **Best suited for:** Reclaiming space from `node_modules`, `target`, caches and old installers on a dev machine.
+- **能做什么：** 扫描磁盘占用，找出可以安全删除的缓存、编译产物和安装包，然后用编号菜单（高价值 / 中等 / 仅供参考）交互式释放空间并验证结果。会发现真实的项目根目录，而不是假定固定的文件夹名。
+- **怎么用：** 可带一个路径参数（默认主目录），例如“清理我的磁盘”或 `disk-cleaner ~/code`。只删除你选中的项目。
+- **最适合：** 在开发机上回收 `node_modules`、`target`、缓存和旧安装包占用的空间。
 
 <a id="s-storage-gc-guardian"></a>
 ### storage-gc-guardian
 
-[storage-gc-guardian.zip](storage-gc-guardian.zip) · entry: `storage-gc-guardian/SKILL.md`
+[storage-gc-guardian.zip](storage-gc-guardian.zip) · 入口：`storage-gc-guardian/SKILL.md`
 
-- **What it does:** Transactional disk cleanup: audits stale temp files, rebuildable package caches and diagnostic residue, builds an evidence-bound plan, moves items to a reversible quarantine and deletes permanently only on explicit commit. Treats unknown data as not-garbage and never touches projects, Downloads, personal media, app data or Codex state by inference. Stdlib Python engine.
-- **How to use:** Say "free up disk space" or "clean caches". It shows the plan first; restore is possible until you commit.
-- **Best suited for:** Safe, reversible cleanup when you are low on space.
+- **能做什么：** 事务式的磁盘清理：审计过期临时文件、可重建的包缓存和诊断残留，建立有证据依据的计划，先把项目移到可恢复的隔离区，只有你明确提交时才永久删除。把未知数据视为“不是垃圾”，绝不凭推断去动项目、下载文件夹、个人媒体、应用数据或 Codex 状态。基于标准库的 Python 引擎。
+- **怎么用：** 说“释放磁盘空间”或“清理缓存”。它会先给出计划；在提交之前都可以恢复。
+- **最适合：** 空间不足时安全、可回退的清理。
 
 <a id="s-system-doctor"></a>
 ### system-doctor
 
-[system-doctor.zip](system-doctor.zip) · entry: `spellbook-main/skills/system-doctor/SKILL.md`
+[system-doctor.zip](system-doctor.zip) · 入口：`spellbook-main/skills/system-doctor/SKILL.md`
 
-- **What it does:** Diagnoses a slow computer: load and uptime, memory pressure, swap, CPU and memory top-20, per-app grouping (e.g. all Chrome renderers together), zombie processes and anomalies, then a structured report with recommendations and optional interactive actions.
-- **How to use:** Say "my computer is slow", "what's using my CPU / memory?". No arguments. Commands target macOS.
-- **Best suited for:** Quickly finding what is bogging down your Mac.
+- **能做什么：** 诊断电脑卡顿：负载与运行时间、内存压力、Swap、CPU 和内存前 20 名、按应用分组（例如把所有 Chrome 渲染进程合并统计）、僵尸进程和异常，然后给出结构化报告、建议和可选的交互操作。
+- **怎么用：** 说“电脑好卡”“什么在占我的 CPU / 内存？”。无需参数。命令针对 macOS。
+- **最适合：** 快速找出是什么拖慢了你的 Mac。
 
 <a id="s-vscode-doctor"></a>
 ### vscode-doctor
 
-[vscode-doctor.zip](vscode-doctor.zip) · entry: `spellbook-main/skills/vscode-doctor/SKILL.md`
+[vscode-doctor.zip](vscode-doctor.zip) · 入口：`spellbook-main/skills/vscode-doctor/SKILL.md`
 
-- **What it does:** Evidence-first diagnosis of slow or freezing VS Code-compatible editors (VS Code, Cursor and others): typing lag, UI freezes, extension-host stalls, file-watcher noise, high CPU/RSS, or using the editor as a file browser over huge folders. No hard-coded paths, extension blocklists or assumed root causes; ranks by fresh evidence and verifies before/after.
-- **How to use:** Say "VS Code / Cursor is lagging" with an optional workspace root. Starts in a simple read-only mode.
-- **Best suited for:** Finding the real cause of editor slowness.
+- **能做什么：** 以证据为先诊断 VS Code 类编辑器（VS Code、Cursor 等）变慢或卡死：打字延迟、界面冻结、扩展宿主卡住、文件监听噪音、CPU/内存占用高，或把编辑器当作大文件夹的文件浏览器。不写死路径、不预设扩展黑名单或根因；按本次采集的证据排序，并验证前后效果。
+- **怎么用：** 说“VS Code / Cursor 很卡”，可附工作区根目录。从简单的只读模式开始。
+- **最适合：** 找到编辑器变慢的真正原因。
 
 <a id="cat-productivity"></a>
-## Productivity, knowledge & reports
+## 效率、知识库与报告
 
-Knowledge libraries, chat digests, weekly reports and small business systems.
+知识库、聊天日报、周报和小型业务系统。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`feishu-rent-billing`](#s-feishu-rent-billing) | Small landlords running utility and rent splitting in Feishu. |
-| [`library-steward`](#s-library-steward) | Turning a folder of reference material into a searchable, versioned library. |
-| [`wechat-group-daily-digest`](#s-wechat-group-daily-digest) | Catching up on busy WeChat groups. |
-| [`weekly`](#s-weekly) | Auto-drafting a weekly work report from commits and agent sessions. |
+| [`feishu-rent-billing`](#s-feishu-rent-billing) | 在飞书里分摊水电和收租的小房东。 |
+| [`library-steward`](#s-library-steward) | 把一文件夹的参考资料变成可检索、有版本的资料库。 |
+| [`wechat-group-daily-digest`](#s-wechat-group-daily-digest) | 快速补上热闹微信群的聊天内容。 |
+| [`weekly`](#s-weekly) | 根据提交和 agent 会话自动起草每周工作报告。 |
 
 <a id="s-feishu-rent-billing"></a>
 ### feishu-rent-billing
 
-[feishu-rent-billing.zip](feishu-rent-billing.zip) · entry: `feishu-rent-billing/SKILL.md` · `feishu-rent-billing/deployment/chg-001/backup/local/SKILL.md`
+[feishu-rent-billing.zip](feishu-rent-billing.zip) · 入口：`feishu-rent-billing/SKILL.md` · `feishu-rent-billing/deployment/chg-001/backup/local/SKILL.md`
 
-- **What it does:** A rent-billing system in Feishu Bitable for a two-floor rental house: meter readings (main meter + upper meter, lower = main − upper), leases, shared costs, billing batches and line items; handles mid-month move-in/out pro-rating, vacancy costs borne by the landlord, "provisional 0" vs "confirmed 0" shared costs, duplicate-charge prevention and plain-text bill reports. Includes an offline calculator to reconcile and a locked rule set (R1–R12).
-- **How to use:** Three modes: build (set up tables, fields, formulas, forms, workflows), calculate/report (give readings and occupancy, get the bill), troubleshoot (find why Feishu's numbers differ). Use the root `feishu-rent-billing/SKILL.md`; the copy under `deployment/chg-001/backup/` is an older backup. Not for multi-unit or commercial property, taxes or contracts.
-- **Best suited for:** Small landlords running utility and rent splitting in Feishu.
+- **能做什么：** 在飞书多维表格里搭建上下两层出租屋的收租计费系统：抄表登记（总表 + 上层表，下层 = 总 − 上层）、租约、公摊、计费批次和费用明细；处理月中入住/退租折算、空置费由房东承担、公摊“暂按 0”与“确认为 0”的区别、防重复计费和纯文字账单报告。附带离线核算器用于对账，以及锁定的规则集（R1–R12）。
+- **怎么用：** 三种模式：搭建（配置表、字段、公式、表单、工作流）、核算/出报告（提供读数和入住情况，得到账单）、排错（找出飞书算出的数不对的原因）。使用根目录的 `feishu-rent-billing/SKILL.md`；`deployment/chg-001/backup/` 下的是旧备份。不适用于多户公寓、商业物业、税务或合同。
+- **最适合：** 在飞书里分摊水电和收租的小房东。
 
 <a id="s-library-steward"></a>
 ### library-steward
 
-[library-steward.zip](library-steward.zip) · entry: `library-steward/SKILL.md`
+[library-steward.zip](library-steward.zip) · 入口：`library-steward/SKILL.md`
 
-- **What it does:** Connects to and manages a local knowledge base, document library, style library, asset library or photo collection: surveys it, agrees on usage with you, then handles search, precise location (line or page numbers), pulling whole groups out for use, ingesting new items, source registration, snapshots, rollback and integrity checks. One stdlib Python script with SQLite full-text search (works for Chinese).
-- **How to use:** Point it at a library folder (`--root` or `STEWARD_ROOT`) and say "find …", "which page is …", "add this to the library", "snapshot / roll back". Optional `pip install pypdf opencc-python-reimplemented` adds PDF text and Traditional/Simplified search.
-- **Best suited for:** Turning a folder of reference material into a searchable, versioned library.
+- **能做什么：** 接入并管理本地知识库、资料库、风格库、素材库或相册：先摸清全貌、和你商量用法，然后负责检索、精确定位（行号或页码）、整组取出使用、入库、来源登记、快照、回滚和校验。一个只依赖标准库的 Python 脚本，基于 SQLite 全文检索（中文可直接搜）。
+- **怎么用：** 指定库的根目录（`--root` 或 `STEWARD_ROOT`），然后说“帮我找……”“在哪一页……”“把这个入库”“做快照 / 回滚”。可选安装 `pypdf opencc-python-reimplemented` 以支持 PDF 正文和繁简互通检索。
+- **最适合：** 把一文件夹的参考资料变成可检索、有版本的资料库。
 
 <a id="s-wechat-group-daily-digest"></a>
 ### wechat-group-daily-digest
 
-[wechat-group-daily-digest.zip](wechat-group-daily-digest.zip) · entry: `wechat-group-daily-digest/SKILL.md`
+[wechat-group-daily-digest.zip](wechat-group-daily-digest.zip) · 入口：`wechat-group-daily-digest/SKILL.md`
 
-- **What it does:** "Moon Rabbit catch-up" — turns WeChat group chats you are authorised to read into a verifiable AI daily digest: read-only, evidence pack first, then summary, and only then advances the "last read" marker so you can continue from last time. Privacy modes keep nicknames or replace them with Member A/B/C.
-- **How to use:** Input options: a JSON/JSONL export (`--input`), an authorised Windows offline snapshot (`--snapshot`), or a Mac's local WeChat via the separately installed `yichen-wechat-local-vault` tool. Run `doctor` first, then `prepare`. Say "爬楼", "群聊日报" or "从上次继续".
-- **Best suited for:** Catching up on busy WeChat groups.
+- **能做什么：** “月兔爬楼”——把你有权读取的微信群聊整理成可核验的 AI 日报：只读，先做证据包，再总结，最后才推进“上次读到哪里”的标记，方便你从上次继续。隐私模式可保留昵称，或替换成成员 A/B/C。
+- **怎么用：** 输入方式：JSON/JSONL 导出（`--input`）、经授权的 Windows 离线快照（`--snapshot`），或通过单独安装的 `yichen-wechat-local-vault` 读取 Mac 本地微信。先运行 `doctor`，再运行 `prepare`。说“爬楼”“群聊日报”或“从上次继续”。
+- **最适合：** 快速补上热闹微信群的聊天内容。
 
 <a id="s-weekly"></a>
 ### weekly
 
-[weekly.zip](weekly.zip) · entry: `spellbook-main/skills/weekly.SKILL.md`
+[weekly.zip](weekly.zip) · 入口：`spellbook-main/skills/weekly.SKILL.md`
 
-- **What it does:** Generates a weekly report for a specified date range by combining Git commits, Claude Code sessions, Codex sessions and optional local memory notes, categorised into refactors, features, fixes, research and other work. Note: it is hard-wired to one project ("om-generator" front-end and back-end repos).
-- **How to use:** Run with a range such as `2-1到2-7` (defaults to this Monday → today). Edit the repo names and paths in `weekly.SKILL.md` to use it for your own projects.
-- **Best suited for:** Auto-drafting a weekly work report from commits and agent sessions.
+- **能做什么：** 为指定日期范围生成周报，整合 Git 提交、Claude Code 会话、Codex 会话和可选的本机记忆记录，并分类为重构、新功能、修复、调研和其他。注意：它写死了某个项目（“om-generator”的前端和后端仓库）。
+- **怎么用：** 带日期范围运行，如 `2-1到2-7`（默认本周一到今天）。要用于自己的项目，请修改 `weekly.SKILL.md` 里的仓库名和路径。
+- **最适合：** 根据提交和 agent 会话自动起草每周工作报告。
 
 <a id="cat-learning"></a>
-## Learning & tutoring
+## 学习与辅导
 
-Structured courses and one-on-one tutoring.
+系统课程和一对一辅导。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`ai-visual-generation-foundation-course`](#s-ai-visual-generation-foundation-course) | Complete beginners who want real skills rather than "magic words". |
-| [`feynman-learning-coach`](#s-feynman-learning-coach) | Actually learning a topic or document, not just skimming answers. |
+| [`ai-visual-generation-foundation-course`](#s-ai-visual-generation-foundation-course) | 想学真本事而不是背“神词”的完全新手。 |
+| [`feynman-learning-coach`](#s-feynman-learning-coach) | 真正学会一个主题或一份资料，而不是走马观花。 |
 
 <a id="s-ai-visual-generation-foundation-course"></a>
 ### ai-visual-generation-foundation-course
 
-[ai-visual-generation-foundation-course.zip](ai-visual-generation-foundation-course.zip) · entry: `ai-image-foundation-course-skill-v1.0.0/SKILL.md`
+[ai-visual-generation-foundation-course.zip](ai-visual-generation-foundation-course.zip) · 入口：`ai-image-foundation-course-skill-v1.0.0/SKILL.md`
 
-- **What it does:** A structured beginner course in AI image generation (levels L0 visual recognition → L4 project delivery). Teaches observe → control → generate → diagnose → fix, one new concept at a time, with lessons, exercises, homework and grading. Cross-model.
-- **How to use:** Ask "teach me AI image generation from zero", "next lesson", "grade my homework image", or choose a mode: beginner (default), teacher, diagnosis, crash course, homework review. Course map and workbook are in the package.
-- **Best suited for:** Complete beginners who want real skills rather than "magic words".
+- **能做什么：** 一套系统的 AI 生图零基础课程（从 L0 视觉识别到 L4 项目交付）。教的是“观察 → 控制 → 生成 → 诊断 → 修正”，每次只教一个新概念，配有课程、练习、作业和批改。跨模型通用。
+- **怎么用：** 说“从零教我 AI 生图”“下一课”“帮我批改作业图”，或选择模式：小白模式（默认）、教师模式、诊断模式、速成模式、作业批改模式。课程地图和练习册都在包里。
+- **最适合：** 想学真本事而不是背“神词”的完全新手。
 
 <a id="s-feynman-learning-coach"></a>
 ### feynman-learning-coach
 
-[feynman-learning-coach.zip](feynman-learning-coach.zip) · entry: `feynman-learning-coach/SKILL.md`
+[feynman-learning-coach.zip](feynman-learning-coach.zip) · 入口：`feynman-learning-coach/SKILL.md`
 
-- **What it does:** One-on-one Feynman-method tutor: builds a personal plan from your goal, level, daily time and deadline, then loops explain → you explain it back → probing questions → patch gaps → apply → spaced review. A "learning relay card" lets you resume across sessions.
-- **How to use:** Say "I want to learn Python, zero background, 30 min a day", "help me understand chapter 3 of this handout", "quiz me on compound interest", or "continue" (paste back your relay card). Not for doing homework or exams for you.
-- **Best suited for:** Actually learning a topic or document, not just skimming answers.
+- **能做什么：** 一对一费曼学习教练：根据你的目标、基础、每天可用时间和截止日期制定个人计划，然后循环“先讲懂 → 让你讲给它听 → 追问找漏洞 → 补洞 → 用起来 → 间隔复习”。“学习接力卡”让你可以跨会话接着学。
+- **怎么用：** 说“我想学 Python，零基础，每天 30 分钟”“帮我学懂这份讲义的第三章”“考考我复利”或“继续学”（把接力卡发回去）。不替你写作业或考试答案。
+- **最适合：** 真正学会一个主题或一份资料，而不是走马观花。
 
 <a id="cat-lifestyle"></a>
-## Home, travel & lifestyle
+## 家居、旅行与生活
 
-Interior design, trip planning and divination tools.
+室内设计、旅行规划和术数工具。
 
-| Skill | Best suited for |
+| 技能 | 最适合 |
 |---|---|
-| [`home-design-director`](#s-home-design-director) | Home renovation planning, layout exploration and style switching. |
-| [`trip-planner`](#s-trip-planner) | Practical, ready-to-follow trip plans. |
-| [`xuanshu-agent`](#s-xuanshu-agent) | Accurate, tool-computed divination and astrology charts and reports. |
+| [`home-design-director`](#s-home-design-director) | 装修规划、布局探索和风格切换。 |
+| [`trip-planner`](#s-trip-planner) | 实用、拿来就能照着走的旅行计划。 |
+| [`xuanshu-agent`](#s-xuanshu-agent) | 由工具精确计算的术数和占星排盘与报告。 |
 
 <a id="s-home-design-director"></a>
 ### home-design-director
 
-[home-design-director.zip](home-design-director.zip) · entry: `home-design-director/SKILL.md`
+[home-design-director.zip](home-design-director.zip) · 入口：`home-design-director/SKILL.md`
 
-- **What it does:** Beginner-friendly interior design: turns floor plans, room photos and plain-language needs into a geometry-grounded Room Model, 2–3 layout directions, room-by-room design decisions and geometry-locked visual briefs (styles may decorate, but never move walls, doors or windows). Unknown dimensions stay unknown.
-- **How to use:** Start by uploading a floor plan or developer's layout screenshot (dimensions help); then answer at most three key questions at a time. Without a plan it can still give concept advice, not build dimensions.
-- **Best suited for:** Home renovation planning, layout exploration and style switching.
+- **能做什么：** 面向新手的室内设计：把户型图、房间照片和大白话需求变成基于几何的房间模型（Room Model）、2–3 套布局方向、逐个房间的设计决定和锁定几何的效果图简报（风格可以装饰，但绝不挪动墙、门、窗）。不知道的尺寸就保持未知。
+- **怎么用：** 先上传户型图或开发商给的户型截图（有尺寸最好），然后每次最多回答三个关键问题。没有户型图也能给概念建议，但不能当施工尺寸。
+- **最适合：** 装修规划、布局探索和风格切换。
 
 <a id="s-trip-planner"></a>
 ### trip-planner
 
-[trip-planner.zip](trip-planner.zip) · entry: `spellbook-main/skills/trip-planner/SKILL.md`
+[trip-planner.zip](trip-planner.zip) · 入口：`spellbook-main/skills/trip-planner/SKILL.md`
 
-- **What it does:** Detailed travel itineraries: trip overview, day-by-day morning/afternoon/evening plans with themes, addresses, hours, booking links, durations, travel times, prep-tonight notes and a quick-reference section (booked activities, offline downloads, local spots), with realistic pacing.
-- **How to use:** Give destination, dates, travellers, interests, budget and pace; ask for an itinerary.
-- **Best suited for:** Practical, ready-to-follow trip plans.
+- **能做什么：** 详细的旅行行程：行程概览，每天上午/下午/晚上的安排和主题，地址、营业时间、预订链接、时长、交通时间、“今晚准备”提示，以及速查区（已预订项目、需离线下载的内容、当地好去处），节奏安排切合实际。
+- **怎么用：** 提供目的地、日期、同行人、兴趣、预算和节奏，要求做行程。
+- **最适合：** 实用、拿来就能照着走的旅行计划。
 
 <a id="s-xuanshu-agent"></a>
 ### xuanshu-agent
 
-[xuanshu-agent.zip](xuanshu-agent.zip) · entry: `xuanshu-skill-2.0.0/.agents/skills/xuanshu-agent/SKILL.md` · `xuanshu-skill-2.0.0/skills/xuanshu-agent/SKILL.md`
+[xuanshu-agent.zip](xuanshu-agent.zip) · 入口：`xuanshu-skill-2.0.0/.agents/skills/xuanshu-agent/SKILL.md` · `xuanshu-skill-2.0.0/skills/xuanshu-agent/SKILL.md`
 
-- **What it does:** Agent guide for Xuanshu (玄枢), a local metaphysics engine with 110 techniques: Western astrology (natal, returns, progressions, primary directions, horary, electional, rectification, AstroCartoGraphy), BaZi, Zi Wei Dou Shu, Da Liu Ren, Qi Men Dun Jia, Tai Yi, Liu Yao, Mei Hua, tarot, geomancy, almanac and more. Core rule: never hand-calculate — every chart comes from the Xuanshu MCP tools or CLI, after clarifying birth time, place, timezone and similar settings. The zip contains the full xuanshu-skill 2.0.0 repo (AGPL-3.0).
-- **How to use:** Install the local server (Python 3.12 + `uv` + offline runtime) and register it as an MCP server, e.g. `uv run --directory <repo>/xuanshu-skill xuanshu-skill client config --format codex` (see the repo README). Then ask "排盘", "起卦", "read my natal chart". Beginners start with `xuanshu_beginner_guide` → `xuanshu_full_reading`.
-- **Best suited for:** Accurate, tool-computed divination and astrology charts and reports.
+- **能做什么：** “玄枢”的 agent 使用指南。玄枢是一个本地术数引擎，包含 110 种技法：西方占星（本命、回归、推运、主限、卜卦、择日、生时校正、AstroCartoGraphy）、八字、紫微斗数、大六壬、奇门遁甲、太乙、六爻、梅花易数、塔罗、天文地占、老黄历等。核心规则：绝不手算——每个盘都必须在确认出生时间、地点、时区等设置后，由玄枢 MCP 工具或命令行算出。压缩包里是完整的 xuanshu-skill 2.0.0 仓库（AGPL-3.0）。
+- **怎么用：** 安装本地服务（Python 3.12 + `uv` + 离线运行时），并注册为 MCP 服务器，例如 `uv run --directory <repo>/xuanshu-skill xuanshu-skill client config --format codex`（见仓库 README）。然后说“排盘”“起卦”“看我的本命盘”。新手从 `xuanshu_beginner_guide` → `xuanshu_full_reading` 开始。
+- **最适合：** 由工具精确计算的术数和占星排盘与报告。
